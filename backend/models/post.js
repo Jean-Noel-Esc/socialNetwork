@@ -25,6 +25,7 @@ module.export = (sequelize, Datatypes) => {const Post = sequelize.define('Post',
   // Other model options go here
 });
 Post.associate = function(models){models.Post.belongsTo(models.User,{foreignKey:{alllowNull: false}}); };
-//Post.associate category id
+Post.associate = function(models){models.Post.belongsTo(models.Category,{foreignkey:{allowNull: false}}); };
+Post.associate = function(models){models.Post.belongsTo(models.Like,{foreignkey:{allowNull: false}}); };
 return Post;
 }

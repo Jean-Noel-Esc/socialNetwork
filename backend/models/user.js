@@ -1,8 +1,5 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:');
 
-
-const User = sequelize.define('User', {
+module.export = (sequelize, Datatypes) => {const User = sequelize.define('User', {
   // Model attributes are defined here
   firstName: {
     type: DataTypes.STRING,
@@ -32,9 +29,18 @@ const User = sequelize.define('User', {
     type: DataTypes.DATETIME
     // allowNull defaults to true
   }
+  picture: {
+    type: DataTypes.STRING
+    // allowNull defaults to true
+  }
+
 }, {
   // Other model options go here
 });
+User.associate = function(models){models.User.hasMany(models.Post,{foreignKey:{alllowNull: false}}); };
+User.associate = function(models){models.User.hasMany(models.Comment,{foreignkey:{allowNull: false}}); };
+User.associate = function(models){models.User.hasMany(models.Like,{foreignkey:{allowNull: false}}); };
+return User;
+}
 
-// `sequelize.define` also returns the model
-console.log(User === sequelize.models.User); // true
+

@@ -52,6 +52,17 @@ exports.login = (req, res, next) => {
 };
 
 // Recupere tous les users
+//on importe le modèle
+var Model = require('./Model');
+//recherche de tous les utilisateurs
+Model.User.findAll().then(users => {
+//on récupère ici un tableau "users" contenant une liste d'utilisateurs
+  console.log(users);
+  }).catch(function (e) {
+    //gestion erreur
+  console.log(e);
+});
+
 
 
 

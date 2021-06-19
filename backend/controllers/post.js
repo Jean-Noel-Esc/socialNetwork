@@ -2,8 +2,6 @@ const Post = require('../models/post');
 
 const fs = require('fs');
 
-
-
 exports.createPost = (req, res, next) => {
   const postObject = JSON.parse(req.body.sauce);
   delete postObject._id;
@@ -19,8 +17,6 @@ exports.createPost = (req, res, next) => {
     .then(() => res.status(201).json({ message: 'Article enregistré !'}))
     .catch(error => res.status(400).json({ error }));
 };
-
-
 
 exports.getOnePost = (req, res, next) => {
   Post.findOne({
@@ -38,7 +34,7 @@ exports.getOnePost = (req, res, next) => {
   );
 };
 
-exports.modifyPost = (req, res, next) => {
+exports.updatePost = (req, res, next) => {
   const postObject = req.file ?
     {
       ...JSON.parse(req.body.post),
@@ -62,8 +58,7 @@ exports.modifyPost = (req, res, next) => {
   }
 };
 
-
-exports.deletePost = (req, res, next) => {
+exports.destroyPost = (req, res, next) => {
   Post.findOne({ _id: req.params.id })
     .then(post => {
       const filename = sauce.imageUrl.split('/images/')[1];
