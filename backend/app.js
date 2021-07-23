@@ -4,9 +4,10 @@ const path = require('path');                                               // I
 //const helmet = require('helmet');                                         // Importation du package helmet :
 //const cors = require('cors');
 
-//const postRoutes = require("./routes/post");                              // Importation des routes messages
+const postRoutes = require("./routes/post");                              // Importation des routes messages
 //const commentRoutes = require("./routes/comments");                       // Importation des routes comments
-//const userRoutes = require("./routes/user");                              // Importation des routes user
+const userRoutes = require("./routes/user");                              // Importation des routes user
+const categoryRoutes = require("./routes/category");                              // Importation des routes category
 
 
 
@@ -28,8 +29,10 @@ app.use(bodyParser.json());                                                // D�
 app.use(bodyParser.urlencoded({extended: true}));                          // content-type: application/x-www-form-urlencoded
 //app.use('/images', express.static(path.join(__dirname, 'images')));      // Gestion de la source de manière statique grâce à Express
 //app.use(helmet());                                                       // Activation de la protection Helmet : équivaut à 11 protections (req http)
-//app.use("/api/post", postRoutes);                                        // L'application utilise le endpoint /api/messages pour les routes messageRoutes
-//app.use("/api/comments", commentRoutes);                                 // L'application utilise le endpoint /api/comments pour les routes commentRoutes
-//app.use("/api/auth", userRoutes);                                        // L'application utilise le endpoint /api/auth pour les routes userRoutes
+app.use("/api/post", postRoutes);                                        // L'application utilise le endpoint /api/messages pour les routes messageRoutes
+//app.use("/api/comments", commentRoutes);
+console.log("i'm in");                                 // L'application utilise le endpoint /api/comments pour les routes commentRoutes
+app.use("/api/auth", userRoutes);                                        // L'application utilise le endpoint /api/auth pour les routes userRoutes
+app.use("/api/category", categoryRoutes);
 
 module.exports = app;                                                      // Exportation de l\'app : utilisation depuis le serveur Node
