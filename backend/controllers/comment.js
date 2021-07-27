@@ -30,6 +30,7 @@ exports.getOneComment = (req, res, next) => {
   );
 };
 
+/*
 exports.modifyComment = (req, res, next) => {
   const commentObject = req.file ?
 
@@ -61,3 +62,4 @@ exports.getAllComments = (req, res, next) => {
     }
   );
 };
+*/

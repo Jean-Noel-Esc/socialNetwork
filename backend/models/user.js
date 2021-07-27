@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {const User = sequelize.define('User'
   // Other model options go here
 });
 User.associate = function(models){models.User.hasMany(models.Post) };
-//User.associate = function(models){models.User.hasMany(models.Comments,{foreignkey:{allowNull: false}}); };
-//User.associate = function(models){models.User.hasMany(models.Likes,{foreignkey:{allowNull: false}}); };
+//User.associate = function(models){models.User.hasMany(models.Comment) };
+User.associate = function(models){models.User.hasMany(models.Like) };
 return User;
 }
 

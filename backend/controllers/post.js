@@ -1,7 +1,7 @@
 const models = require('../models');  
 
 exports.createPost = (req, res, next) => {
-  console.log(req.body);
+  //console.log(req.body);
 
   const newPost = models.Post.create({
     text: req.body.text,
@@ -10,14 +10,14 @@ exports.createPost = (req, res, next) => {
     CategoryId: req.body.categoryId
   })
   .then(newPost => {
-    console.log(newPost);
+    //console.log(newPost);
     res.status(201).json({'post created id':newPost.id});
   })
-    .catch(error => res.status(500).json({ error }));
+  .catch(error => res.status(500).json({ error }));
 };
 
 exports.getOnePost = (req, res, next) => {
-  Post.findOne({
+  models.Post.findOne({
     where : {id: req.params.id}
   }).then(
     (post) => {
@@ -33,13 +33,20 @@ exports.getOnePost = (req, res, next) => {
 };
 
 exports.updatePost = (req, res, next) => {
+    models.Post.findOne({ where : {id: req.params.id} })
+    .then(post => {
+        models.Post.update({text: req.body.text},{ where : {id: req.params.id} })
+          .then(() => res.status(200).json({ message: 'Ce post a été modifié !'}))
+          .catch(error => res.status(400).json({ error }));
+    })
+    .catch(error => res.status(500).json({ error }));
 
 };
 
 exports.destroyPost = (req, res, next) => {
-  Post.findOne({ where : {id: req.params.id} })
+  models.Post.findOne({ where : {id: req.params.id} })
     .then(post => {
-        Post.destroy({ where : {id: req.params.id} })
+        models.Post.destroy({ where : {id: req.params.id} })
           .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
           .catch(error => res.status(400).json({ error }));
     })

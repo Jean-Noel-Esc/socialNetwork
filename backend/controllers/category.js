@@ -27,7 +27,7 @@ exports.create = (req, res, next) => {
 // Recuperer toutes les categories
 exports.findAll = (req, res) => {
   
-  Category.findAll().then((categories) => {
+  models.Category.findAll().then((categories) => {
     // Send all categories as response
     res.status(200).json({
       status: true,
@@ -37,11 +37,9 @@ exports.findAll = (req, res) => {
 };
 
 // Find a category by Id
-exports.findOne = (req, res) => {
-  Category.findOne(req.params.categoryId).then((category) => {
-    res.status(200).json({
-      status: true,
-      data: category,
+exports.getOneCategory = (req, res) => {
+  models.Category.findOne(req.params.id).then((category) => {
+    res.status(200).json({data: category,
     });
   });
 };
@@ -69,7 +67,7 @@ exports.findOne = (req, res) => {
 
 exports.delete = (req, res) => {
   const id = req.params.categoryId;
-  Category.destroy({
+  models.Category.destroy({
     where: { id: id },
   }).then(() => {
     res.status(200).json({
