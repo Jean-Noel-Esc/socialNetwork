@@ -9,9 +9,8 @@ module.exports = (sequelize, DataTypes) => {const User = sequelize.define('User'
 }, {
   // Other model options go here
 });
-User.associate = function(models){models.User.hasMany(models.Post) };
-//User.associate = function(models){models.User.hasMany(models.Comment) };
-User.associate = function(models){models.User.hasMany(models.Like) };
+User.associate = function(models){models.User.hasMany(models.Post); models.User.hasMany(models.Comment); models.User.hasMany(models.Like) };
+
 return User;
 }
 

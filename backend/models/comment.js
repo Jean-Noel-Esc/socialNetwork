@@ -5,7 +5,14 @@ module.exports = (sequelize, DataTypes) => {const Comment = sequelize.define('Co
 }, {
   // Other model options go here
 });
-Comment.associate = function(models){models.Comment.belongsTo(models.User,{foreignKey:{alllowNull: false}}); };
-Comment.associate = function(models){models.Comment.belongsTo(models.Post,{foreignkey:{allowNull: false}}); };
+Comment.associate = function(models){
+	models.Comment.belongsTo(models.User,{
+		foreignKey:{alllowNull: false}
+	}); 
+	models.Comment.belongsTo(models.Post,{
+		foreignkey:{allowNull: false}
+	});
+};
+
 return Comment;
 }
