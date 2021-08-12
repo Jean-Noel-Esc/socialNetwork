@@ -1,27 +1,32 @@
 <template>
     <main class="container">
         <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-light rounded">
-            <form @submit.prevent="sendForm(event)">
+            <form @submit.prevent="sendForm()">
                 
                 <h1 class="text-center font-weight-bold" style="font-size:4vw;" >SIGNUP</h1>
                 <div class="form-group">
-                    <label for="inputUserName">Nom d'utilisateur:</label>
-                    <input v-on:keydown="invalid = false" v-model="inputUserName" type="text" class="form-control" id="inputUserName" aria-describedby="userNameHelp" placeholder="Entrez votre nom">
+                    <label for="inputFirstName">Nom d'utilisateur:</label>
+                    <input v-on:keydown="invalid = false" v-model="inputFirstName" type="text" class="form-control" id="inputFirstName" placeholder="Entrez votre nom">
 
-                </div>      
+                </div> 
+                <div class="form-group">
+                    <label for="inputLastName">Nom d'utilisateur:</label>
+                    <input v-on:keydown="invalid = false" v-model="inputLastName" type="text" class="form-control" id="inputLastName"  placeholder="Entrez votre nom">
+
+                </div>       
                 <div class="form-group">
                     <label for="inputEmail">Email:</label>
-                    <input v-on:keydown="invalid = false" v-model="inputEmail" type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="votre email">
+                    <input v-on:keydown="invalid = false" v-model="inputEmail" type="email" class="form-control" id="inputEmail"  placeholder="votre email">
 
                 </div>
                 <div class="form-group">
                     <label for="inputPassword">Entrez votre password:</label>
-                    <input v-on:keydown="invalid = false" v-model="inputPassword" type="password" class="form-control" id="inputPassword" aria-describedby="passwordHelp" placeholder="mot de passe">
+                    <input v-on:keydown="invalid = false" v-model="inputPassword" type="password" class="form-control" id="inputPassword"  placeholder="mot de passe">
                 </div>
 
                 <div class="form-group">
-                    <label for="inputPassword">Confirmer votre password:</label>
-                    <input v-on:keydown="invalid = false" v-model="inputPassword" type="password" class="form-control" id="inputPassword" aria-describedby="passwordHelp" placeholder="mot de passe">
+                    <label for="inputConfirmPassword">Confirmer votre password:</label>
+                    <input v-on:keydown="invalid = false" v-model="inputConfirmPassword" type="password" class="form-control" id="inputConfirmPassword"  placeholder="mot de passe">
                 </div>
 
 
@@ -39,22 +44,55 @@
 
 <script>
 
-//import router from "../router";
+import axios from "axios";
+import router from "../router";
 
 export default {
     name: "signup",
     data() {
         return {
-            inputUserName: "",
+            inputFirstName: "",
+            inputLastName: "",
             inputEmail: "",
             inputPassword: "",
+            inputConfirmPassword: "",
             invalid: false
+
         }
     },
+    //mettre les MOUNTED ce qu'il doit faire par defaut lorsque l'app est montée avt que l'user interagisse 
     methods: {
         sendForm() {
-           
+            console.log("ok");
+                //if ( !this.inputFirstName || !this.inputLastName || !this.inputEmail || !this.inputPassword || this.inputPassword !== this.inputConfirmPassword) {
+                //return this.invalid = true;
+            //}
+            const nameRegex = /(.*[a-z]){3,30}/;
+            const mailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+            const pwdRegex  = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/  
+
+            //if ( nameRegex.test(this.inputFirstName) && nameRegex.test(this.inputLastName) && mailRegex.test(this.inputEmail) && pwdRegex.test(this.inputPassword)) {
+                axios.post("http://localhost:3000/api/auth/signup", { 
+                    firstname   : this.inputFirstName, 
+                    lastname    : this.inputLastName, 
+                    email       : this.inputEmail,
+                    password    : this.inputPassword
+                })
+                .then((res) => {
+                    console.log(res);
+                    alert('inscription réussie');
+                    //redirection main page
+                    router.push({ path : '/main'});
+                })
+                .catch((error)=>{
+                    alert(error.status)
+                    console.log(error)});
+            //} else {
+            //    console.log('erreur')
+            //    this.invalid = true;
+            //}
         }
+    
     }
-}    
+}   
 </script>
