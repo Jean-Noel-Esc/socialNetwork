@@ -22,7 +22,15 @@ exports.signup = (req, res, next) => {
     })
     .then(newUser => {
       console.log(newUser);
-      res.status(201).json({'user created id':newUser.id});
+      res.status(201).json({
+        userId: newUser.id,
+        token: jwt.sign(
+          { userId: newUser.id },
+          'RANDOM_TOKEN_SECRET',
+          { expiresIn: '24h' }
+        )
+      });
+
     })
     .catch(_error => console.log("Bonjour"));
   })

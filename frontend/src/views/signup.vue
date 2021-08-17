@@ -1,7 +1,7 @@
 <template>
     <main class="container">
         <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-light rounded">
-            <form @submit.prevent="sendForm()">
+            <form @submit="sendForm()">
                 
                 <h1 class="text-center font-weight-bold" style="font-size:4vw;" >SIGNUP</h1>
                 <div class="form-group">
@@ -57,40 +57,47 @@ export default {
             inputPassword: "",
             inputConfirmPassword: "",
             invalid: false
-
         }
     },
-    //mettre les MOUNTED ce qu'il doit faire par defaut lorsque l'app est montée avt que l'user interagisse 
+    mounted(){
+
+    },
+    // pour la page article mettre les MOUNTED ce qu'il doit faire par defaut lorsque l'app est montée avt que l'user interagisse  verif si l'utilisateur 
     methods: {
         sendForm() {
             console.log("ok");
-                //if ( !this.inputFirstName || !this.inputLastName || !this.inputEmail || !this.inputPassword || this.inputPassword !== this.inputConfirmPassword) {
-                //return this.invalid = true;
-            //}
+                if ( !this.inputFirstName || !this.inputLastName || !this.inputEmail || !this.inputPassword || this.inputPassword !== this.inputConfirmPassword) {
+                return this.invalid = true;
+                
+            }
+            
             const nameRegex = /(.*[a-z]){3,30}/;
-            const mailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
-            const pwdRegex  = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/  
-
-            //if ( nameRegex.test(this.inputFirstName) && nameRegex.test(this.inputLastName) && mailRegex.test(this.inputEmail) && pwdRegex.test(this.inputPassword)) {
-                axios.post("http://localhost:3000/api/auth/signup", { 
-                    firstname   : this.inputFirstName, 
-                    lastname    : this.inputLastName, 
-                    email       : this.inputEmail,
-                    password    : this.inputPassword
-                })
+            const mailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+            const pwdRegex  = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            
+            if ( nameRegex.test(this.inputFirstName) && nameRegex.test(this.inputLastName) && mailRegex.test(this.inputEmail) && pwdRegex.test(this.inputPassword)) {
+                console.log("toto");
+                const data= { 
+                    "firstname": this.inputFirstName, 
+                    "lastname": this.inputLastName, 
+                    "email": this.inputEmail,
+                    "password": this.inputPassword};
+                axios.post('http://localhost:3000/api/auth/signup', data)
                 .then((res) => {
+                sessionStorage.setItem("token",   res.data.token)
+                sessionStorage.setItem("userId",  res.data.userId)
                     console.log(res);
                     alert('inscription réussie');
                     //redirection main page
-                    router.push({ path : '/main'});
+                    router.push({ path : 'Main'});
                 })
                 .catch((error)=>{
                     alert(error.status)
                     console.log(error)});
-            //} else {
-            //    console.log('erreur')
-            //    this.invalid = true;
-            //}
+            } else {
+                console.log('erreur')
+                this.invalid = true;
+            }
         }
     
     }

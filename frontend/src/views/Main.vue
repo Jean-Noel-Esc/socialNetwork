@@ -103,8 +103,8 @@ export default {
             displayPost(){
                 // vers la route get all post ???? + auth
                 axios.get("http://localhost:3000/api/post")
-                 .then((res) => {
-                     console.log(res)
+                .then((res) => {
+                    console.log(res)
         })
         .catch((error)=>{
             console.log(error)
