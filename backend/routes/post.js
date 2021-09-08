@@ -6,6 +6,7 @@ const auth = require('../middleware/auth');
 //const multer = require('../middleware/multer-config');
 console.log("je suis route post");
 router.get('/', postCtrl.getAllPosts); // delete : auth pour test
+router.get('/admin', postCtrl.getAllPostsToModerate);
 router.post('/',postCtrl.createPost);
 router.get('/:id', postCtrl.getOnePost);
 router.put('/:id', postCtrl.updatePost);

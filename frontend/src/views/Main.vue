@@ -120,7 +120,6 @@ export default {
         axios.get("http://localhost:3000/api/post/",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
 
         .then((res) => {
-            console.log("pb fonction");
                 if (res) {
             const rep = res.data;
             this.posts = rep;
@@ -152,7 +151,7 @@ export default {
         // .catch((error)=>{
         //     console.log(error)
         // })   
-        //     }
+        //}
     }
 }
 </script>

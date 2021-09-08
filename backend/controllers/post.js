@@ -54,10 +54,22 @@ exports.destroyPost = (req, res, next) => {
 };
 
 exports.getAllPosts = (req, res, next) => {
-  models.Post.findAll()
-  .then((posts) => {
-      console.log("where the fuck i am ?????????????????????????????");
-      
+  models.Post.findAll({ where : {status: 1}, include : models.User } )
+  .then((posts) => {  
+      res.status(200).json(posts);
+    }
+  ).catch(
+    (error) => {
+      res.status(400).json({
+        error: error
+      });
+    }
+  );
+};
+
+exports.getAllPostsToModerate = (req, res, next) => {
+  models.Post.findAll({ where : {status: 0}, include : models.User } )
+  .then((posts) => {  
       res.status(200).json(posts);
     }
   ).catch(

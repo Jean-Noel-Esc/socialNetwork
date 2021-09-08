@@ -147,7 +147,7 @@
                 <tr>
                     <td>{{post.id}}</td>
                     <td>{{post.CategoryId}}</td>
-                    <td>#</td>
+                    <td>{{post.User.firstname}} {{post.User.lastname}}</td>
                     <td>{{post.createdAt}}</td>
                     <td>text</td>
                     <td>
@@ -227,7 +227,7 @@ export default {
     },
     mounted () {
         // faire une requete dans le back pour voir si le token est tjrs valide est ce qu'il y un token estce qu'il est valide si oui recup les data
-        axios.get("http://localhost:3000/api/post/",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
+        axios.get("http://localhost:3000/api/post/admin",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
         .then((res) => {
             console.log("pb fonction");
                 if (res) {
