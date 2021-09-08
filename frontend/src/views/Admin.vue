@@ -90,7 +90,6 @@
             </ul>
         </div>
         </nav>
-
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Dashboard</h1>
@@ -129,7 +128,6 @@
             </div>
         </div>
     </div>
-
         <h2>Post to moderate</h2>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
@@ -159,7 +157,6 @@
             </tbody>
             </table>
         </div>
-
         <h2>Comment to moderate</h2>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
@@ -197,13 +194,11 @@
         -moz-user-select: none;
         user-select: none;
     }
-
     @media (min-width: 768px) {
         .bd-placeholder-img-lg {
         font-size: 3.5rem;
         }
     }
-
 </style>
 
 
