@@ -18,11 +18,11 @@ const routes = [
     name: "Main",
     component: () => import("../views/Main"),
   },
-  // {
-  //   path: "/admin",
-  //   name: "Admin",
-  //   component: () => import("../views/Admin"),
-  // },
+  {
+     path: "/admin",
+     name: "Admin",
+     component: () => import("../views/Admin"),
+   },
 
 ]
 

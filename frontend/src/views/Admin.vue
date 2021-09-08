@@ -1,7 +1,7 @@
 <template>
 <body>
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Company name</a>
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">GROUPOMANIA</a>
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -106,131 +106,78 @@
             </div>
         </div>
 
-        <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+        <canvas class="my-4 w-100" id="myChart" width="900" height="380">INSERT D3 CHART SVG</canvas>
 
-        <h2>Section title</h2>
+        <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col" v-for="post in posts" :key="post.id">
+                    <div class="card shadow-sm">
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                        <div class="card-body">
+                            <p class="card-text">{{post.text}}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                </div>
+                                <small class="text-muted">9 mins</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <h2>Post to moderate</h2>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                <th scope="col">#</th>
+                <th scope="col">#id</th>
+                <th scope="col">Category</th>
+                <th scope="col">Auteur</th>
+                <th scope="col">Created at</th>
                 <th scope="col">Header</th>
-                <th scope="col">Header</th>
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody  v-for="post in posts" :key="post.id">
+                <tr>
+                    <td>{{post.id}}</td>
+                    <td>{{post.CategoryId}}</td>
+                    <td>#</td>
+                    <td>{{post.createdAt}}</td>
+                    <td>text</td>
+                    <td>
+                    <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                    <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                    <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+
+        <h2>Comment to moderate</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                <th scope="col">#id</th>
+                <th scope="col">Category</th>
+                <th scope="col">Auteur</th>
                 <th scope="col">Header</th>
                 <th scope="col">Header</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody v-for="comment in comments" :key="comment.id">
                 <tr>
-                <td>1,001</td>
-                <td>random</td>
-                <td>data</td>
-                <td>placeholder</td>
-                <td>text</td>
-                </tr>
-                <tr>
-                <td>1,002</td>
-                <td>placeholder</td>
-                <td>irrelevant</td>
-                <td>visual</td>
-                <td>layout</td>
-                </tr>
-                <tr>
-                <td>1,003</td>
-                <td>data</td>
-                <td>rich</td>
-                <td>dashboard</td>
-                <td>tabular</td>
-                </tr>
-                <tr>
-                <td>1,003</td>
-                <td>information</td>
-                <td>placeholder</td>
-                <td>illustrative</td>
-                <td>data</td>
-                </tr>
-                <tr>
-                <td>1,004</td>
-                <td>text</td>
-                <td>random</td>
-                <td>layout</td>
-                <td>dashboard</td>
-                </tr>
-                <tr>
-                <td>1,005</td>
-                <td>dashboard</td>
-                <td>irrelevant</td>
-                <td>text</td>
-                <td>placeholder</td>
-                </tr>
-                <tr>
-                <td>1,006</td>
-                <td>dashboard</td>
-                <td>illustrative</td>
-                <td>rich</td>
-                <td>data</td>
-                </tr>
-                <tr>
-                <td>1,007</td>
-                <td>placeholder</td>
-                <td>tabular</td>
-                <td>information</td>
-                <td>irrelevant</td>
-                </tr>
-                <tr>
-                <td>1,008</td>
-                <td>random</td>
-                <td>data</td>
-                <td>placeholder</td>
-                <td>text</td>
-                </tr>
-                <tr>
-                <td>1,009</td>
-                <td>placeholder</td>
-                <td>irrelevant</td>
-                <td>visual</td>
-                <td>layout</td>
-                </tr>
-                <tr>
-                <td>1,010</td>
-                <td>data</td>
-                <td>rich</td>
-                <td>dashboard</td>
-                <td>tabular</td>
-                </tr>
-                <tr>
-                <td>1,011</td>
-                <td>information</td>
-                <td>placeholder</td>
-                <td>illustrative</td>
-                <td>data</td>
-                </tr>
-                <tr>
-                <td>1,012</td>
-                <td>text</td>
-                <td>placeholder</td>
-                <td>layout</td>
-                <td>dashboard</td>
-                </tr>
-                <tr>
-                <td>1,013</td>
-                <td>dashboard</td>
-                <td>irrelevant</td>
-                <td>text</td>
-                <td>visual</td>
-                </tr>
-                <tr>
-                <td>1,014</td>
-                <td>dashboard</td>
-                <td>illustrative</td>
-                <td>rich</td>
-                <td>data</td>
-                </tr>
-                <tr>
-                <td>1,015</td>
-                <td>random</td>
-                <td>tabular</td>
-                <td>information</td>
+                <td>{{comment.id}}</td>
+                <td>{{comment.CategoryId}}</td>
+                <td>#</td>
+                <td>{{comment.createdAt}}</td>
                 <td>text</td>
                 </tr>
             </tbody>
@@ -263,21 +210,49 @@
 
 <script>
 
-// import axios from "axios";
-// import router from "../router";
+import axios from "axios";
+//import router from "../router";
 
 // import "../main.css"; If i add style  ask where to put style.css
-// import { defineComponent } from '@vue/composition-api'
 
-export default defineComponent({
-    // name: "Admin",
-        data() {
-        return {    
-            // messages: [],
-            // id: "",                 
-            // name: "",               
-            // creation: ""           
+
+export default {
+    name: "Main",
+    data() {
+        return {
+            posts:[],
+            comments:[],
+            
         }
     },
-})
+    mounted () {
+        // faire une requete dans le back pour voir si le token est tjrs valide est ce qu'il y un token estce qu'il est valide si oui recup les data
+        axios.get("http://localhost:3000/api/post/",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
+        .then((res) => {
+            console.log("pb fonction");
+                if (res) {
+                const rep = res.data;
+                this.posts = rep;
+                console.log(rep);
+                }
+        })
+        .catch((error) =>{
+            console.log(error);
+            console.log ("c'est err 404");
+        })
+        axios.get("http://localhost:3000/api/comment/admin",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
+        .then((res) => {
+            console.log("pb fonction");
+                if (res) {
+                const rep = res.data;
+                this.comments = rep;
+                console.log(rep);
+                }
+        })
+        .catch((error) =>{
+            console.log(error);
+            console.log ("c'est err 404");
+        })
+    }
+}
 </script>

@@ -100,23 +100,19 @@
 
 <script>
 
-import axios from "axios";
 //import router from "../router";
+import axios from "axios";
+
 
 export default {
     name: "Main",
     data() {
-
         return {
-
             posts:[],
-
-            //createdat
-            //post img
             
         }
     },
-    // ajouter un mounted pour si check si dans la session storage il y a bien un user id et un token §§§§!
+    // ajouter un mounted pour si check si dans la session storage il y a bien un user id et un token !
     mounted () {
 
         //let id = sessionStorage.getItem('userId')

@@ -54,8 +54,10 @@ exports.destroyPost = (req, res, next) => {
 };
 
 exports.getAllPosts = (req, res, next) => {
-  models.Post.findAll({include : User}).then(
-    (posts) => {
+  models.Post.findAll()
+  .then((posts) => {
+      console.log("where the fuck i am ?????????????????????????????");
+      
       res.status(200).json(posts);
     }
   ).catch(
