@@ -54,7 +54,7 @@ exports.destroyPost = (req, res, next) => {
 };
 
 exports.getAllPosts = (req, res, next) => {
-  models.Post.findAll().then(
+  models.Post.findAll({include : User}).then(
     (posts) => {
       res.status(200).json(posts);
     }

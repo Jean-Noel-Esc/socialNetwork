@@ -1,7 +1,5 @@
 <template>
-
-<body>
-    
+   
 <header>
     <div class="collapse bg-dark" id="navbarHeader">
         <div class="container">
@@ -51,57 +49,23 @@
 
     <div class="album py-5 bg-light">
         <div class="container">
-
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col">
-            <div class="card shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col" v-for="post in posts" :key="post.id">
+                    <div class="card shadow-sm">
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                        <div class="card-body">
+                            <p class="card-text">{{post.text}}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                </div>
+                                <small class="text-muted">9 mins</small>
+                            </div>
+                        </div>
                     </div>
-                    <small class="text-muted">9 mins</small>
-                </div>
                 </div>
             </div>
-            </div>
-            <div class="col">
-            <div class="card shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-muted">9 mins</small>
-                </div>
-                </div>
-            </div>
-            </div>
-            <div class="col">
-            <div class="card shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-muted">9 mins</small>
-                </div>
-                </div>
-            </div>
-            </div>
-        </div>
         </div>
     </div>
     </main>
@@ -114,7 +78,7 @@
             <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="../getting-started/introduction/">getting started guide</a>.</p>
         </div>
     </footer>   
-</body>
+
 
 </template>
 
@@ -136,39 +100,63 @@
 
 <script>
 
-
 import axios from "axios";
 //import router from "../router";
 
 export default {
     name: "Main",
     data() {
-        //quelle data ????
+
         return {
-            roles:0,
-            post:[],
-            id:[]
+
+            posts:[],
+
             //createdat
             //post img
+            
         }
+    },
+    // ajouter un mounted pour si check si dans la session storage il y a bien un user id et un token §§§§!
+    mounted () {
 
-        },
-        // ajouter un mounted pour si check si dans la session storage il y a bien un user id et un token §§§§!
-        methods:{
-            displayPost(){
-                // vers la route get all post ???? + auth
-                axios.get("http://localhost:3000/api/post")
-                .then((res) => {
-                    console.log(res)
+        //let id = sessionStorage.getItem('userId')
+        // faire une requete dans le back pour voir si le token est tjrs valide est ce qu'il y un token estce qu'il est valide si oui recup les data
+        axios.get("http://localhost:3000/api/post/",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
+
+        .then((res) => {
+            console.log("pb fonction");
+                if (res) {
+            const rep = res.data;
+            this.posts = rep;
+            console.log(rep);
+                        //si token ok affiche message
+                        // si l'user a acces aux messages 
+                }
+                //else {
+                    //si les post sont absent c'est que le token est invalide
+                    // redirection vers login si token invalide 
+        //         }
+        //     })
+
         })
-        .catch((error)=>{
-            console.log(error)
-        })   
-            }
-        }
-    
+        .catch((error) =>{
+            console.log(error);
+            console.log ("c'est err 404");
+        })
 
-    
+    // si fais en une fonction pas besoin de methodes display post
+    // methods:{
+        //     displayPost(){
+        //      vers la route get all post ???? + auth
+        //         axios.get("http://localhost:3000/api/post")
+        //         .then((res) => {
 
-}    
+        //             console.log(res)
+        // })
+        // .catch((error)=>{
+        //     console.log(error)
+        // })   
+        //     }
+    }
+}
 </script>
