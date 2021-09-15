@@ -107,7 +107,7 @@
 
         <canvas class="my-4 w-100" id="myChart" width="900" height="380">INSERT D3 CHART SVG</canvas>
 
-        <div class="album py-5 bg-light">
+        <!-- <div class="album py-5 bg-light">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <div class="col" v-for="post in posts" :key="post.id">
@@ -127,7 +127,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
         <h2>Post to moderate</h2>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
@@ -149,14 +149,56 @@
                     <td>{{post.createdAt}}</td>
                     <td>text</td>
                     <td>
-                    <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                    <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                    <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#exampleModalLong"><font-awesome-icon icon = "eye"/></button>
                     </td>
                 </tr>
             </tbody>
             </table>
         </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Ceci est un article </p>
+                        <div class="album py-5 bg-light">
+                            <div class="container">
+                                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                                    <div class="col" v-for="post in posts" :key="post.id">
+                                        <div class="card shadow-sm">
+                                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                                            <div class="card-body">
+                                                <p class="card-text">{{post.text}}</p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                                    </div>
+                                                    <small class="text-muted">9 mins</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                <button type="button" class="btn btn-success"> <font-awesome-icon icon="edit"/></button>
+                <button type="button" class="btn btn-danger"><font-awesome-icon icon="trash"/></button>
+            </div>
+            </div>
+        </div>
+        </div>
+
         <h2>Comment to moderate</h2>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
@@ -165,6 +207,7 @@
                 <th scope="col">#id</th>
                 <th scope="col">Category</th>
                 <th scope="col">Auteur</th>
+                <th scope="col">Header</th>
                 <th scope="col">Header</th>
                 <th scope="col">Header</th>
                 </tr>
@@ -176,6 +219,9 @@
                 <td>#</td>
                 <td>{{comment.createdAt}}</td>
                 <td>text</td>
+                <td>
+                <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#exampleModalLong"><font-awesome-icon icon = "eye"/></button>
+                </td>
                 </tr>
             </tbody>
             </table>
@@ -205,7 +251,10 @@
 
 <script>
 
+
+
 import axios from "axios";
+
 //import router from "../router";
 
 // import "../main.css"; If i add style  ask where to put style.css

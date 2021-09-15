@@ -19,10 +19,16 @@ const routes = [
     component: () => import("../views/Main"),
   },
   {
-     path: "/admin",
-     name: "Admin",
-     component: () => import("../views/Admin"),
-   },
+    path: "/admin",
+    name: "Admin",
+    component: () => import("../views/Admin"),
+  },
+  {
+    path: "/singlepost/:id",
+    name: "singlePost",
+    component: () => import("../views/singlePost"),
+    props:true,
+  },
 
 ]
 

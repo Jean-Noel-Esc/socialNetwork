@@ -1,5 +1,4 @@
 <template>
-   
 <header>
     <div class="collapse bg-dark" id="navbarHeader">
         <div class="container">
@@ -30,10 +29,8 @@
         </button>
         </div>
     </div>
-    </header>
-
-    <main>
-
+</header>
+<main>
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
@@ -46,7 +43,6 @@
         </div>
         </div>
     </section>
-
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -57,7 +53,7 @@
                             <p class="card-text">{{post.text}}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" @click=displayPost(post.id)>View</button>
                                     <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                                 </div>
                                 <small class="text-muted">9 mins</small>
@@ -68,18 +64,17 @@
             </div>
         </div>
     </div>
-    </main>
-    <footer class="text-muted py-5">
-        <div class="container">
-            <p class="float-end mb-1">
-            <a href="#">Back to top</a>
-            </p>
-            <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-            <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="../getting-started/introduction/">getting started guide</a>.</p>
-        </div>
-    </footer>   
-
-
+</main>
+    
+<footer class="text-muted py-5">
+    <div class="container">
+        <p class="float-end mb-1">
+        <a href="#">Back to top</a>
+        </p>
+        <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+        <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="../getting-started/introduction/">getting started guide</a>.</p>
+    </div>
+</footer>   
 </template>
 
 <style>
@@ -100,7 +95,7 @@
 
 <script>
 
-//import router from "../router";
+import router from "../router";
 import axios from "axios";
 
 
@@ -138,20 +133,13 @@ export default {
             console.log(error);
             console.log ("c'est err 404");
         })
-
+    },
     // si fais en une fonction pas besoin de methodes display post
-    // methods:{
-        //     displayPost(){
-        //      vers la route get all post ???? + auth
-        //         axios.get("http://localhost:3000/api/post")
-        //         .then((res) => {
-
-        //             console.log(res)
-        // })
-        // .catch((error)=>{
-        //     console.log(error)
-        // })   
-        //}
+    methods:{
+        displayPost(id){
+            router.push({ path : '/singlepost/'+id});
+        }
     }
+
 }
 </script>
