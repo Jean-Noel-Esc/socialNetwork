@@ -85,7 +85,6 @@
         -moz-user-select: none;
         user-select: none;
     }
-
     @media (min-width: 768px) {
         .bd-placeholder-img-lg {
         font-size: 3.5rem;
@@ -103,43 +102,32 @@ export default {
     name: "Main",
     data() {
         return {
-            posts:[],
-            
+            posts:[],    
         }
     },
-    // ajouter un mounted pour si check si dans la session storage il y a bien un user id et un token !
     mounted () {
-
-        //let id = sessionStorage.getItem('userId')
-        // faire une requete dans le back pour voir si le token est tjrs valide est ce qu'il y un token estce qu'il est valide si oui recup les data
         axios.get("http://localhost:3000/api/post/",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
-
         .then((res) => {
                 if (res) {
-            const rep = res.data;
-            this.posts = rep;
-            console.log(rep);
-                        //si token ok affiche message
-                        // si l'user a acces aux messages 
+                    const rep = res.data;
+                    this.posts = rep;
+                    console.log(rep);
                 }
                 //else {
                     //si les post sont absent c'est que le token est invalide
                     // redirection vers login si token invalide 
         //         }
         //     })
-
         })
         .catch((error) =>{
             console.log(error);
             console.log ("c'est err 404");
         })
     },
-    // si fais en une fonction pas besoin de methodes display post
     methods:{
         displayPost(id){
             router.push({ path : '/singlepost/'+id});
         }
     }
-
 }
 </script>

@@ -80,3 +80,13 @@ exports.getAllPostsToModerate = (req, res, next) => {
     }
   );
 };
+
+exports.moderatePost = (req, res, next) => {
+  models.Post.findOne({ where : {id: req.params.id} })
+  .then(post => {
+      models.Post.update({status: 1}, { where : {id: req.params.id} }) //{ where : {id: req.params.id} }
+        .then(() => res.status(200).json({ message: 'Ce post a été validé!'}))
+        .catch(error => res.status(400).json({ error }));
+  })
+  .catch(error => res.status(500).json({ error }));
+};

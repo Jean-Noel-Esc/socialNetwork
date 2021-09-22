@@ -23,8 +23,6 @@
 </template>
 
 <script>
-
-
 import axios from "axios";
 //import router from "../router";
 
@@ -38,23 +36,18 @@ export default {
         }
     },
     mounted () {
-        //console.log(this.posts);
         axios.get("http://localhost:3000/api/post/"+this.$route.params.id,  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
-
         .then((res) => {
                 if (res) {
-            const rep = res.data;
-            this.article = rep;
-            console.log(rep);
-                        //si token ok affiche message
-                        // si l'user a acces aux messages 
+                    const rep = res.data;
+                    this.article = rep;
+                    console.log(rep);
                 }
                 //else {
                     //si les post sont absent c'est que le token est invalide
                     // redirection vers login si token invalide 
         //         }
         //     })
-
         })
         .catch((error) =>{
             console.log(error);
@@ -64,9 +57,9 @@ export default {
         .then((res) => {
             console.log("pb fonction");
                 if (res) {
-                const rep = res.data;
-                this.commentaires = rep;
-                console.log(rep);
+                    const rep = res.data;
+                    this.commentaires = rep;
+                    console.log(rep);
                 }
         })
         .catch((error) =>{
@@ -74,9 +67,6 @@ export default {
             console.log ("c'est err 404");
         })
     }
-
-    
-
 }
 </script>
 

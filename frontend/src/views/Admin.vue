@@ -149,7 +149,7 @@
                     <td>{{post.createdAt}}</td>
                     <td>text</td>
                     <td>
-                    <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#exampleModalLong"><font-awesome-icon icon = "eye"/></button>
+                    <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#exampleModalLong"  v-bind:data-bs-title="post.text"><font-awesome-icon icon = "eye"/></button>
                     </td>
                 </tr>
             </tbody>
@@ -167,32 +167,12 @@
             </div>
             <div class="modal-body">
                 <p>Ceci est un article </p>
-                        <div class="album py-5 bg-light">
-                            <div class="container">
-                                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                                    <div class="col" v-for="post in posts" :key="post.id">
-                                        <div class="card shadow-sm">
-                                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                                            <div class="card-body">
-                                                <p class="card-text">{{post.text}}</p>
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                                    </div>
-                                                    <small class="text-muted">9 mins</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                <button type="button" class="btn btn-success"> <font-awesome-icon icon="edit"/></button>
+                <button type="button" class="btn btn-success" @click=moderationValid()> <font-awesome-icon icon="edit"/></button>
                 <button type="button" class="btn btn-danger"><font-awesome-icon icon="trash"/></button>
             </div>
             </div>
@@ -250,34 +230,26 @@
 
 
 <script>
-
-
-
 import axios from "axios";
 
 //import router from "../router";
-
 // import "../main.css"; If i add style  ask where to put style.css
-
 
 export default {
     name: "Main",
     data() {
         return {
             posts:[],
-            comments:[],
-            
+            comments:[],            
         }
     },
     mounted () {
-        // faire une requete dans le back pour voir si le token est tjrs valide est ce qu'il y un token estce qu'il est valide si oui recup les data
         axios.get("http://localhost:3000/api/post/admin",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
         .then((res) => {
-            console.log("pb fonction");
                 if (res) {
-                const rep = res.data;
-                this.posts = rep;
-                console.log(rep);
+                    const rep = res.data;
+                    this.posts = rep;
+                    console.log(rep);
                 }
         })
         .catch((error) =>{
@@ -288,15 +260,39 @@ export default {
         .then((res) => {
             console.log("pb fonction");
                 if (res) {
-                const rep = res.data;
-                this.comments = rep;
-                console.log(rep);
+                    const rep = res.data;
+                    this.comments = rep;
+                    console.log(rep);
                 }
         })
         .catch((error) =>{
             console.log(error);
             console.log ("c'est err 404");
         })
+    var exampleModal = document.getElementById('exampleModalLong')
+    exampleModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        var title = button.getAttribute('data-bs-title')
+        var modalTitle = exampleModal.querySelector('.modal-title')
+        modalTitle.textContent = title
+    })
+    },
+    methods:{
+    moderationValid(){
+        axios.put("http://localhost:3000/api/post/admin",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
+        .then((res) => {
+            console.log("fonction moderation valid");
+                if (res) {
+                    const rep = res.data;
+                    this.post = rep;
+                    console.log(rep);
+                }
+        })
+        .catch((error) =>{
+            console.log(error);
+            console.log ("c'est err 404");
+        })  
+        }
     }
 }
 </script>

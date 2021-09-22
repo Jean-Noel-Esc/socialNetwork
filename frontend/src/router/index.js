@@ -22,13 +22,22 @@ const routes = [
     path: "/admin",
     name: "Admin",
     component: () => import("../views/Admin"),
+    props:true,
   },
+  // {
+  //   path: "/admin/:id",
+  //   name: "Admin",
+  //   component: () => import("../views/Admin"),
+  //   props:true,
+  // },
+
   {
     path: "/singlepost/:id",
     name: "singlePost",
     component: () => import("../views/singlePost"),
     props:true,
   },
+  
 
 ]
 
