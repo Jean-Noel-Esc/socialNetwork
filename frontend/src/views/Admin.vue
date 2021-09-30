@@ -149,7 +149,7 @@
                     <td>{{post.createdAt}}</td>
                     <td>text</td>
                     <td>
-                    <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#exampleModalLong"  v-bind:data-bs-title="post.text"><font-awesome-icon icon = "eye"/></button>
+                    <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#exampleModalLong" v-bind:data-bs-id="post.id"  v-bind:data-bs-title="post.text"><font-awesome-icon icon = "eye"/></button>
                     </td>
                 </tr>
             </tbody>
@@ -172,8 +172,8 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                <button type="button" class="btn btn-success" @click=moderationValid()> <font-awesome-icon icon="edit"/></button>
-                <button type="button" class="btn btn-danger"><font-awesome-icon icon="trash"/></button>
+                <button id="edit" type="button" class="btn btn-success"><font-awesome-icon icon="edit"/></button>
+                <button id="trash" type="button" class="btn btn-danger"><font-awesome-icon icon="trash"/></button>
             </div>
             </div>
         </div>
@@ -230,17 +230,16 @@
 
 
 <script>
+//import router from "../router";
 import axios from "axios";
 
-//import router from "../router";
-// import "../main.css"; If i add style  ask where to put style.css
-
 export default {
-    name: "Main",
+    name: "Admin",
     data() {
         return {
             posts:[],
-            comments:[],            
+            comments:[],
+            postIdToModerate: 0,         
         }
     },
     mounted () {
@@ -258,7 +257,6 @@ export default {
         })
         axios.get("http://localhost:3000/api/comment/admin",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
         .then((res) => {
-            console.log("pb fonction");
                 if (res) {
                     const rep = res.data;
                     this.comments = rep;
@@ -271,28 +269,46 @@ export default {
         })
     var exampleModal = document.getElementById('exampleModalLong')
     exampleModal.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget
-        var title = button.getAttribute('data-bs-title')
-        var modalTitle = exampleModal.querySelector('.modal-title')
-        modalTitle.textContent = title
+        var button = event.relatedTarget;
+        var title = button.getAttribute('data-bs-title');
+        var modalTitle = exampleModal.querySelector('.modal-title');
+        modalTitle.textContent = title;
+        var id = button.getAttribute('data-bs-id');
+        console.log(id);
+        this.postIdToModerate = id;
+        console.log(this.postIdToModerate);
+        document.getElementById("edit").addEventListener("click", function (){
+            axios.put("http://localhost:3000/api/post/admin/"+id,  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
+            .then((res) => {
+                    if (res) {
+                        console.log(res);
+                        window.location.reload();
+                    }
+            })
+            .catch((error) =>{
+                console.log(error);
+                console.log ("c'est err 404");
+            }) ;
+        })
+        document.getElementById("trash").addEventListener("click", function (){
+            axios.delete("http://localhost:3000/api/post/"+id, { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
+            .then((res) => {
+                    if (res) {
+                        console.log(res);
+                        window.location.reload();
+                    }
+            })
+            .catch((error) =>{
+                console.log(error);
+                console.log ("c'est err 404");
+            })  
+
+        })
+        
     })
     },
     methods:{
-    moderationValid(){
-        axios.put("http://localhost:3000/api/post/admin",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
-        .then((res) => {
-            console.log("fonction moderation valid");
-                if (res) {
-                    const rep = res.data;
-                    this.post = rep;
-                    console.log(rep);
-                }
-        })
-        .catch((error) =>{
-            console.log(error);
-            console.log ("c'est err 404");
-        })  
-        }
+
     }
 }
 </script>

@@ -19,13 +19,17 @@ const routes = [
     component: () => import("../views/Main"),
   },
   {
+    path: "/addPost",
+    name: "addPost",
+    component: () => import("../views/addPost"),
+  },
+  {
     path: "/admin",
     name: "Admin",
     component: () => import("../views/Admin"),
-    props:true,
   },
   // {
-  //   path: "/admin/:id",
+  //   path: "/post/:id",
   //   name: "Admin",
   //   component: () => import("../views/Admin"),
   //   props:true,

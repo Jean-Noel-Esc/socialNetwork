@@ -55,7 +55,6 @@ export default {
         })
         axios.get("http://localhost:3000/api/comment/"+this.$route.params.id,  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
         .then((res) => {
-            console.log("pb fonction");
                 if (res) {
                     const rep = res.data;
                     this.commentaires = rep;
