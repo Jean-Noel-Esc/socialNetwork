@@ -131,52 +131,51 @@
         <h2>Post to moderate</h2>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
-            <thead>
-                <tr>
-                <th scope="col">#id</th>
-                <th scope="col">Category</th>
-                <th scope="col">Auteur</th>
-                <th scope="col">Created at</th>
-                <th scope="col">Header</th>
-                <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody  v-for="post in posts" :key="post.id">
-                <tr>
-                    <td>{{post.id}}</td>
-                    <td>{{post.CategoryId}}</td>
-                    <td>{{post.User.firstname}} {{post.User.lastname}}</td>
-                    <td>{{post.createdAt}}</td>
-                    <td>text</td>
-                    <td>
-                    <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#exampleModalLong" v-bind:data-bs-id="post.id"  v-bind:data-bs-title="post.text"><font-awesome-icon icon = "eye"/></button>
-                    </td>
-                </tr>
-            </tbody>
+                <thead>
+                    <tr>
+                    <th scope="col">#id</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Auteur</th>
+                    <th scope="col">Created at</th>
+                    <th scope="col">Header</th>
+                    <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody  v-for="post in posts" :key="post.id">
+                    <tr>
+                        <td>{{post.id}}</td>
+                        <td>{{post.CategoryId}}</td>
+                        <td>{{post.User.firstname}} {{post.User.lastname}}</td>
+                        <td>{{post.createdAt}}</td>
+                        <td>text</td>
+                        <td>
+                        <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#exampleModalLong" v-bind:data-bs-id="post.id"  v-bind:data-bs-title="post.text"><font-awesome-icon icon = "eye"/></button>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
-        <!-- Modal -->
+        <!-- Modale pour post -->
         <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Ceci est un article </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                        <button id="edit" type="button" class="btn btn-success"><font-awesome-icon icon="edit"/></button>
+                        <button id="trash" type="button" class="btn btn-danger"><font-awesome-icon icon="trash"/></button>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <p>Ceci est un article </p>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                <button id="edit" type="button" class="btn btn-success"><font-awesome-icon icon="edit"/></button>
-                <button id="trash" type="button" class="btn btn-danger"><font-awesome-icon icon="trash"/></button>
-            </div>
-            </div>
-        </div>
         </div>
 
         <h2>Comment to moderate</h2>
@@ -196,16 +195,41 @@
                 <tr>
                 <td>{{comment.id}}</td>
                 <td>{{comment.CategoryId}}</td>
-                <td>#</td>
+                <td>{{comment.text}}</td>
                 <td>{{comment.createdAt}}</td>
                 <td>text</td>
                 <td>
-                <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#exampleModalLong"><font-awesome-icon icon = "eye"/></button>
+                <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#modalComment" v-bind:data-bs-comment-id="comment.id"  v-bind:data-bs-comment-title="comment.text"><font-awesome-icon icon = "eye"/></button>
                 </td>
                 </tr>
             </tbody>
             </table>
         </div>
+        <!-- Modale pour commentaire -->
+        
+        <div class="modal fade" id="modalComment" tabindex="-1" role="dialog" aria-labelledby="modalCommentTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalCommentTitle">Modal comment title</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Ceci est un article </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button id="editComment" type="button" class="btn btn-success"><font-awesome-icon icon="edit"/></button>
+                        <button id="trashComment" type="button" class="btn btn-danger"><font-awesome-icon icon="trash"/></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
         </main>
     </div>
     </div>
@@ -239,7 +263,8 @@ export default {
         return {
             posts:[],
             comments:[],
-            postIdToModerate: 0,         
+            postIdToModerate: 0,
+            commentIdToModerate: 0,              
         }
     },
     mounted () {
@@ -267,48 +292,89 @@ export default {
             console.log(error);
             console.log ("c'est err 404");
         })
-    var exampleModal = document.getElementById('exampleModalLong')
-    exampleModal.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget;
-        var title = button.getAttribute('data-bs-title');
-        var modalTitle = exampleModal.querySelector('.modal-title');
-        modalTitle.textContent = title;
-        var id = button.getAttribute('data-bs-id');
-        console.log(id);
-        this.postIdToModerate = id;
-        console.log(this.postIdToModerate);
-        document.getElementById("edit").addEventListener("click", function (){
-            axios.put("http://localhost:3000/api/post/admin/"+id,  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
-            .then((res) => {
-                    if (res) {
-                        console.log(res);
-                        window.location.reload();
-                    }
-            })
-            .catch((error) =>{
-                console.log(error);
-                console.log ("c'est err 404");
-            }) ;
-        })
-        document.getElementById("trash").addEventListener("click", function (){
-            axios.delete("http://localhost:3000/api/post/"+id, { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
-            .then((res) => {
-                    if (res) {
-                        console.log(res);
-                        window.location.reload();
-                    }
-            })
-            .catch((error) =>{
-                console.log(error);
-                console.log ("c'est err 404");
-            })  
-
-        })
+        var exampleModal = document.getElementById('exampleModalLong')
+            exampleModal.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget;
+                var title = button.getAttribute('data-bs-title');
+                var modalTitle = exampleModal.querySelector('.modal-title');
+                modalTitle.textContent = title;
+                var id = button.getAttribute('data-bs-id');
+                console.log(id);
+                this.postIdToModerate = id;
+                console.log(this.postIdToModerate);
+                    document.getElementById("edit").addEventListener("click", function (){
+                        axios.put("http://localhost:3000/api/post/admin/"+id,  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
+                            .then((res) => {
+                                if (res) {
+                                console.log(res);
+                                window.location.reload();
+                                }
+                            })
+                            .catch((error) =>{
+                                console.log(error);
+                                console.log ("c'est err 404");
+                            }) ;
+                    })
+                    document.getElementById("trash").addEventListener("click", function (){
+                        axios.delete("http://localhost:3000/api/post/"+id, { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
+                        .then((res) => {
+                                if (res) {
+                                    console.log(res);
+                                    window.location.reload();
+                                }
+                        })
+                        .catch((error) =>{
+                            console.log(error);
+                            console.log ("c'est err 404");
+                        })  
+                    })
         
-    })
+        })
+        var modalComment = document.getElementById('modalComment')
+            modalComment.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget;
+                var title = button.getAttribute('data-bs-comment-title');
+                var modalTitle = modalComment.querySelector('.modal-title');
+                modalTitle.textContent = title;
+                var id = button.getAttribute('data-bs-comment-id');
+                console.log(id);
+                this.commentIdToModerate = id;
+                console.log(this.commentIdToModerate);
+                    document.getElementById("editComment").addEventListener("click", function (){
+                        axios.put("http://localhost:3000/api/comment/admin/"+id,  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
+                            .then((res) => {
+                                if (res) {
+                                console.log(res);
+                                window.location.reload();
+                                }
+                            })
+                            .catch((error) =>{
+                                console.log(error);
+                                console.log ("c'est err 404");
+                            }) ;
+                    })
+                    document.getElementById("trashComment").addEventListener("click", function (){
+                        axios.delete("http://localhost:3000/api/comment/"+id, { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
+                        .then((res) => {
+                                if (res) {
+                                    console.log(res);
+                                    window.location.reload();
+                                }
+                        })
+                        .catch((error) =>{
+                            console.log(error);
+                            console.log ("c'est err 404");
+                        })  
+                    })
+        })
+
+
+
+
+
+
     },
     methods:{
-
     }
 }
 </script>

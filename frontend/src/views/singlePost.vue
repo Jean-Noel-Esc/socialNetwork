@@ -2,20 +2,21 @@
     <div class="album py-5 bg-light h-100">
         <div class="container">
             <!-- <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">  -->
-                <div class="col h-100">
-                    <div class="card h-100 shadow-sm" style="max-height: 100%;">
+                <div class="col">
+                    <div class="card shadow-sm">
                         <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                        <div class="card-body h-100" alt="Max-height 100%">
+                        <div class="card-body" alt="Max-height 100%">
                             <p class="card-text">{{article.text}}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" v-if="author">Edit</button>
                                 </div>
                                 <small class="text-muted">9 mins</small>
                             </div>
                         </div>
                     </div>
+                    <div v-for="comment in commentaires" :key="comment.id">{{ comment.text}}</div>
                 </div>
             <!-- </div>  -->
         </div>
@@ -32,7 +33,7 @@ export default {
         return {
             article:[],
             commentaires:[],
-            
+            author: false,
         }
     },
     mounted () {
@@ -41,6 +42,9 @@ export default {
                 if (res) {
                     const rep = res.data;
                     this.article = rep;
+                    if (this.article.UserId === sessionStorage.getItem("id")){
+                        this.author = true;
+                    }
                     console.log(rep);
                 }
                 //else {

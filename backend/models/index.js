@@ -9,8 +9,8 @@ let db = {};
 
 // Option 2: Passing parameters separately (other dialects)
 sequelize = new Sequelize('db_groupomania', 'root', '', {
-  host: 'localhost',
-  dialect: 'mysql'
+	host: 'localhost',
+	dialect: 'mysql'
 });
 
 //

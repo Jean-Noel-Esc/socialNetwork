@@ -4,6 +4,7 @@ const fs = require('fs');
 
 
 exports.createComment = (req, res, next) => {
+  console.log(req.body);
   models.Post.findOne({
     where : {id: req.body.postId}
   }).then(Post => {
@@ -13,8 +14,8 @@ exports.createComment = (req, res, next) => {
       const newComment = models.Comment.create({
         text: req.body.text,
         status:0,
-        userId: req.body.userId, // modif pour correspondre a l'id de l'user connecte donc a extraire du token
-        postId: req.body.postId
+        UserId: req.body.userId, // modif pour correspondre a l'id de l'user connecte donc a extraire du token
+        PostId: req.body.postId
       })
       .then(newComment => {
         res.status(201).json({'comment created id':newComment.id});
@@ -74,6 +75,31 @@ exports.getAllCommentsToModerate = (req, res, next) => {
     }
   );
 };
+
+exports.destroyComment = (req, res, next) => {
+  models.Comment.findOne({ where : {id: req.params.id} })
+    .then( comment => {
+        models.Comment.destroy({ where : {id: req.params.id} })
+          .then(() => res.status(200).json({ message: 'Commentaire supprimé !'}))
+          .catch(error => res.status(400).json({ error }));
+    })
+    .catch(error => res.status(500).json({ error }));
+};
+
+
+exports.moderateComment = (req, res, next) => {
+  models.Comment.findOne({ where : {id: req.params.id} })
+  .then( comment => {
+      models.Comment.update({status: 1}, { where : {id: req.params.id} }) 
+        .then(() => res.status(200).json({ message: 'Ce Commentaire a été validé!'}))
+        .catch(error => res.status(400).json({ error }));
+  })
+  .catch(error => res.status(500).json({ error }));
+};
+
+
+
+
 /*
 exports.modifyComment = (req, res, next) => {
   const commentObject = req.file ?
@@ -82,7 +108,13 @@ exports.modifyComment = (req, res, next) => {
     .then(() => res.status(200).json({ message: 'Comment modifié !'}))
     .catch(error => res.status(400).json({ error })); 
 };
+*/
 
+
+
+
+
+/*
 exports.deleteComment = (req, res, next) => {
   Comment.findOne({ _id: req.params.id })
     .then(comment => {
@@ -91,8 +123,10 @@ exports.deleteComment = (req, res, next) => {
           .catch(error => res.status(400).json({ error }));
       });
     };
+*/
 
 
+/*
 exports.getAllComments = (req, res, next) => {
   Comment.findAll().then(
     (comments) => {
