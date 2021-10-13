@@ -5,13 +5,13 @@
                 
                 <h1 class="text-center font-weight-bold" style="font-size:4vw;" >SIGNUP</h1>
                 <div class="form-group">
-                    <label for="inputFirstName">Nom d'utilisateur:</label>
+                    <label for="inputFirstName">Firstname:</label>
                     <input v-on:keydown="invalid = false" v-model="inputFirstName" type="text" class="form-control" id="inputFirstName" placeholder="Entrez votre nom">
                     <img src="ressources/check.svg" alt="icone de validation" class="icone-verif">
                     <span class= "message-alerte">Choississez un pseudo entre 3 et 24 charactère</span>
                 </div> 
                 <div class="form-group">
-                    <label for="inputLastName">Nom d'utilisateur:</label>
+                    <label for="inputLastName">Lastname:</label>
                     <input v-on:keydown="invalid = false" v-model="inputLastName" type="text" class="form-control" id="inputLastName"  placeholder="Entrez votre nom">
                     <img src="ressources/check.svg" alt="icone de validation" class="icone-verif">
                     <span class= "message-alerte">Choississez un pseudo entre 3 et 24 charactère</span>
@@ -68,10 +68,11 @@ export default {
         }
     },
     mounted(){ // mettre les elements JS de verif front
-    const inpUtilisateur = document.querySelector('.form-groupe:nth-child(1) input');
-const inpMail = document.querySelector('.form-groupe:nth-child(2) input');
-const inpMdp = document.querySelector('.form-groupe:nth-child(3) input');
-const inpConfirme = document.querySelector('.form-groupe:nth-child(4) input');
+//const inpFirstname = document.querySelector('.form-groupe:nth-child(1) input');
+const inpUtilisateur = document.querySelector('.form-groupe:nth-child(2) input');
+const inpMail = document.querySelector('.form-groupe:nth-child(3) input');
+const inpMdp = document.querySelector('.form-groupe:nth-child(4) input');
+const inpConfirme = document.querySelector('.form-groupe:nth-child(5) input');
 
 const allImg = document.querySelectorAll('.icone-verif');
 const allSpan = document.querySelectorAll('span');

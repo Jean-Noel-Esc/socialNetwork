@@ -128,7 +128,60 @@
             </div>
         </div>
     </div> -->
-        <h2>Post to moderate</h2>
+    <!--display des users à modérer-->
+                <h2>Moderation des nouveaux utilisateurs</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                    <th scope="col">#id</th>
+                    <th scope="col">Firstname</th>
+                    <th scope="col">Lastname</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Vue</th>
+                    </tr>
+                </thead>
+                <tbody  v-for="user in users" :key="user.id">
+                    <tr>
+                        <td>{{user.id}}</td>
+                        <td>{{user.firstname}}</td>
+                        <td>{{user.lastname}}</td>
+                        <td>{{user.email}}</td>
+                        <td>
+                        <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#modalUser" v-bind:data-bs-user-id="user.id"  v-bind:data-bs-user-fisrtname="user.firstname" v-bind:data-bs-user-lastname="user.lastname"><font-awesome-icon icon = "eye"/></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    <!--------------------------------->
+    <!-- Modale pour moderation des nouveaux utilisateurs -->
+        <div class="modal fade" id="modalUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Cet utilisateur est en attente de validation</p>
+                    </div>
+                    <div class="modal-user-body">
+                        <p>les infos de l'utilisateur</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                        <button id="editUser" type="button" class="btn btn-success"><font-awesome-icon icon="edit"/></button>
+                        <button id="trashUser" type="button" class="btn btn-danger"><font-awesome-icon icon="trash"/></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- liste des articles à moderer -->
+        <h2>Articles en attente de publication</h2>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
                 <thead>
@@ -155,7 +208,7 @@
                 </tbody>
             </table>
         </div>
-        <!-- Modale pour post -->
+        <!-- Modale pour modération des articles/posts -->
         <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -177,8 +230,8 @@
                 </div>
             </div>
         </div>
-
-        <h2>Comment to moderate</h2>
+        <!--display liste des commentaires-->
+        <h2>Commentaires en attente de publication</h2>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
             <thead>
@@ -205,8 +258,7 @@
             </tbody>
             </table>
         </div>
-        <!-- Modale pour commentaire -->
-        
+        <!-- Modale pour commentaire -->        
         <div class="modal fade" id="modalComment" tabindex="-1" role="dialog" aria-labelledby="modalCommentTitle" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -217,7 +269,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Ceci est un article </p>
+                        <p>Ceci est un commentaire</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -227,8 +279,6 @@
                 </div>
             </div>
         </div>
-
-
 
         </main>
     </div>
@@ -261,13 +311,28 @@ export default {
     name: "Admin",
     data() {
         return {
+            users:[],
             posts:[],
             comments:[],
             postIdToModerate: 0,
-            commentIdToModerate: 0,              
+            commentIdToModerate: 0,
+            userIdToModerate: 0,              
         }
     },
     mounted () {
+        // Requetes listes utilisateurs / articles / commentaires.
+        axios.get("http://localhost:3000/api/auth/findalluserstomoderate",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
+        .then((res) => {
+                if (res) {
+                    const rep = res.data;
+                    this.users = rep;
+                    console.log(rep);
+                }
+        })
+        .catch((error) =>{
+            console.log(error);
+            console.log ("c'est err 404");
+        })
         axios.get("http://localhost:3000/api/post/admin",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
         .then((res) => {
                 if (res) {
@@ -292,6 +357,8 @@ export default {
             console.log(error);
             console.log ("c'est err 404");
         })
+        // Gestion des modales pour la modération des utilisateurs / articles / commentaires
+        // Modale Post
         var exampleModal = document.getElementById('exampleModalLong')
             exampleModal.addEventListener('show.bs.modal', function (event) {
                 var button = event.relatedTarget;
@@ -330,6 +397,7 @@ export default {
                     })
         
         })
+        // Modale commentaire
         var modalComment = document.getElementById('modalComment')
             modalComment.addEventListener('show.bs.modal', function (event) {
                 var button = event.relatedTarget;
@@ -355,6 +423,55 @@ export default {
                     })
                     document.getElementById("trashComment").addEventListener("click", function (){
                         axios.delete("http://localhost:3000/api/comment/"+id, { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
+                        .then((res) => {
+                                if (res) {
+                                    console.log(res);
+                                    window.location.reload();
+                                }
+                        })
+                        .catch((error) =>{
+                            console.log(error);
+                            console.log ("c'est err 404");
+                        })  
+                    })
+        })
+        // Modale utilisateurs
+        var modalUser = document.getElementById('modalUser')
+            modalUser.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget;
+                var title = button.getAttribute('data-bs-user-title');
+                var modalTitle = modalUser.querySelector('.modal-title');
+                modalTitle.textContent = title;
+
+                
+                var id = button.getAttribute('data-bs-user-id');
+                console.log(id);
+
+
+                var modalUserContent = modalUser.querySelector('.modal-user-body');
+                var firstname = button.getAttribute('data-bs-user-fisrtname');
+                var lastname = button.getAttribute('data-bs-user-lastname')
+                //var email = button.getAttribute()
+                modalUserContent.textContent = firstname + " " + lastname;
+                console.log(firstname);
+                
+                this.userIdToModerate = id;
+                console.log(this.userIdToModerate);
+                    document.getElementById("editUser").addEventListener("click", function (){
+                        axios.put("http://localhost:3000/api/auth/updateroleuser/"+id,  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
+                            .then((res) => {
+                                if (res) {
+                                console.log(res);
+                                window.location.reload();
+                                }
+                            })
+                            .catch((error) =>{
+                                console.log(error);
+                                console.log ("c'est err 404");
+                            }) ;
+                    })
+                    document.getElementById("trashUser").addEventListener("click", function (){
+                        axios.delete("http://localhost:3000/api/auth/deleteuser/"+id, { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
                         .then((res) => {
                                 if (res) {
                                     console.log(res);

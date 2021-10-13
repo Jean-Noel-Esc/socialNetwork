@@ -77,25 +77,62 @@ exports.login = (req, res, _next) => {
 
 exports.findAll = (req, res) => {
   console.log("je suis le findAll users");
-   models.User.findAll().then(users => {
-     res.status(200).json (users);  
-   })
-   .catch(error => res.status(400).json({ error }));
+  models.User.findAll().then(users => {
+    res.status(200).json (users);  
+  })
+  .catch(error => res.status(400).json({ error }));
 };
 
 // Recup un seul user
 exports.findById = (req, res) => {
- 
-   models.User.findOne( {where: {id:req.params.id}} ).then(user => {
-       res.status(200).json (user);
-   })
+  models.User.findOne( {where: {id:req.params.id}} ).then(user => {
+      res.status(200).json (user);
+  })
   .catch(error => res.status(400).json({ error }));
 };
 
-// Modifier les infos d'un user
+// Recup tous les nouveaux utilisateurs en attente de validation.
+exports.getAllUsersToModerate = (req, res, next) => {
+  models.User.findAll({
+    where : {role: 0}
+  }).then(
+    (user) => {
+      res.status(200).json(user);
+    }
+  ).catch(
+    (error) => {
+      res.status(404).json({
+        message : "Cet utilisateur est introuvable"
+      });
+    }
+  );
+};
+
+// Fonction de validation d'un utilisateur dans le forum
+exports.moderateUser = (req, res, next) => {
+  models.User.findOne({ where : {id: req.params.id} })
+  .then( user => {
+      models.User.update({role: 1}, { where : {id: req.params.id} }) 
+        .then(() => res.status(200).json({ message: 'Cet utilisateur a été validé!'}))
+        .catch(error => res.status(400).json({ error }));
+  })
+  .catch(error => res.status(500).json({ error }));
+};
+
+// Supprimer un utilisateur de la liste des users en attente de validation 
+exports.deleteUser = (req, res, next) => {
+  models.User.findOne({ where : {id: req.params.id} })
+  .then( user => {
+      models.User.destroy({ where : {id: req.params.id} }) 
+        .then(() => res.status(200).json({ message: 'Cet utilisateur a été supprimé!'}))
+        .catch(error => res.status(400).json({ error }));
+  })
+  .catch(error => res.status(500).json({ error }));
+};
+
+// Modifier les infos d'un user par un user
 // verif avec un find one si l'user existe
 exports.update = (req, res) => {
-  
   let newpass = req.body.newpassword;
   bcrypt.hash(newpass, 10)                                        // On appelle la fonction de hachage, on créer un nouvel utilisateur, on le sauvegarde dans la BDD
   .then(hash => {
@@ -116,15 +153,17 @@ exports.update = (req, res) => {
 
 
 //avant de delete verifier par un find one si l'utilisateur existe 
+//
 // Supprimer un user par son id
 exports.delete = (req, res) => {
-   const id = req.body.userid;
-   models.User.destroy({
-       where: { id: id }
-   }).then(() => {
+  const id = req.body.userid;
+  
+  models.User.destroy({
+      where: { id: id }
+  }).then(() => {
     res.status(201).json({ confirmation:'compte supprimé'});
-   })
-   .catch(error =>res.status(500).json({ error }));
+  })
+  .catch(error =>res.status(500).json({ error }));
 };  
 
 
