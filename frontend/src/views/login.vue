@@ -3,18 +3,20 @@
     <main class="form-signin text-center">
         <!-- <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-light rounded"> -->
             <form @submit.prevent="submitForm()">
-                <img class="mb-4" src="" alt="" width="72" height="57">
-                <h1 class="h3 mb-3 fw-normal">Login</h1>
+                <!-- <img class="mb-4" src="" alt="" width="72" height="57"> -->
+                <font-awesome-icon class="icone-groupomania" icon="globe" size="3x"/>
+
+                <h1 class="h3 mb-3 fw-normal">LOGIN</h1>
                 <div class="form-floating">
                     <label for="floatingInput">Email:</label>
                     <input v-on:keydown="invalid = false" v-model="inputEmail" type="email" class="form-control" id="floatingInput" aria-describedby="emailHelp" placeholder="votre email">
                 </div>
                 <div class="form-floating">
-                    <label for="floatingPassword">Entrez votre password:</label>
+                    <label for="floatingPassword">Password:</label>
                     <input v-on:keydown="invalid = false" v-model="inputPassword" type="password" class="form-control" id="inputPassword" aria-describedby="passwordHelp" placeholder="mot de passe">
                 </div>
                 <button class="w-100 btn btn-lg btn-primary" type="submit">CONNEXION</button> 
-                <button class="w-100 btn btn-lg btn-success" type="link">SIGN'UP</button> 
+                <button class="w-100 btn btn-lg btn-success" type="link" @click="$router.push({ path : 'signup'})">INSCRIPTION</button> 
             </form>
         <!-- </section>   -->
     </main>
@@ -45,20 +47,26 @@ main {
     font-weight: 400;
 }
 
-.form-signin .form-floating:focus-within {
+
+/* .form-signin .form-floating:focus-within {
     z-index: 2;
-}
+}   */
 
 .form-signin input[type="email"] {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
-}
+} 
 
 .form-signin input[type="password"] {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+
+.input{
+    margin : 10px;
 }
 
 button {
@@ -109,7 +117,7 @@ export default {
                 sessionStorage.setItem("token",   res.data.token)
                 sessionStorage.setItem("userId",  res.data.userId)
                 //sessionStorage.setItem("role",    res.data.role)
-                window.alert('connexion réussie');
+                window.alert('Connexion réussie');
                 router.push({ path : 'Main'});
             })
             .catch((error) => {

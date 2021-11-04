@@ -6,11 +6,12 @@ module.exports = (sequelize, DataTypes) => {const User = sequelize.define('User'
   email:  DataTypes.STRING,
   password: DataTypes.STRING,
   role: DataTypes.INTEGER,
-}, {
-  // Other model options go here
-});
-User.associate = function(models){models.User.hasMany(models.Post); models.User.hasMany(models.Comment); models.User.hasMany(models.Like) };
-
+},);
+User.associate = function(models){
+  models.User.hasMany(models.Post); 
+  models.User.hasMany(models.Comment); 
+  models.User.hasMany(models.Like) 
+  };
 return User;
 }
 

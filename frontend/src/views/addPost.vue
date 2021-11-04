@@ -1,22 +1,29 @@
 <template>
-    <main class="container">
+<div>
+<navBar/>
+    <main class="container-fluid">
         <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-light rounded">
+            <h1 class="text-center font-weight-bold" style="font-size:4vw;" >EDITEZ VOTRE ARTICLE</h1>
             <form @submit="sendForm()">                
-                <h1 class="text-center font-weight-bold" style="font-size:4vw;" >EDIT YOUR POST</h1>
                 <div class="mb-3">
-                    <label for="formFile" class="form-label">Default file input example</label>
+                    <label for="formFile" class="form-label">Ajoutez une photo pour illustrer votre article</label>
                     <input class="form-control" type="file" id="formFile">
                 </div>
                 <div class="form-group">
-                    <label for="inputFirstName">ADD PICTURE</label>
+                    <label for="inputFirstName">Prénom</label>
                     <input v-on:keydown="invalid = false" v-model="inputImage" type="text" class="form-control" id="inputImage" placeholder="Ajoutez une image">
-                    <span class= "message-alerte">Ajoutez une image</span>
+                    <span class= "message-alerte">Entrez votre prénom</span>
                 </div> 
                 <div class="form-group">
-                    <label for="inputLastName">TITRE</label>
+                    <label for="inputLastName">Nom</label>
+                    <input v-on:keydown="invalid = false" v-model="inputTitre" type="text" class="form-control" id="inputTitre"  placeholder="Ajoutez un titre">
+                    <span class= "message-alerte">Entrez</span>
+                </div> 
+                <div class="form-group">
+                    <label for="inputTiltle">Titre de votre article</label>
                     <input v-on:keydown="invalid = false" v-model="inputTitre" type="text" class="form-control" id="inputTitre"  placeholder="Ajoutez un titre">
                     <span class= "message-alerte">Ajoutez un titre</span>
-                </div>       
+                </div>          
                 <div class="form-group">
                     <label for="inputEmail">TEXT</label>
                     <input v-on:keydown="invalid = false" v-model="inputText" type="text" class="form-control" id="inputText"  placeholder="Ajoutez du texte">
@@ -27,21 +34,21 @@
             </form>
         </section>  
     </main>
-
-
-
+</div>
 </template>
 
 <script>
 
 import axios from "axios";
 import router from "../router";
+import navBar from "../components/Nav.vue";
 
 export default {
-    name: "addPost",
+    name: "addPost", 
+    components: {navBar},
     data() {
         // mes data sont des var dans la page qui matchent avec la partie template cad le champ v model des input
-        // c'est v model qui fait matcher les input de la var .
+        // c'est l'attribut v model qui fait matcher les input de la var .
         return {
             inputImage: "",
             inputTitre: "",

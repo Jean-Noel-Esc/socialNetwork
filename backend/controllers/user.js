@@ -42,7 +42,7 @@ exports.signup = (req, res, next) => {
 // Connexion // Login
 
 exports.login = (req, res, _next) => {
-  models.User.findOne({ email: req.body.email })
+  models.User.findOne({ where: {email:req.body.email} }) 
     .then(user => {
       if (!user) {
         return res.status(401).json({ error: 'Utilisateur non trouvé !' });
@@ -52,6 +52,7 @@ exports.login = (req, res, _next) => {
           if (!valid) {
             return res.status(401).json({ error: 'Mot de passe incorrect !' });
           }
+          //ici verif user status if user.status = 1 
           res.status(200).json({
             userId: user.id,
             token: jwt.sign(
