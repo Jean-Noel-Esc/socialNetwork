@@ -29,8 +29,9 @@
                 <div class="form-groupe">
                     <label for="inputPassword">Password:</label>
                     <input v-on:keydown="invalid = false" v-model="inputPassword" type="password" class="form-control" id="inputPassword"  placeholder="Entrez votre mot de passe">
-                    <img src="ressources/check.svg" alt="icone de validation" class="icone-verif">
-                    <span class= "message-alerte">un symbole, une lettre minuscule, un chiffre</span>
+                    <font-awesome-icon class="icone-verif" icon="check"/>
+                    <font-awesome-icon class="icone-verif-error" icon="times"/>  
+                    <span class= "message-alerte">8 caractères au minimum avec un symbole ,.@!, une lettre minuscule, un chiffre</span>
                     <div class="ligne">
                         <div class="l1"><span>Faible</span></div>
                         <div class="l2"><span>Moyen</span></div>
@@ -40,7 +41,8 @@
                 <div class="form-groupe">
                     <label for="inputConfirmPassword">Confirmez votre password:</label>
                     <input v-on:keydown="invalid = false" v-model="inputConfirmPassword" type="password" class="form-control" id="inputConfirmPassword"  placeholder="Confirmez votre mot de passe">
-                    <img src="ressources/check.svg" alt="icone de validation" class="icone-verif">
+                    <font-awesome-icon class="icone-verif" icon="check"/>
+                    <font-awesome-icon class="icone-verif-error" icon="times"/>  
                     <span class= "message-alerte">un symbole, une lettre minuscule, un chiffre</span>
                 </div>
                 <button type="submit">VALIDER</button> 
@@ -160,7 +162,6 @@ button:active {
 
 import router from "../router";
 import axios from "axios";
-
 
 export default {
     name: "signup",
@@ -289,12 +290,15 @@ inpMdp.addEventListener('input', (e) => {
     }
     // Si il n'y a pas assez d'input  
     if(testAll < 3){
-        allSpan[2].style.display = "inline";
-        allImg[2].style.display = "inline";
-        allImg[2].src = "times";
+        allSpan[3].style.display = "inline";
+        allImg[3].style.display = "none";
+        allImg2[3].style.display = "inline";
+        allImg2[3].src = "times";
     } else {
-        allSpan[2].style.display = "none";
-        allImg[2].src = "check";
+        allSpan[3].style.display = "inline";
+        allImg[3].src = "check";
+        allImg[3].style.display = "inline";
+        allImg2[3].style.display = "none";
     }
         // valider la force du mdp
         // valeur la plus basse
@@ -310,24 +314,18 @@ inpMdp.addEventListener('input', (e) => {
             allLigne[2].style.display = 'none';
         }
         //mdp fort
-        else if (valeurInp.length > 9) {
+         else if (valeurInp.length > 9) {
             allLigne[0].style.display = 'block';
             allLigne[1].style.display = 'block';
             allLigne[2].style.display = 'block';
         }
-        if (type == 4){
-            if(e.target.value.length === 0){
-                allImg[type].style.display = "none";
-                allSpan[type].style.display = "inline";  
-            }
-            else if(e.target.value === valeurInp){
-                allImg[type].style.display = "inline";
-                allSpan[type].style.display = "none";    
-            } else {
-                allImg[type].style.display = "none"; 
-                allSpan[type].style.display = "inline";          
-            }
+        // si 0 input 
+        else if (valeurInp.length === 0) {
+            allLigne[0].style.display = 'none';
+            allLigne[1].style.display = 'none';
+            allLigne[2].style.display = 'none';
         }
+
     
 })
 // check confirmation
@@ -336,31 +334,28 @@ inpMdp.addEventListener('input', (e) => {
 // Si la target value =  strictement celle de valeurInp  retour check;
 // Sinon retour error ; 
 
-        //  check confirmation
-        // On compare la valeur de l'input a celle de l'input  valeurInp
-        // Si la length de la target value = 0  retour error ;
-        // Si la target value =  strictement celle de valeurInp  retour check;
-        // Sinon retour error ; 
+    inpConfirme.addEventListener('input', (e) => {
+        if(e.target.value.length === 0){
+            //allSpan[4].style.display = "none";
+            allImg2[4].style.display = "inline";
+            allImg2[4].src = "times";
+            allImg[4].style.display = "none";
 
-    if(e.target.value.length === 0){
-        allImg[3].style.display = "inline";
-        allImg[3].src = "times";
-    }
-    else if(e.target.value === valeurInp){
-        allImg[3].style.display = "inline";
-        allImg[3].src = "check";
-    } else {
-        allImg[3].style.display = "inline";
-        allImg[3].src = "times";
-    }
-
-})
+        }
+        else if(e.target.value === valeurInp){
+            allImg[4].style.display = "inline";
+            allImg[4].src = "check";
+            allImg2[4].style.display = "none";
+        } else {
+            allImg2[4].style.display = "inline";
+            allImg2[4].src = "times";
+            allImg[4].style.display = "none";
+        }
+    })
     
     },
-    // pour la page article mettre les MOUNTED ce qu'il doit faire par defaut lorsque l'app est montée avt que l'user interagisse  verif si l'utilisateur 
     methods: {
         sendForm() {
-            //e.preventDefault;
             console.log("ok");
                 if (!this.inputFirstName || !this.inputLastName || !this.inputEmail || !this.inputPassword || this.inputPassword !== this.inputConfirmPassword) {
                 
@@ -371,9 +366,6 @@ inpMdp.addEventListener('input', (e) => {
             const nameRegex = /(.*[a-z]){3,30}/;
             const mailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
             const pwdRegex  = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[,.@!])[A-Za-z\d,.@!]{8,}$/;
-
-            //&& pwdRegex.test(this.inputPassword)
-            //
             
             if (nameRegex.test(this.inputFirstName) && nameRegex.test(this.inputLastName) && mailRegex.test(this.inputEmail) && pwdRegex.test(this.inputPassword)) {
                 console.log("ok3");
@@ -381,22 +373,24 @@ inpMdp.addEventListener('input', (e) => {
                     "firstname": this.inputFirstName, 
                     "lastname": this.inputLastName, 
                     "email": this.inputEmail,
-                    "password": this.inputPassword};
-                    console.log(data);
+                    "password": this.inputPassword
+                };
                 axios.post('http://localhost:3000/api/auth/signup', data)
                 .then((res) => {
-                sessionStorage.setItem("token",   res.data.token)
-                sessionStorage.setItem("userId",  res.data.userId)
-                    console.log(res);
-                    alert('inscription réussie');
-                    //redirection main page
-                    router.push({ path : 'main'});
+                    sessionStorage.setItem("token",   res.data.token)
+                    sessionStorage.setItem("userId",  res.data.userId)
+                        console.log(res);
+                        alert('inscription réussie');
+                        //redirection main page
+                        router.push({ path : 'main'});
                 })
                 .catch((error)=>{
                     alert(error.status)
-                    console.log(error)});
-            } else {
-                console.log('erreur lkjdsfoizajmlihj')
+                    console.log(error)
+                });
+            } 
+            else {
+                console.log('erreur')
                 this.invalid = true;
             }
         }
