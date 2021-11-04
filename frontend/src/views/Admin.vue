@@ -152,7 +152,7 @@
         </div>
     <!--------------------------------->
     <!--Boutton pour la création d'une nouvelle catégorie-->
-    <!-- <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#modalCategory" v-bind:data-bs-category-id="category.id"  v-bind:data-bs-category-name="category.name"><font-awesome-icon icon = "eye"/></button> --> -->
+    <!-- <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#modalCategory" v-bind:data-bs-category-id="category.id"  v-bind:data-bs-category-name="category.name"><font-awesome-icon icon = "eye"/></button> --> 
     <!----------------------------------------------------->
 
 

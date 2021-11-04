@@ -259,6 +259,22 @@ const chiffres = /[0-9]/;
 
 inpMdp.addEventListener('input', (e) => {
     valeurInp = e.target.value;
+            if(inpConfirme.value.length === 0){
+            //allSpan[4].style.display = "none";
+            allImg2[4].style.display = "inline";
+            allImg2[4].src = "times";
+            allImg[4].style.display = "none";
+
+        }
+        else if(inpConfirme.value === valeurInp){
+            allImg[4].style.display = "inline";
+            allImg[4].src = "check";
+            allImg2[4].style.display = "none";
+        } else {
+            allImg2[4].style.display = "inline";
+            allImg2[4].src = "times";
+            allImg[4].style.display = "none";
+        }
     if(valeurInp.search(specialCar) !== -1){
         objValidation.symbole = 1;
     }

@@ -7,18 +7,9 @@
             <form @submit="sendForm()">                
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Ajoutez une photo pour illustrer votre article</label>
-                    <input v-on:keydown="invalid"  @change="handleImage($event.target.name, $event.target.files)" class="form-control" type="file" accept="image/png, image/jpeg" id="formFile">                    
+                    <input v-on:keydown="invalid"  @change="handleImage()" class="form-control" type="file" accept="image/png, image/jpeg" id="inputImage">                    
+                    <div id="previewSettings"></div>
                 </div>
-                <div class="form-group">
-                    <label for="inputFirstName">Prénom</label>
-                    <input v-on:keydown="invalid = false" v-model="inputFirstName" type="text" class="form-control" id="inputFirstName" placeholder="Entrez votre prénom">
-                    <span class= "message-alerte"></span>
-                </div> 
-                <div class="form-group">
-                    <label for="inputLastName">Nom</label>
-                    <input v-on:keydown="invalid = false" v-model="inputLastName" type="text" class="form-control" id="inputLastName"  placeholder="Entrez votre nom">
-                    <span class= "message-alerte"></span>
-                </div> 
                 <div class="form-group">
                     <label for="inputTiltle">Titre de votre article</label>
                     <input v-on:keydown="invalid = false" v-model="inputTitle" type="text" class="form-control" id="inputTitle"  placeholder="Ajoutez un titre">
@@ -29,7 +20,7 @@
                     <input v-on:keydown="invalid = false" v-model="inputText" type="text" class="form-control" id="inputText"  placeholder="Ajoutez du texte">
                     <span class= "message-alerte"></span>
                 </div>
-                <button class="w-100 btn btn-lg btn-primary" type="submit">PUBLICATION</button> 
+                <button class="w-100 btn btn-lg btn-primary" type="submit" @click.prevent="sendForm()">PUBLICATION</button> 
             </form>
         </section>  
     </main>
@@ -74,37 +65,29 @@ export default {
         }
     },
     methods: {
-        // handleFiles(){ // Cette fonction permet d'avoir une miniature des fichiers qui vont être uploadés même si ils ne possèdent pas encore d'URLs
-        // document.getElementById("inputImage").innerHTML="";
-        // let files = document.getElementById("inputImage").files;
-        // for (let i = 0; i < files.length; i++) {
-        //     let img = document.createElement("img");
-        //     img.classList.add("previewSettingsImg");
-        //     img.file = files[i];
-        //     document.getElementById("previewSettings").appendChild(img);
-        //     var reader = new FileReader();
-        //     reader.onload = ( function(aImg) {
-        //     return function(e) {
-        //         aImg.src = e.target.result; 
-        //     };
-        //     })(img);
-        //     reader.readAsDataURL(files[i]);
-        // }
-        // },
-        handleImage() {
-            console.log("okImage");
-            let files = document.getElementById("inputImage").files;
-            this.inputImage = {
-            name: files.name,
-            //data: files[0]
-            }
-            console.log(this.inputImage);
+        handleImage(){ // Cette fonction permet d'avoir une miniature des fichiers qui vont être uploadés même si ils ne possèdent pas encore d'URLs
+        document.getElementById("previewSettings").innerHTML="";
+        let files = document.getElementById("inputImage").files;
+        for (let i = 0; i < files.length; i++) {
+            let img = document.createElement("img");
+            img.classList.add("img-fluid");
+            img.file = files[i];
+            document.getElementById("previewSettings").appendChild(img);
+            var reader = new FileReader();
+            reader.onload = ( function(aImg) {
+            return function(e) {
+                aImg.src = e.target.result; 
+            };
+            })(img);
+            reader.readAsDataURL(files[i]);
+        }
         },
+
 
 
         sendForm() {
             console.log("ok");
-                if ( !this.inputImage || !this.inputFirstName || !this.inputLastName || !this.inputTitle || !this.inputText) {
+                if ( !this.inputImage || !this.inputTitle || !this.inputText) {
                 return this.invalid = true;
                 
             }
