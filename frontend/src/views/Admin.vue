@@ -128,6 +128,34 @@
             </div>
         </div>
     </div> -->
+    <!--Gestion des catégories-->
+    <h2>Gestion des catégories</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                    <th scope="col">#id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">DELETE</th>
+                    </tr>
+                </thead>
+                <tbody  v-for="category in categories" :key="category.id">
+                    <tr>
+                        <td>{{category.id}}</td>
+                        <td>{{category.name}}</td>
+                        <td>
+                        <!-- <button type="button" class="btn btn-danger m-3" data-bs-toggle="modal" data-bs-target="#modalcategory" v-bind:data-bs-user-id="category.id"  v-bind:data-bs-category-name="category.name"><font-awesome-icon icon = "trash"/></button>  -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    <!--------------------------------->
+    <!--Boutton pour la création d'une nouvelle catégorie-->
+    <!-- <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#modalCategory" v-bind:data-bs-category-id="category.id"  v-bind:data-bs-category-name="category.name"><font-awesome-icon icon = "eye"/></button> --> -->
+    <!----------------------------------------------------->
+
+
     <!--display des users à modérer-->
                 <h2>Moderation des nouveaux utilisateurs</h2>
         <div class="table-responsive">
@@ -311,6 +339,7 @@ export default {
     name: "Admin",
     data() {
         return {
+            categories:[],
             users:[],
             posts:[],
             comments:[],
@@ -320,7 +349,24 @@ export default {
         }
     },
     mounted () {
-        // Requetes listes utilisateurs / articles / commentaires.
+        // Requetes listes categories/ utilisateurs / articles / commentaires.
+        axios.get("http://localhost:3000/api/category/",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
+        .then((res) => {
+                if (res) {
+                    const rep = res.data;
+                    this.categories = rep;
+                    console.log(rep);
+                    console.log("Mais ou sont les categories");
+                }
+        })
+        .catch((error) =>{
+            console.log(error);
+            console.log ("c'est err 404");
+        })       
+
+
+
+
         axios.get("http://localhost:3000/api/auth/findalluserstomoderate",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
         .then((res) => {
                 if (res) {

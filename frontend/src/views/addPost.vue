@@ -7,35 +7,50 @@
             <form @submit="sendForm()">                
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Ajoutez une photo pour illustrer votre article</label>
-                    <input class="form-control" type="file" id="formFile">
+                    <input v-on:keydown="invalid"  @change="handleImage($event.target.name, $event.target.files)" class="form-control" type="file" accept="image/png, image/jpeg" id="formFile">                    
                 </div>
                 <div class="form-group">
                     <label for="inputFirstName">Prénom</label>
-                    <input v-on:keydown="invalid = false" v-model="inputImage" type="text" class="form-control" id="inputImage" placeholder="Ajoutez une image">
-                    <span class= "message-alerte">Entrez votre prénom</span>
+                    <input v-on:keydown="invalid = false" v-model="inputFirstName" type="text" class="form-control" id="inputFirstName" placeholder="Entrez votre prénom">
+                    <span class= "message-alerte"></span>
                 </div> 
                 <div class="form-group">
                     <label for="inputLastName">Nom</label>
-                    <input v-on:keydown="invalid = false" v-model="inputTitre" type="text" class="form-control" id="inputTitre"  placeholder="Ajoutez un titre">
-                    <span class= "message-alerte">Entrez</span>
+                    <input v-on:keydown="invalid = false" v-model="inputLastName" type="text" class="form-control" id="inputLastName"  placeholder="Entrez votre nom">
+                    <span class= "message-alerte"></span>
                 </div> 
                 <div class="form-group">
                     <label for="inputTiltle">Titre de votre article</label>
-                    <input v-on:keydown="invalid = false" v-model="inputTitre" type="text" class="form-control" id="inputTitre"  placeholder="Ajoutez un titre">
-                    <span class= "message-alerte">Ajoutez un titre</span>
+                    <input v-on:keydown="invalid = false" v-model="inputTitle" type="text" class="form-control" id="inputTitle"  placeholder="Ajoutez un titre">
+                    <span class= "message-alerte"></span>
                 </div>          
                 <div class="form-group">
-                    <label for="inputEmail">TEXT</label>
+                    <label for="inputEmail">Texte</label>
                     <input v-on:keydown="invalid = false" v-model="inputText" type="text" class="form-control" id="inputText"  placeholder="Ajoutez du texte">
-                    <img src="src/assets/check.svg" alt="icone de validation" class="icone-verif">
-                    <span class= "message-alerte">Ajoutez votre texte</span>
+                    <span class= "message-alerte"></span>
                 </div>
-                <button type="submit">PUBLISH YOUR POST</button> 
+                <button class="w-100 btn btn-lg btn-primary" type="submit">PUBLICATION</button> 
             </form>
         </section>  
     </main>
 </div>
 </template>
+
+<style>
+button {
+    margin-top: 20px;
+}
+
+label{
+    margin: 5px 23px;
+    font-size: 20px;
+    padding: 10px 0 5px 0;
+    display: block;
+    position: left;
+    text-align: left;
+}
+
+</style>
 
 <script>
 
@@ -51,23 +66,55 @@ export default {
         // c'est l'attribut v model qui fait matcher les input de la var .
         return {
             inputImage: "",
-            inputTitre: "",
+            inputFirstName: "",
+            inputLastName: "",
+            inputTitle: "",
             inputText: "",
             invalid: false
         }
     },
     methods: {
+        // handleFiles(){ // Cette fonction permet d'avoir une miniature des fichiers qui vont être uploadés même si ils ne possèdent pas encore d'URLs
+        // document.getElementById("inputImage").innerHTML="";
+        // let files = document.getElementById("inputImage").files;
+        // for (let i = 0; i < files.length; i++) {
+        //     let img = document.createElement("img");
+        //     img.classList.add("previewSettingsImg");
+        //     img.file = files[i];
+        //     document.getElementById("previewSettings").appendChild(img);
+        //     var reader = new FileReader();
+        //     reader.onload = ( function(aImg) {
+        //     return function(e) {
+        //         aImg.src = e.target.result; 
+        //     };
+        //     })(img);
+        //     reader.readAsDataURL(files[i]);
+        // }
+        // },
+        handleImage() {
+            console.log("okImage");
+            let files = document.getElementById("inputImage").files;
+            this.inputImage = {
+            name: files.name,
+            //data: files[0]
+            }
+            console.log(this.inputImage);
+        },
+
+
         sendForm() {
             console.log("ok");
-                if ( !this.inputImage || !this.inputTitre || !this.inputText) {
+                if ( !this.inputImage || !this.inputFirstName || !this.inputLastName || !this.inputTitle || !this.inputText) {
                 return this.invalid = true;
                 
             }
+            // || !this.inputFirstName || !this.inputLastName 
             
-            if (!this.inputImage || !this.inputTitre || !this.inputText) {
+            if (!this.inputImage || !this.inputTitle || !this.inputText) {
+                console.log("ok2");
                 const data= { 
-                    "picture": this.inputImage, 
-                    "title": this.inputTitre, 
+                    "picture": this.inputImage,
+                    "title": this.inputTitle, 
                     "text": this.inputText
                 };
 

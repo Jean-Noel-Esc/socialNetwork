@@ -26,11 +26,10 @@ exports.create = (req, res, next) => {
 
 // Recuperer toutes les categories
 exports.findAll = (req, res) => {
-  
   models.Category.findAll().then((categories) => {
     // Send all categories as response
     res.status(200).json({
-      status: true,
+      // status: true,
       data: categories,
     });
   });

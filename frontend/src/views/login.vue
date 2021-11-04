@@ -1,26 +1,27 @@
 <template>
+<div>
+        <!-- <font-awesome-icon class="icone-groupomania" icon="globe" size="3x"/>
+        <h1 class="title">LOGIN</h1> -->
 
     <main class="form-signin text-center">
-        <!-- <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-light rounded"> -->
+        <!-- <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-light rounded">  -->
+            <font-awesome-icon class="icone-groupomania" icon="globe" size="3x"/>
+            <h1 class="h3 fw-normal">LOGIN</h1>
             <form @submit.prevent="submitForm()">
-                <!-- <img class="mb-4" src="" alt="" width="72" height="57"> -->
-                <font-awesome-icon class="icone-groupomania" icon="globe" size="3x"/>
-
-                <h1 class="h3 mb-3 fw-normal">LOGIN</h1>
                 <div class="form-floating">
-                    <label for="floatingInput">Email:</label>
                     <input v-on:keydown="invalid = false" v-model="inputEmail" type="email" class="form-control" id="floatingInput" aria-describedby="emailHelp" placeholder="votre email">
+                    <label for="floatingInput">Email:</label>               
                 </div>
-                <div class="form-floating">
-                    <label for="floatingPassword">Password:</label>
+                <div class="form-floating mb-3">
                     <input v-on:keydown="invalid = false" v-model="inputPassword" type="password" class="form-control" id="inputPassword" aria-describedby="passwordHelp" placeholder="mot de passe">
+                    <label for="floatingPassword">Password:</label>                
                 </div>
                 <button class="w-100 btn btn-lg btn-primary" type="submit">CONNEXION</button> 
                 <button class="w-100 btn btn-lg btn-success" type="link" @click="$router.push({ path : 'signup'})">INSCRIPTION</button> 
             </form>
-        <!-- </section>   -->
+        <!-- </section>    -->
     </main>
-
+</div>
 </template>
 
 <style>
@@ -46,11 +47,14 @@ main {
 .form-signin .checkbox {
     font-weight: 400;
 }
+/* .form-floating mb3 {
+    margin-bottom: 0px;
+} */
 
 
-/* .form-signin .form-floating:focus-within {
+.form-signin .form-floating:focus-within {
     z-index: 2;
-}   */
+}   
 
 .form-signin input[type="email"] {
     margin-bottom: -1px;
@@ -62,11 +66,6 @@ main {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-}
-
-
-.input{
-    margin : 10px;
 }
 
 button {

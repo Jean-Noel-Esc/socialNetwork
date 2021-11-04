@@ -42,9 +42,15 @@
             <h1 class="fw-light">Bienvenu</h1>
             <p class="lead text-muted">the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
             <p>
-            <button class="btn btn-primary my-2" @click="$router.push({path:'addpost'})">ADD POST</button>
+            <button class="btn btn-primary my-2" @click="$router.push({path:'addpost'})">PUBLIER</button>
             <!-- <a href="#" class="btn btn-secondary my-2">Secondary action</a> -->
             </p>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Flitrer les articles par catégorie</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
         </div>
         </div>
     </section>
