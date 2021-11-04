@@ -1,8 +1,8 @@
 <template>
-  <div id="nav">
-    
-  </div>
+<div>
+  <div id="nav"></div>
   <router-view/>
+</div>
 </template>
 
 <style>
