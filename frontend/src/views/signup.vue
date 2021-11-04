@@ -158,10 +158,8 @@ button:active {
 
 <script>
 
-import axios from "axios";
 import router from "../router";
-
-
+import axios from "axios";
 
 
 export default {
@@ -252,11 +250,11 @@ const chiffres = /[0-9]/;
 // pour voir si 
 // dans notre input il y a au moins 1 symbole 1e lettre et 1 chiffre
 
-let objValidation = {
-    symbole : 0,
-    lettre : 0,
-    chiffre : 0
-}
+        let objValidation = {
+            symbole : 0,
+            lettre : 0,
+            chiffre : 0
+        }
 
 inpMdp.addEventListener('input', (e) => {
     valeurInp = e.target.value;
@@ -317,11 +315,18 @@ inpMdp.addEventListener('input', (e) => {
             allLigne[1].style.display = 'block';
             allLigne[2].style.display = 'block';
         }
-        // si 0 input 
-        else if (valeurInp.length === 0) {
-            allLigne[0].style.display = 'none';
-            allLigne[1].style.display = 'none';
-            allLigne[2].style.display = 'none';
+        if (type == 4){
+            if(e.target.value.length === 0){
+                allImg[type].style.display = "none";
+                allSpan[type].style.display = "inline";  
+            }
+            else if(e.target.value === valeurInp){
+                allImg[type].style.display = "inline";
+                allSpan[type].style.display = "none";    
+            } else {
+                allImg[type].style.display = "none"; 
+                allSpan[type].style.display = "inline";          
+            }
         }
     
 })
@@ -331,7 +336,11 @@ inpMdp.addEventListener('input', (e) => {
 // Si la target value =  strictement celle de valeurInp  retour check;
 // Sinon retour error ; 
 
-inpConfirme.addEventListener('input', (e) => {
+        //  check confirmation
+        // On compare la valeur de l'input a celle de l'input  valeurInp
+        // Si la length de la target value = 0  retour error ;
+        // Si la target value =  strictement celle de valeurInp  retour check;
+        // Sinon retour error ; 
 
     if(e.target.value.length === 0){
         allImg[3].style.display = "inline";
@@ -351,6 +360,7 @@ inpConfirme.addEventListener('input', (e) => {
     // pour la page article mettre les MOUNTED ce qu'il doit faire par defaut lorsque l'app est montée avt que l'user interagisse  verif si l'utilisateur 
     methods: {
         sendForm() {
+            //e.preventDefault;
             console.log("ok");
                 if (!this.inputFirstName || !this.inputLastName || !this.inputEmail || !this.inputPassword || this.inputPassword !== this.inputConfirmPassword) {
                 
@@ -386,7 +396,7 @@ inpConfirme.addEventListener('input', (e) => {
                     alert(error.status)
                     console.log(error)});
             } else {
-                console.log('erreur')
+                console.log('erreur lkjdsfoizajmlihj')
                 this.invalid = true;
             }
         }
