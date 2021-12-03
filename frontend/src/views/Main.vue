@@ -16,8 +16,8 @@
                 <li><a href="#" class="text-white">Email </a></li>
             </ul>
             </div>
-            <div class="col-sm-4 offset-md-1 py-4">
-            <h4 class="text-white">Déconnexion</h4>
+            <div class="col-sm-8 col-md-7 py-4">
+            <button type="button" class="btn text-white btn-warning" @Click="disconnectUser()">Déconnexion</button>
             </div>
         </div>
         </div>
@@ -25,9 +25,9 @@
     <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container">
         <a href="#" class="navbar-brand d-flex align-items-center">
-            <font-awesome-icon class="icone-groupomania" icon="globe" size="3x"/>
+            <img src = "../assets/groupomania/icon-left-font-monochrome-white.svg" alt="globe"/>
+            <!-- <font-awesome-icon class="icone-groupomania" icon="globe" size="3x"/> -->
             <!-- <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> -->
-            <strong>GROUPOMANIA</strong>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -45,12 +45,12 @@
             <button class="btn btn-primary my-2" @click="$router.push({path:'addpost'})">PUBLIER</button>
             <!-- <a href="#" class="btn btn-secondary my-2">Secondary action</a> -->
             </p>
-            <select class="form-select" aria-label="Default select example">
+            <!-- <select class="form-select" aria-label="Default select example">
                 <option selected>Flitrer les articles par catégorie</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
                 <option value="3">Three</option>
-            </select>
+            </select> -->
         </div>
         </div>
     </section>
@@ -114,7 +114,8 @@ export default {
     name: "Main",
     data() {
         return {
-            posts:[],    
+            posts:[],
+            users:[]    
         }
     },
     mounted () {
@@ -139,6 +140,14 @@ export default {
     methods:{
         displayPost(id){
             router.push({ path : '/singlepost/'+id});
+        },
+        disconnectUser(){
+            //axios.get("http://localhost:3000/api/auth/"+ id,  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
+                //sessionStorage.getItem("token",   res.data.token)
+                //sessionStorage.getItem("userId",  res.data.userId)
+                sessionStorage.clear();
+                window.alert('Voulez-vous vous déconnecter');
+                router.push({ path : 'login'});
         }
     }
 }

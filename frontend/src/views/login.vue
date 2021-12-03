@@ -2,11 +2,13 @@
 <div>
         <!-- <font-awesome-icon class="icone-groupomania" icon="globe" size="3x"/>
         <h1 class="title">LOGIN</h1> -->
+        <img src = "../assets/groupomania/icon.svg" alt="globe"/>
 
     <main class="form-signin text-center">
         <!-- <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-light rounded">  -->
-            <font-awesome-icon class="icone-groupomania" icon="globe" size="3x"/>
+            <!-- <font-awesome-icon class="icone-groupomania" icon="globe" size="3x"/> -->
             <h1 class="h3 fw-normal">LOGIN</h1>
+            <!-- <img src = "../assets/groupomania/icon.svg" alt="globe"/> -->
             <form @submit.prevent="submitForm()">
                 <div class="form-floating">
                     <input v-on:keydown="invalid = false" v-model="inputEmail" type="email" class="form-control" id="floatingInput" aria-describedby="emailHelp" placeholder="votre email">
@@ -35,6 +37,11 @@ main {
     padding-top: 40px;
     padding-bottom: 40px;
     background-color: #f5f5f5;
+}
+img{
+    height: 10%;
+    width: 10%;
+    
 }
 
 .form-signin {
