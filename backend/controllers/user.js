@@ -156,16 +156,16 @@ exports.update = (req, res) => {
 //avant de delete verifier par un find one si l'utilisateur existe 
 //
 // Supprimer un user par son id
-exports.delete = (req, res) => {
-  const id = req.body.userid;
+// exports.delete = (req, res) => {
+//   const id = req.body.userid;
   
-  models.User.destroy({
-      where: { id: id }
-  }).then(() => {
-    res.status(201).json({ confirmation:'compte supprimé'});
-  })
-  .catch(error =>res.status(500).json({ error }));
-};  
+//   models.User.destroy({
+//       where: { id: id }
+//   }).then(() => {
+//     res.status(201).json({ confirmation:'compte supprimé'});
+//   })
+//   .catch(error =>res.status(500).json({ error }));
+// };  
 
 
 

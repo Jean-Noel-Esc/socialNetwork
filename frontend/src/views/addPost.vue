@@ -4,10 +4,17 @@
     <main class="container-fluid">
         <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-light rounded">
             <h1 class="text-center font-weight-bold" style="font-size:4vw;" >EDITEZ VOTRE ARTICLE</h1>
-            <form @submit="sendForm()">                
+            <form @submit="sendForm()">
+                <div class="form-group">
+                    <label for="inputCategory">Texte</label>
+                    <select v-on:keydown="invalid = false" v-model="inputCategory" type="text" class="form-control" id="inputCategory"  placeholder="Ajoutez du texte">
+                    <option v-for="categorie in categories" v-bind:value="categorie.id" :key="categorie.name">{{categorie.name}}</option>
+                    </select>
+                    <span class= "message-alerte"></span>
+                </div>                
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Ajoutez une photo pour illustrer votre article</label>
-                    <input v-on:keydown="invalid"  @change="handleImage()" class="form-control" type="file" accept="image/png, image/jpeg" id="inputImage">                    
+                    <input @change="handleImage()" class="form-control" type="file" accept="image/png, image/jpeg" id="inputImage">                    
                     <div id="previewSettings"></div>
                 </div>
                 <div class="form-group">
@@ -53,17 +60,36 @@ export default {
     name: "addPost", 
     components: {navBar},
     data() {
-        // mes data sont des var dans la page qui matchent avec la partie template cad le champ v model des input
+        // mes data sont des var dans la page qui matchent avec la partie template
+        // cad le champ v model des input
         // c'est l'attribut v model qui fait matcher les input de la var .
         return {
             inputImage: "",
-            inputFirstName: "",
-            inputLastName: "",
+            // inputFirstName: "",
+            // inputLastName: "",
             inputTitle: "",
             inputText: "",
-            invalid: false
+            invalid: false,
+            categories:""
         }
     },
+    mounted ()
+    {
+        axios.get("http://localhost:3000/api/category/")
+        .then((res) => {
+                if (res) {
+                    const rep = res.data;
+                    this.categories = rep;
+                    console.log(rep);
+                }
+
+        })
+        .catch((error) =>{
+            console.log(error);
+            console.log ("c'est err 404");
+        })
+    },
+
     methods: {
         handleImage(){ // Cette fonction permet d'avoir une miniature des fichiers qui vont être uploadés même si ils ne possèdent pas encore d'URLs
         document.getElementById("previewSettings").innerHTML="";
@@ -82,41 +108,64 @@ export default {
             reader.readAsDataURL(files[i]);
         }
         },
-
-
+         envoiModifPhotoProfil(){ // Envoi des modifications de la photo de profil via une requete PUT
+            let input = document.getElementById("inputImage");
+            let file = input.files;
+            let formData = new FormData();
+            formData.append('image', file[0]);
+            axios
+            .put("http://localhost:3000/api/post/"+ this.userId, formData, {
+                headers: {
+                'Authorization': 'Bearer ' + this.token,
+                "Content-Type": "application/json",
+                }
+            })
+            .then(
+                alert("Modifications sauvegardées !"),
+                window.location.reload()
+            )
+            .catch(function (error) {
+                console.log(error); 
+            });
+            },
 
         sendForm() {
             console.log("ok");
-                if ( !this.inputImage || !this.inputTitle || !this.inputText) {
+                if ( !this.inputTitle || !this.inputText) {
+                    console.log('err')
                 return this.invalid = true;
-                
-            }
-            // || !this.inputFirstName || !this.inputLastName 
-            
-            if (!this.inputImage || !this.inputTitle || !this.inputText) {
-                console.log("ok2");
-                const data= { 
-                    "picture": this.inputImage,
-                    "title": this.inputTitle, 
-                    "text": this.inputText
-                };
 
-                axios.post('http://localhost:3000/api/post', data)
-                .then((res) => {
-                sessionStorage.setItem("token",   res.data.token)
-                sessionStorage.setItem("userId",  res.data.userId)
-                    console.log(res);
-                    alert('Votre Post est en attente de modération');
-                    //redirection main page
-                    router.push({ path : 'Main'});
-                })
-                .catch((error)=>{
-                    alert(error.status)
-                    console.log(error)});
-            } else {
+            
+            }else {
                 console.log('erreur')
                 this.invalid = true;
             }
+            console.log('bien')
+            let input = document.getElementById("inputImage");
+            let userId = sessionStorage.getItem("userId");
+            let file = input.files;
+            let formData = new FormData();
+            formData.append('image', file[0]);
+            formData.append('title', this.inputTitle);
+            formData.append('text', this.inputText);
+            formData.append('categoryId', this.inputCategory); // ce sera un this.inputCategorie
+            formData.append('userId', userId);
+            console.log(formData);
+                axios.post('http://localhost:3000/api/post/create', formData, {
+                headers: {
+                //'Authorization': 'Bearer ' + this.token,
+                'Content-Type': 'application/json',
+                }
+            })
+                .then((res) => {
+                    console.log(res);
+                    alert('Votre article est en attente de modération');
+                    //redirection main page
+                    router.push({ path : '/main'});
+                })
+                .catch((error)=>{
+                    alert(error.status)
+                    console.log("on est dans cette erreur")});
         }
     
     }

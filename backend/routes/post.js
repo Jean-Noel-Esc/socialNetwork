@@ -3,13 +3,13 @@ const router = express.Router();
 const postCtrl = require('../controllers/post');
 const auth = require('../middleware/auth');
 
-//const multer = require('../middleware/multer-config');
+const multer = require('../middleware/multer');
 
 console.log("je suis route post");
 
 router.get('/', postCtrl.getAllPosts); // delete : auth pour test
 router.get('/admin', postCtrl.getAllPostsToModerate);
-router.post('/',postCtrl.createPost);
+router.post('/create',multer, postCtrl.createPost);
 router.get('/:id', postCtrl.getOnePost);
 router.put('/:id', postCtrl.updatePost);
 router.delete('/:id', postCtrl.destroyPost);
