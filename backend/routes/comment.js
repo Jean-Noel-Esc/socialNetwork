@@ -8,11 +8,11 @@ const auth = require('../middleware/auth');
 console.log("je suis route comment");
 
 
-router.get('/admin', commentCtrl.getAllCommentsToModerate);
-router.get('/:id', commentCtrl.getAllComments);
-router.post('/',commentCtrl.createComment);
-router.delete('/:id', commentCtrl.destroyComment);
-router.put('/admin/:id', commentCtrl.moderateComment); //route pour valider la moderation d'un commentaire 
+router.get('/admin', auth, commentCtrl.getAllCommentsToModerate);
+router.get('/:id', auth,  commentCtrl.getAllComments);
+router.post('/', auth, commentCtrl.createComment);
+router.delete('/:id',auth,  commentCtrl.destroyComment);
+router.put('/admin/:id',auth, commentCtrl.moderateComment); //route pour valider la moderation d'un commentaire 
 
 
 

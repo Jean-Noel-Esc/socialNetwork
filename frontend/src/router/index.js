@@ -34,6 +34,11 @@ const routes = [
     component: () => import("../views/singlePost"),
     props:true,
   },
+  {
+    path: "/userprofile",
+    name: "userProfile",
+    component: () => import("../views/userProfile"),
+  },
   
 
 ]

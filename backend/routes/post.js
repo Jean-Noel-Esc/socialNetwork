@@ -7,13 +7,13 @@ const multer = require('../middleware/multer');
 
 console.log("je suis route post");
 
-router.get('/', postCtrl.getAllPosts); // delete : auth pour test
-router.get('/admin', postCtrl.getAllPostsToModerate);
-router.post('/create',multer, postCtrl.createPost);
-router.get('/:id', postCtrl.getOnePost);
-router.put('/:id', postCtrl.updatePost);
-router.delete('/:id', postCtrl.destroyPost);
-router.put('/admin/:id', postCtrl.moderatePost); //route pour valider la moderation d'un post 
+router.get('/', auth, postCtrl.getAllPosts); // delete : auth pour test
+router.get('/admin', auth, postCtrl.getAllPostsToModerate);
+router.post('/create',auth, multer, postCtrl.createPost);
+router.get('/:id',auth, postCtrl.getOnePost);
+router.put('/:id',auth, postCtrl.updatePost);
+router.delete('/:id',auth, postCtrl.destroyPost);
+router.put('/admin/:id',auth, postCtrl.moderatePost); //route pour valider la moderation d'un post 
 //router.post ('/:id/like',auth, postCtrl.likePost);
 
 module.exports = router;

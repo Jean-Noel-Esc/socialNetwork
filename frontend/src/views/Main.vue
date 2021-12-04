@@ -16,8 +16,11 @@
                 <li><a href="#" class="text-white">Email </a></li>
             </ul>
             </div>
-            <div class="col-sm-8 col-md-7 py-4">
+            <div class="col-sm-8 col-md-7 py-4" v-if="userConnected">
             <button type="button" class="btn text-white btn-warning" @Click="disconnectUser()">Déconnexion</button>
+            </div>
+            <div class="col-sm-8 col-md-7 py-4" v-else>
+            <button type="button" class="btn text-white btn-primary" @Click="connectUser()">Connexion</button>
             </div>
         </div>
         </div>
@@ -115,7 +118,7 @@ export default {
     data() {
         return {
             posts:[],
-            users:[]    
+            userConnected: false   
         }
     },
     mounted () {
@@ -136,18 +139,24 @@ export default {
             console.log(error);
             console.log ("c'est err 404");
         })
+        let userDataToken = sessionStorage.getItem("token")
+        let userDataUserId = sessionStorage.getItem("userId")
+        if (userDataToken && userDataUserId){
+            this.userConnected = true;
+        }
+        
     },
     methods:{
         displayPost(id){
             router.push({ path : '/singlepost/'+id});
         },
         disconnectUser(){
-            //axios.get("http://localhost:3000/api/auth/"+ id,  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
-                //sessionStorage.getItem("token",   res.data.token)
-                //sessionStorage.getItem("userId",  res.data.userId)
                 sessionStorage.clear();
                 window.alert('Voulez-vous vous déconnecter');
-                router.push({ path : 'login'});
+                router.push({ path : '/'});
+        },
+        connectUser(){
+            router.push({ path : '/'});
         }
     }
 }
