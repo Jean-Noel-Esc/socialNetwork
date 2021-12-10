@@ -4,8 +4,10 @@
             <!-- <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">  -->
                 <div class="col">
                     <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                        <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+                        <img class="card-img-top" v-bind:src="article.picture"/>
                         <div class="card-body" alt="Max-height 100%">
+                            
                             <p class="card-text">{{article.text}}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
@@ -16,6 +18,10 @@
                             </div>
                         </div>
                     </div>
+                    <form @submit="sendForm()">
+                        
+                    </form>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                     <div v-for="comment in commentaires" :key="comment.id">{{ comment.text}}</div>
                 </div>
             <!-- </div>  -->

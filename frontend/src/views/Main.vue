@@ -3,30 +3,35 @@
 <header>
     <div class="collapse bg-dark" id="navbarHeader">
         <div class="container">
-        <div class="row">
-            <div class="col-sm-8 col-md-7 py-4">
-            <h4 class="text-white">A propos</h4>
-            <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+            <div class="row">
+                <div class="col-sm-8 col-md-7 py-4">
+                    <h4 class="text-white">A propos</h4>
+                    <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+                </div>
+                <div class="col-sm-4 offset-md-1 py-4">
+                <h4 class="text-white">Contact</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Follow on Twitter</a></li>
+                        <li><a href="#" class="text-white">Like on Facebook</a></li>
+                        <li><a href="#" class="text-white">Email </a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-8 col-md-7 py-4" v-if="userConnected">
+                    <button type="button" class="btn text-white btn-warning" @Click="disconnectUser()">Déconnexion</button>
+                </div>
+                <div class="col-sm-8 col-md-7 py-4" v-else>
+                        <button type="button" class="btn text-white btn-primary" @Click="connectUser()">Connexion</button>
+                </div>
+                <!-- <acces profil user> -->
+                <div class="col-sm-8 col-md-7 py-4">
+                    <button type="button" class="btn text-white btn-secondary" @Click="$router.push({path:'userprofile'})">Mon profil</button>
+                </div>
+                
             </div>
-            <div class="col-sm-4 offset-md-1 py-4">
-            <h4 class="text-white">Contact</h4>
-            <ul class="list-unstyled">
-                <li><a href="#" class="text-white">Follow on Twitter</a></li>
-                <li><a href="#" class="text-white">Like on Facebook</a></li>
-                <li><a href="#" class="text-white">Email </a></li>
-            </ul>
-            </div>
-            <div class="col-sm-8 col-md-7 py-4" v-if="userConnected">
-            <button type="button" class="btn text-white btn-warning" @Click="disconnectUser()">Déconnexion</button>
-            </div>
-            <div class="col-sm-8 col-md-7 py-4" v-else>
-            <button type="button" class="btn text-white btn-primary" @Click="connectUser()">Connexion</button>
-            </div>
-        </div>
         </div>
     </div>
     <div class="navbar navbar-dark bg-dark shadow-sm">
-        <div class="container">
+        <div class="container-fluid">
         <a href="#" class="navbar-brand d-flex align-items-center">
             <img src = "../assets/groupomania/icon-left-font-monochrome-white.svg" alt="globe"/>
             <!-- <font-awesome-icon class="icone-groupomania" icon="globe" size="3x"/> -->
@@ -62,7 +67,8 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <div class="col" v-for="post in posts" :key="post.id">
                     <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                        <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+                        <img class="card-img-top" v-bind:src="post.picture"/>
                         <div class="card-body">
                             <p class="card-text">{{post.text}}</p>
                             <div class="d-flex justify-content-between align-items-center">
@@ -99,6 +105,10 @@
         -webkit-user-select: none;
         -moz-user-select: none;
         user-select: none;
+    }
+    img{
+        height: inherit;
+        width: 30%;
     }
     @media (min-width: 768px) {
         .bd-placeholder-img-lg {

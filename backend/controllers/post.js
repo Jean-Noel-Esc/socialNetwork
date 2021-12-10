@@ -9,7 +9,7 @@ exports.createPost = (req, res, next) => {
     text: req.body.text,
     picture:`${req.protocol}://${req.get('host')}/images/`+req.file.filename,
     UserId: req.body.userId, // modif pour correspondre a l'id de l'user connecte donc a extraire du token
-    CategoryId: req.body.categoryId,
+    //CategoryId: req.body.categoryId,
     status:0
 
   })
@@ -23,7 +23,8 @@ exports.createPost = (req, res, next) => {
 
 exports.getOnePost = (req, res, next) => {
   models.Post.findOne({
-    where : {id: req.params.id}
+    where : {id: req.params.id},
+    include : models.comment
   }).then(
     (post) => {
       res.status(200).json(post);

@@ -5,13 +5,13 @@
         <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-light rounded">
             <h1 class="text-center font-weight-bold" style="font-size:4vw;" >EDITEZ VOTRE ARTICLE</h1>
             <form @submit="sendForm()">
-                <div class="form-group">
-                    <label for="inputCategory">Texte</label>
+                <!-- <div class="form-group"> -->
+                    <!-- <label for="inputCategory">Categorie</label>
                     <select v-on:keydown="invalid = false" v-model="inputCategory" type="text" class="form-control" id="inputCategory"  placeholder="Ajoutez du texte">
                     <option v-for="categorie in categories" v-bind:value="categorie.id" :key="categorie.name">{{categorie.name}}</option>
                     </select>
-                    <span class= "message-alerte"></span>
-                </div>                
+                    <span class= "message-alerte"></span> -->
+                <!-- </div>                 -->
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Ajoutez une photo pour illustrer votre article</label>
                     <input @change="handleImage()" class="form-control" type="file" accept="image/png, image/jpeg" id="inputImage">                    
@@ -24,7 +24,8 @@
                 </div>          
                 <div class="form-group">
                     <label for="inputEmail">Texte</label>
-                    <input v-on:keydown="invalid = false" v-model="inputText" type="text" class="form-control" id="inputText"  placeholder="Ajoutez du texte">
+                    <textarea v-on:keydown="invalid = false" v-model="inputText" class="form-control" id="inputText" rows="3">
+                    </textarea>
                     <span class= "message-alerte"></span>
                 </div>
                 <button class="w-100 btn btn-lg btn-primary" type="submit" @click.prevent="sendForm()">PUBLICATION</button> 
@@ -70,24 +71,25 @@ export default {
             inputTitle: "",
             inputText: "",
             invalid: false,
-            categories:""
+            //categories:""
+            
         }
     },
     mounted ()
     {
-        axios.get("http://localhost:3000/api/category/")
-        .then((res) => {
-                if (res) {
-                    const rep = res.data;
-                    this.categories = rep;
-                    console.log(rep);
-                }
+        // axios.get("http://localhost:3000/api/category/")
+        // .then((res) => {
+        //         if (res) {
+        //             const rep = res.data;
+        //             this.categories = rep;
+        //             console.log(rep);
+        //         }
 
-        })
-        .catch((error) =>{
-            console.log(error);
-            console.log ("c'est err 404");
-        })
+        // })
+        // .catch((error) =>{
+        //     console.log(error);
+        //     console.log ("c'est err 404");
+        // })
     },
 
     methods: {
@@ -148,12 +150,12 @@ export default {
             formData.append('image', file[0]);
             formData.append('title', this.inputTitle);
             formData.append('text', this.inputText);
-            formData.append('categoryId', this.inputCategory); // ce sera un this.inputCategorie
+            //formData.append('categoryId', this.inputCategory); // ce sera un this.inputCategorie
             formData.append('userId', userId);
             console.log(formData);
                 axios.post('http://localhost:3000/api/post/create', formData, {
                 headers: {
-                //'Authorization': 'Bearer ' + this.token,
+                'Authorization': 'Bearer ' + sessionStorage.getItem("token"),
                 'Content-Type': 'application/json',
                 }
             })
