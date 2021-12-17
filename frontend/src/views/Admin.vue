@@ -118,7 +118,7 @@
 
 
     <!--display des users à modérer-->
-                <h2>Moderation des nouveaux utilisateurs</h2>
+        <h2>Moderation des nouveaux utilisateurs</h2>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
                 <thead>

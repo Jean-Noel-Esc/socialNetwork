@@ -11,18 +11,50 @@
                             <p class="card-text">{{article.text}}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    <!-- <button type="button" class="btn btn-sm btn-outline-secondary">View</button> -->
                                     <button type="button" class="btn btn-sm btn-outline-secondary" v-if="author">Edit</button>
+                                    <!-- ici c'est la gestion de la modification d'un commentaire ????? -->
                                 </div>
                                 <small class="text-muted">9 mins</small>
                             </div>
                         </div>
                     </div>
-                    <form @submit="sendForm()">
-                        
-                    </form>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <!-- <form @submit="sendForm()">
+                        <label for="inputComment">Taper votre comment</label>
+                            <textarea v-on:keydown="invalid = false" v-model="inputText" class="form-control" id="inputText" rows="3">
+                            </textarea>
+                        <span class= "message-alerte"></span>                        
+                    </form> -->
+                    <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#modalComment"><font-awesome-icon icon = "pen"/></button>
+                    <!-- <button type="button" class="btn btn-sm btn-outline-secondary">ADD COMMENT</button> -->
                     <div v-for="comment in commentaires" :key="comment.id">{{ comment.text}}</div>
+                </div>
+
+                <!-- Modale pour ajout de commentaire -->
+                <div class="modal fade" id="modalComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                <label for="inputComment">Taper votre comment</label>
+                                    <textarea v-on:keydown="invalid = false" v-model="inputText" class="form-control" id="inputText" rows="3">
+                                    </textarea>
+                                <span class= "message-alerte"></span>                        
+                                </form> 
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                                <button id="editUser" @click="sendForm()" type="button" class="btn btn-success"><font-awesome-icon icon="edit"/></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             <!-- </div>  -->
         </div>
@@ -40,6 +72,7 @@ export default {
             article:[],
             commentaires:[],
             author: false,
+            inputText:"",
         }
     },
     mounted () {
@@ -75,6 +108,36 @@ export default {
             console.log(error);
             console.log ("c'est err 404");
         })
+    },
+    methods:{
+        sendForm () {
+            console.log(this.inputText);
+                if ( !this.inputText ) {
+                    return this.invalid = true;
+                }
+                else{
+                axios.post("http://localhost:3000/api/comment/",  
+                                  {
+                    text: this.inputText,
+                    userId: sessionStorage.getItem("userId"),
+                    postId: this.$route.params.id
+                    },
+                    { headers: {'Authorization': 'Bearer ' + sessionStorage.getItem("token")}}
+  )
+                    .then(function () {
+                    window.alert('Comment send');
+                    window.location.reload;
+                    })
+                .catch((error) => {
+                this.invalid = true;
+                console.log(error);
+            })  
+                }
+                
+
+
+        }
+
     }
 }
 </script>

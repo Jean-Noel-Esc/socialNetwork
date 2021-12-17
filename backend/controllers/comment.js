@@ -45,7 +45,7 @@ exports.getOneComment = (req, res, next) => {
 
 exports.getAllComments = (req, res, next) => {
   models.Comment.findAll({
-    where : {postId: req.params.id}
+    where : {postId: req.params.id, status:1}
   }).then(
     (comment) => {
       res.status(200).json(comment);

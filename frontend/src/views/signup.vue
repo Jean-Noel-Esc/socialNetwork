@@ -330,7 +330,7 @@ inpMdp.addEventListener('input', (e) => {
             allLigne[2].style.display = 'none';
         }
         //mdp fort
-         else if (valeurInp.length > 9) {
+        else if (valeurInp.length > 9) {
             allLigne[0].style.display = 'block';
             allLigne[1].style.display = 'block';
             allLigne[2].style.display = 'block';
