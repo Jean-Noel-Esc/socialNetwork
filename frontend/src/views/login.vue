@@ -21,6 +21,9 @@
                 <button class="w-100 btn btn-lg btn-primary" type="submit">CONNEXION</button> 
                 <button class="w-100 btn btn-lg btn-success" type="link" @click="$router.push({ path : 'signup'})">INSCRIPTION</button> 
             </form>
+            <div>
+                <p class="text-danger">{{error}}</p>
+            </div>
         <!-- </section>    -->
     </main>
 </div>
@@ -106,7 +109,8 @@ export default {
         return {
             inputEmail: "",
             inputPassword: "",
-            invalid: false
+            invalid: false,
+            error:""
         }
     },
     methods: {
@@ -122,13 +126,15 @@ export default {
                 console.log(res);
                 sessionStorage.setItem("token",   res.data.token)
                 sessionStorage.setItem("userId",  res.data.userId)
-                //sessionStorage.setItem("role",    res.data.role)
+                sessionStorage.setItem("role",    res.data.role)
                 window.alert('Connexion réussie');
-                router.push({ path : 'Main'});
+                router.push({ path : 'main'});
             })
-            .catch((error) => {
+
+            .catch(() => {
                 this.invalid = true;
-                console.log(error);
+                this.error= 'Utilisateur en attente de modération ou inexistant!';
+                
             })         
         }
     } 

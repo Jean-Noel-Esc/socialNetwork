@@ -5,7 +5,6 @@
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
         <a class="nav-link px-3" href="#">Sign out</a>
@@ -24,27 +23,27 @@
                 Page principale
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="#">
                 <span data-feather="file"></span>
                 Catégories
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                <span data-feather="shopping-cart"></span>
+                <a href="#utilisateurs" class="nav-link">
+                <!-- <span data-feather="shopping-cart"></span> -->
                 Utilisateurs
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                <span data-feather="users"></span>
+                <a href="#articles" class="nav-link">
+                <!-- <span data-feather="users"></span> -->
                 Articles
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                <span data-feather="bar-chart-2"></span>
+                <a href="#commentaires" class="nav-link">
+                <!-- <span data-feather="bar-chart-2"></span> -->
                 Commentaires
                 </a>
             </li>
@@ -65,8 +64,6 @@
             </button> -->
             </div>
         </div>
-
-        <canvas class="my-4 w-100" id="myChart" width="900" height="380">INSERT D3 CHART SVG</canvas>
 
         <!-- <div class="album py-5 bg-light">
         <div class="container">
@@ -118,8 +115,9 @@
 
 
     <!--display des users à modérer-->
+        <section>
         <h2>Moderation des nouveaux utilisateurs</h2>
-        <div class="table-responsive">
+        <div class="table-responsive" id="utilisateurs">
             <table class="table table-striped table-sm">
                 <thead>
                     <tr>
@@ -143,6 +141,7 @@
                 </tbody>
             </table>
         </div>
+        </section>
     <!--------------------------------->
     <!-- Modale pour moderation des nouveaux utilisateurs -->
         <div class="modal fade" id="modalUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -170,8 +169,9 @@
             </div>
         </div>
     <!-- liste des articles à moderer -->
+    <section>
         <h2>Articles en attente de publication</h2>
-        <div class="table-responsive">
+        <div class="table-responsive" id="articles">
             <table class="table table-striped table-sm">
                 <thead>
                     <tr>
@@ -197,6 +197,7 @@
                 </tbody>
             </table>
         </div>
+    </section>
         <!-- Modale pour modération des articles/posts -->
         <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -220,8 +221,9 @@
             </div>
         </div>
         <!--display liste des commentaires-->
+        <section>
         <h2>Commentaires en attente de publication</h2>
-        <div class="table-responsive">
+        <div class="table-responsive" id="commentaires">
             <table class="table table-striped table-sm">
             <thead>
                 <tr>
@@ -247,6 +249,7 @@
             </tbody>
             </table>
         </div>
+        </section>
         <!-- Modale pour commentaire -->        
         <div class="modal fade" id="modalComment" tabindex="-1" role="dialog" aria-labelledby="modalCommentTitle" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -293,7 +296,7 @@
 
 
 <script>
-//import router from "../router";
+import router from "../router";
 import axios from "axios";
 
 export default {
@@ -310,6 +313,9 @@ export default {
         }
     },
     mounted () {
+        if (sessionStorage.getItem("role")!= 2 ){
+            router.push({ path : 'main'});
+        }
         // Requetes listes categories/ utilisateurs / articles / commentaires.
         axios.get("http://localhost:3000/api/category/",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
         .then((res) => {

@@ -60,6 +60,7 @@ exports.destroyPost = (req, res, next) => {
 };
 
 exports.getAllPosts = (req, res, next) => {
+
   models.Post.findAll({ where : {status: 1}, include : models.User, order:[["updatedAt", "DESC"]] } )
   .then((posts) => {  
       res.status(200).json(posts);

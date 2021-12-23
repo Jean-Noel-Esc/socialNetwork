@@ -42,11 +42,11 @@ exports.signup = (req, res, next) => {
 // Connexion // Login
 
 exports.login = (req, res, _next) => {
-  models.User.findOne({ where: {email:req.body.email} }) 
+  models.User.findOne({ where: {email:req.body.email, role: [1,2]} }) 
     .then(user => {
       if (!user) {
-        return res.status(401).json({ error: 'Utilisateur non trouvé !' });
-      }
+        return res.status(401).json({ error: 'Utilisateur en attente de modération ou inexistant!' });
+      } 
       bcrypt.compare(req.body.password, user.password)
         .then(valid => {
           if (!valid) {
@@ -64,7 +64,7 @@ exports.login = (req, res, _next) => {
         })
         .catch(error => res.status(500).json({ error }));
     })
-    .catch(error => res.status(500).json({ error }));
+    .catch(error => res.status(501).json({ error }));
 };
 
 

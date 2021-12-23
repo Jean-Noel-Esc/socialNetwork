@@ -5,13 +5,13 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 const routes = [
   {
     path: "/",
-    name: "login",
-    component: () => import("../views/login"),
+    name: "Login",
+    component: () => import("../views/Login"),
   },
   {
     path: "/signup",
-    name: "signup",
-    component: () => import("../views/signup"),
+    name: "Signup",
+    component: () => import("../views/Signup"),
   },
   {
     path: "/main",
@@ -19,9 +19,9 @@ const routes = [
     component: () => import("../views/Main"),
   },
   {
-    path: "/addPost",
-    name: "addPost",
-    component: () => import("../views/addPost"),
+    path: "/addpost",
+    name: "AddPost",
+    component: () => import("../views/AddPost"),
   },
   {
     path: "/admin",
@@ -30,14 +30,14 @@ const routes = [
   },
   {
     path: "/singlepost/:id",
-    name: "singlePost",
-    component: () => import("../views/singlePost"),
+    name: "SinglePost",
+    component: () => import("../views/SinglePost"),
     props:true,
   },
   {
     path: "/userprofile",
-    name: "userProfile",
-    component: () => import("../views/userProfile"),
+    name: "UserProfile",
+    component: () => import("../views/UserProfile"),
   },
   
 
