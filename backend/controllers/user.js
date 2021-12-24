@@ -42,7 +42,8 @@ exports.signup = (req, res, next) => {
 // Connexion // Login
 
 exports.login = (req, res, _next) => {
-  models.User.findOne({ where: {email:req.body.email, role: [1,2]} }) 
+  const { Op } = require("sequelize");
+  models.User.findOne({ where: {email:req.body.email, role: {[Op.or]: [1,2]}} }) 
     .then(user => {
       if (!user) {
         return res.status(401).json({ error: 'Utilisateur en attente de modération ou inexistant!' });
@@ -55,6 +56,7 @@ exports.login = (req, res, _next) => {
           //ici verif user status if user.status = 1 
           res.status(200).json({
             userId: user.id,
+            role: user.role,
             token: jwt.sign(
               { userId: user.id },
               'RANDOM_TOKEN_SECRET',
