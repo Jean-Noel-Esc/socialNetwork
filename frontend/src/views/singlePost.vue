@@ -1,4 +1,6 @@
 <template>
+<div>
+<navBar/>
     <div class="album py-5 bg-light h-100">
         <div class="container">
             <!-- <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">  -->
@@ -59,14 +61,16 @@
             <!-- </div>  -->
         </div>
     </div> 
+</div>
 </template>
 
 <script>
 import axios from "axios";
-//import router from "../router";
+import navBar from "../components/Nav.vue";
 
 export default {
     name: "singlePost",
+    components: {navBar},
     data() {
         return {
             article:[],

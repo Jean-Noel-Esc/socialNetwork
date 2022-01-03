@@ -316,7 +316,7 @@ export default {
         if (sessionStorage.getItem("role")!= 2 ){
             router.push({ path : 'main'});
         }
-        // Requetes listes categories/ utilisateurs / articles / commentaires.
+        // Requetes listes categories / utilisateurs / articles / commentaires.
         axios.get("http://localhost:3000/api/category/",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
         .then((res) => {
                 if (res) {
@@ -330,9 +330,6 @@ export default {
             console.log(error);
             console.log ("c'est err 404");
         })       
-
-
-
 
         axios.get("http://localhost:3000/api/auth/findalluserstomoderate",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
         .then((res) => {
