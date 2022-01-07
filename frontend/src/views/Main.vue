@@ -4,9 +4,8 @@
 
 <main>
     <section class="py-5 text-center container">
-        <div class="row py-lg-5">
+        <div id="publish" class="row py-lg-5 mx-0">
             <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">Bienvenu</h1>
                 <p>
                 <button class="btn btn-primary my-2" @click="$router.push({path:'addpost'})">PUBLIER</button>
                 </p>
@@ -54,6 +53,10 @@
     img{
         height: inherit;
         width: 30%;
+    }
+    #publish{
+        padding-top: 0px!important;
+        padding-bottom: 0px!important;
     }
     @media (min-width: 768px) {
         .bd-placeholder-img-lg {

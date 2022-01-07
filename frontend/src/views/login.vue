@@ -1,14 +1,10 @@
 <template>
 <div>
-        <!-- <font-awesome-icon class="icone-groupomania" icon="globe" size="3x"/>
-        <h1 class="title">LOGIN</h1> -->
-        <img src = "../assets/groupomania/icon.svg" alt="globe"/>
-
+    <!-- <img src = "../assets/groupomania/icon-above-font.svg" style="width: 50%; height: 200px;" alt="globe"/> -->
     <main class="form-signin text-center">
         <!-- <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-light rounded">  -->
-            <!-- <font-awesome-icon class="icone-groupomania" icon="globe" size="3x"/> -->
-            <h1 class="h3 fw-normal">LOGIN</h1>
-            <!-- <img src = "../assets/groupomania/icon.svg" alt="globe"/> -->
+            <img src = "../assets/groupomania/icon-above-font.svg" style="width: 50%; height: 200px;" alt="globe"/>
+            <h1>LOGIN</h1>
             <form @submit.prevent="submitForm()">
                 <div class="form-floating">
                     <input v-on:keydown="invalid = false" v-model="inputEmail" type="email" class="form-control" id="floatingInput" aria-describedby="emailHelp" placeholder="votre email">
@@ -42,11 +38,15 @@ main {
     background-color: #f5f5f5;
 }
 img{
-    height: 10%;
-    width: 10%;
+    height: 20%;
+    width: 20%;
     
 }
-
+h1 {
+    color:red;
+    font-size: 15px;
+    font-weight: bold;
+}
 .form-signin {
     width: 100%;
     max-width: 330px;
@@ -79,23 +79,9 @@ img{
 }
 
 button {
-    /* margin-top: 10px; */
     margin-bottom: 20px;
 }
 
-.bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-}
-
-@media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-        }
-}
 </style>
 
 <script>
