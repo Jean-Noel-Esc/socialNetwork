@@ -3,8 +3,9 @@
 <navBar/>
     <main class="container-fluid">
         <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-light rounded">
-            <h1 class="text-center font-weight-bold" style="font-size:4vw;" >EDITEZ VOTRE ARTICLE</h1>
+            <h1 class="text-center font-weight-bold" style="font-size:4vw;" >VOTRE ARTICLE</h1>
             <form @submit="sendForm()">
+                <!--EN COURS DE DEV gestion category -->
                 <!-- <div class="form-group"> -->
                     <!-- <label for="inputCategory">Categorie</label>
                     <select v-on:keydown="invalid = false" v-model="inputCategory" type="text" class="form-control" id="inputCategory"  placeholder="Ajoutez du texte">
@@ -36,9 +37,9 @@
 </template>
 
 <style>
-button {
+/* button {
     margin-top: 20px;
-}
+} */
 
 label{
     margin: 5px 23px;
@@ -47,6 +48,10 @@ label{
     display: block;
     position: left;
     text-align: left;
+}
+
+textarea{
+    margin-bottom: 20px;
 }
 
 </style>

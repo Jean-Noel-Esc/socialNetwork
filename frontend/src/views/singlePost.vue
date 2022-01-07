@@ -17,7 +17,7 @@
                                     <button type="button" class="btn btn-sm btn-outline-secondary" v-if="author">Edit</button>
                                     <!-- ici c'est la gestion de la modification d'un commentaire ????? -->
                                 </div>
-                                <small class="text-muted">9 mins</small>
+                                <small class="text-muted">Auteur:{{ auteur.firstname}} {{ auteur.lastname}}  </small>
                             </div>
                         </div>
                     </div>
@@ -29,7 +29,8 @@
                     </form> -->
                     <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#modalComment"><font-awesome-icon icon = "pen"/></button>
                     <!-- <button type="button" class="btn btn-sm btn-outline-secondary">ADD COMMENT</button> -->
-                    <div v-for="comment in commentaires" :key="comment.id">{{ comment.text}}</div>
+                    <div v-for="comment in commentairesValides" :key="comment.id">{{comment.text}}<hr/></div>
+
                 </div>
 
                 <!-- Modale pour ajout de commentaire -->
@@ -75,6 +76,8 @@ export default {
         return {
             article:[],
             commentaires:[],
+            commentairesValides : [],
+            auteur:[],
             author: false,
             inputText:"",
         }
@@ -85,29 +88,19 @@ export default {
                 if (res) {
                     const rep = res.data;
                     this.article = rep;
+                    this.commentaires = rep.Comments;
+                    this.auteur = rep.User;
                     if (this.article.UserId === sessionStorage.getItem("id")){
                         this.author = true;
                     }
+                    for ( let i=0 ; i<this.commentaires.length; i++ ){
+                        if (this.commentaires[i].status == 1){
+                            this.commentairesValides.push(this.commentaires[i])
+                        }
+                    }  
                     console.log(rep);
                 }
-                //else {
-                    //si les post sont absent c'est que le token est invalide
-                    // redirection vers login si token invalide 
-        //         }
-        //     })
-        })
-        .catch((error) =>{
-            console.log(error);
-            console.log ("c'est err 404");
-        })
-        axios.get("http://localhost:3000/api/comment/"+this.$route.params.id,  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
-        .then((res) => {
-                if (res) {
-                    const rep = res.data;
-                    this.commentaires = rep;
-                    console.log(rep);
-                }
-        })
+            })
         .catch((error) =>{
             console.log(error);
             console.log ("c'est err 404");
@@ -121,13 +114,13 @@ export default {
                 }
                 else{
                 axios.post("http://localhost:3000/api/comment/",  
-                                  {
+                    {
                     text: this.inputText,
                     userId: sessionStorage.getItem("userId"),
                     postId: this.$route.params.id
                     },
                     { headers: {'Authorization': 'Bearer ' + sessionStorage.getItem("token")}}
-  )
+                )
                     .then(function () {
                     window.alert('Comment send');
                     window.location.reload;
@@ -147,5 +140,11 @@ export default {
 </script>
 
 <style>
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
 
 </style>

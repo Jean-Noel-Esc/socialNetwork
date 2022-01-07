@@ -225,7 +225,7 @@ export default {
     name: "Admin",
     data() {
         return {
-            categories:[],
+            //categories:[],
             users:[],
             posts:[],
             comments:[],
@@ -303,7 +303,7 @@ export default {
                 this.postIdToModerate = id;
                 console.log(this.postIdToModerate);
                     document.getElementById("edit").addEventListener("click", function (){
-                        axios.put("http://localhost:3000/api/post/admin/"+id,  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
+                        axios.put("http://localhost:3000/api/post/admin/"+id, {userId : sessionStorage.getItem("userId")},  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
                             .then((res) => {
                                 if (res) {
                                 console.log(res);
@@ -342,7 +342,7 @@ export default {
                 this.commentIdToModerate = id;
                 console.log(this.commentIdToModerate);
                     document.getElementById("editComment").addEventListener("click", function (){
-                        axios.put("http://localhost:3000/api/comment/admin/"+id,  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
+                        axios.put("http://localhost:3000/api/comment/admin/"+id, {userId : sessionStorage.getItem("userId")},  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
                             .then((res) => {
                                 if (res) {
                                 console.log(res);
@@ -391,7 +391,7 @@ export default {
                 this.userIdToModerate = id;
                 console.log(this.userIdToModerate);
                     document.getElementById("editUser").addEventListener("click", function (){
-                        axios.put("http://localhost:3000/api/auth/updateroleuser/"+id,  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
+                        axios.put("http://localhost:3000/api/auth/updateroleuser/"+id, {userId : sessionStorage.getItem("userId")},  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
                             .then((res) => {
                                 if (res) {
                                 console.log(res);

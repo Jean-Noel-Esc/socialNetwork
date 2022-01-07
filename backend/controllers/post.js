@@ -24,7 +24,7 @@ exports.createPost = (req, res, next) => {
 exports.getOnePost = (req, res, next) => {
   models.Post.findOne({
     where : {id: req.params.id},
-    include : models.comment
+    include : [models.Comment, models.User]
   }).then(
     (post) => {
       res.status(200).json(post);
