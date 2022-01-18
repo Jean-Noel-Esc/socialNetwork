@@ -46,7 +46,7 @@
 
     <!--display des users à modérer-->
         <section>
-        <h2>Moderation des nouveaux utilisateurs</h2>
+        <h2>Modération des nouveaux utilisateurs</h2>
         <div class="table-responsive" id="utilisateurs">
             <table class="table table-striped table-sm">
                 <thead>

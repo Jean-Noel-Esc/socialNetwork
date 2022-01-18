@@ -4,10 +4,10 @@
         <navBar></navBar>
 
         <main class="container-fluid">
-            <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-light rounded">
+            <!-- <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-light rounded"> -->
                 <div class="album py-5 bg-light">
                     <div class="container-fluid">
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        <!-- <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"> -->
                             <h2>Votre profil utilisateur</h2>
                             <div class="table-responsive">
                                 <table class="table table-striped">
@@ -31,10 +31,10 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
+                        <!-- </div> -->
                     </div>
                 </div>
-            </section>  
+            <!-- </section>   -->
         </main>
         <div class="modal fade" id="modalUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -110,6 +110,3 @@ export default {
 }
 </script>
 
-<style>
-
-</style>

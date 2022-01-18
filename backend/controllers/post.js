@@ -39,11 +39,20 @@ exports.getOnePost = (req, res, next) => {
 };
 
 exports.updatePost = (req, res, next) => {
+  console.log(req.body.text);
     models.Post.findOne({ where : {id: req.params.id} })
     .then(post => {
-        models.Post.update({text: req.body.text},{ where : {id: req.params.id} })
+      if (req.file.filename) {
+
+        models.Post.update({text: req.body.text , title: req.body.title, picture:`${req.protocol}://${req.get('host')}/images/`+req.file.filename, status: 0},{ where : {id: req.params.id} })
+        .then(() => res.status(200).json({ message: 'Ce post a été modifié !'}))
+        .catch(error => res.status(400).json({ error }));
+      }
+    else {
+          models.Post.update({text: req.body.text , title: req.body.title, status: 0},{ where : {id: req.params.id} })
           .then(() => res.status(200).json({ message: 'Ce post a été modifié !'}))
           .catch(error => res.status(400).json({ error }));
+        }
     })
     .catch(error => res.status(500).json({ error }));
 

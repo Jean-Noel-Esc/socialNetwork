@@ -50,10 +50,10 @@
         -moz-user-select: none;
         user-select: none;
     }
-    img{
+    /* img{
         height: inherit;
         width: 30%;
-    }
+    } */
     #publish{
         padding-top: 0px!important;
         padding-bottom: 0px!important;

@@ -135,7 +135,6 @@ export default {
                 console.log(error); 
             });
             },
-
         sendForm() {
             console.log("ok");
                 if ( !this.inputTitle || !this.inputText) {
@@ -167,7 +166,7 @@ export default {
                 .then((res) => {
                     console.log(res);
                     alert('Votre article est en attente de modération');
-                    //redirection main page
+                    //redirection page principale
                     router.push({ path : '/main'});
                 })
                 .catch((error)=>{
@@ -181,7 +180,3 @@ export default {
 
 }
 </script>
-
-<style>
-
-</style>
