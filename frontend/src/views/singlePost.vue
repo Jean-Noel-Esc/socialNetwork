@@ -29,8 +29,10 @@
                     </form> -->
                     <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#modalComment"><font-awesome-icon icon = "pen"/></button>
                     <!-- <button type="button" class="btn btn-sm btn-outline-secondary">ADD COMMENT</button> -->
-                    <div v-for="comment in commentairesValides" :key="comment.id">{{comment.text}}<hr/></div>
-
+                    <div v-for="comment in commentairesValides" :key="comment.id">{{comment.text}}
+                        <div>{{comment.firstname}} {{comment.lastname}}</div><hr/>
+                    </div>
+                    
                 </div>
 
                 <!-- MODALE POUR AJOUT DE COMMENTAIRE -->
@@ -123,10 +125,24 @@ export default {
             inputText:"",
             inputTitle:"",
             inputPicture:"",
-            invalid: false
+            invalid: false,
+            users:[],
+            j: 0
         }
     },
     mounted () {
+        axios.get("http://localhost:3000/api/auth/findAll", { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
+            .then((res) => {
+                if (res) {
+                    const rep = res.data;
+                    this.users = rep;
+                    console.log(rep);
+                }
+            })
+            .catch((error) =>{
+                console.log(error);
+                console.log ("c'est err 404");
+            })
         axios.get("http://localhost:3000/api/post/"+this.$route.params.id,  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
         .then((res) => {
                 if (res) {
@@ -143,9 +159,21 @@ export default {
                     this.inputTitle = this.article.title;
                     this.inputPicture = this.article.picture;
                     for ( let i=0 ; i<this.commentaires.length; i++ ){
+                        //on parcour tt les commentaires
                         if (this.commentaires[i].status == 1){
+
                             this.commentairesValides.push(this.commentaires[i])
+                            
+                            for (let k =0; k<this.users.length ; k++){
+                             // on recup tt les user
+                            if (this.users[k].id == this.commentairesValides[this.j].UserId){
+                                    this.commentairesValides[this.j].firstname = this.users[k].firstname;
+                                    this.commentairesValides[this.j].lastname = this.users[k].lastname;
+                                }
+                            }
+                            this.j+=1;
                         }
+                    console.log(this.commentairesValides);
                     }  
                     console.log(rep);
                 }
@@ -154,6 +182,7 @@ export default {
             console.log(error);
             console.log ("c'est err 404");
         })
+
     },
     methods:{
         sendForm () {
