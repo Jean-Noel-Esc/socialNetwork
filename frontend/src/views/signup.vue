@@ -58,7 +58,6 @@
 h1{
     margin-top: 5px;
 }
-
 label{
     margin: 5px 23px;
     font-size: 20px;
@@ -67,7 +66,6 @@ label{
     position: left;
     text-align: left;
 } 
-
 input {
     display: block;
     /* margin: 10px 20px 20px 20px;  */
@@ -83,14 +81,12 @@ input {
 .icone-verif{
     color: green;
     width: 30px;
-
     align-items: center; 
     position: absolute; 
     right: 27px;
     top: 60px;
     display: none;
 }
-
 .icone-verif-error { 
     color: red;
     width: 30px;
@@ -99,14 +95,12 @@ input {
     top: 60px;
     display: none;
 }
-
 .message-alerte{
     font-size: 15px;
     margin: 5px 23px;
     color:orangered;
     display: none;
 }
-
 .ligne {
     width: 80%;
     display: flex;
@@ -147,9 +141,7 @@ button{
     border-radius: 3px;
     font-size: 20px;
     cursor: pointer;
-
 }
-
 button:hover {
     background: rgb(252,181,49);
 }
@@ -159,7 +151,6 @@ button:active {
 </style>
 
 <script>
-
 import router from "../router";
 import axios from "axios";
 
@@ -178,213 +169,196 @@ export default {
         }
     },
     mounted(){ // mettre les elements JS de verif front
-const inpFirstname = document.getElementById('inputFirstName', 'input');
-const inpLastname = document.getElementById("inputLastName", 'input');
-const inpMail = document.getElementById('inputEmail', 'input');
-const inpMdp = document.getElementById('inputPassword', 'input');
-const inpConfirme = document.getElementById('inputConfirmPassword', 'input');
+        const inpFirstname = document.getElementById('inputFirstName', 'input');
+        const inpLastname = document.getElementById("inputLastName", 'input');
+        const inpMail = document.getElementById('inputEmail', 'input');
+        const inpMdp = document.getElementById('inputPassword', 'input');
+        const inpConfirme = document.getElementById('inputConfirmPassword', 'input');
 
-const allImg = document.querySelectorAll('.icone-verif');
-const allImg2 = document.querySelectorAll('.icone-verif-error');
-const allSpan = document.querySelectorAll('span');
-const allLigne = document.querySelectorAll('.ligne div');
+        const allImg = document.querySelectorAll('.icone-verif');
+        const allImg2 = document.querySelectorAll('.icone-verif-error');
+        const allSpan = document.querySelectorAll('span');
+        const allLigne = document.querySelectorAll('.ligne div');
 
-inpFirstname.addEventListener('input', (e) => {
-    console.log(e)
-    if(e.target.value.length >= 3){
-        console.log(e.target.value)
-        allImg[0].style.display = "inline";
-        allImg[0].src = "check";
-        allSpan[0].style.display = "none";
-        allImg2[0].style.display = "none";
-    }
-    else{
-        allImg[0].style.display = "none";
-        allImg2[0].style.display = "inline";
-        allImg2[0].src = "times";
-        allSpan[0].style.display = "inline";
-    }
-})
-
-inpLastname.addEventListener('input', (e) => {
-    if(e.target.value.length >= 3){
-        allImg[1].style.display = "inline";
-        allImg[1].src = "check";
-        allSpan[1].style.display = "none";
-        allImg2[1].style.display = "none";
-    }
-    else{
-        allImg[1].style.display = "none";
-        allImg2[1].style.display = "inline";
-        allImg2[1].src = "times";
-        allSpan[1].style.display = "inline";
-    }
-})
-
-inpMail.addEventListener('input', (e) => {
-    const regexEmail = /\S+@\S+\.\S+/;
-    if(e.target.value.search(regexEmail) === 0){
-        allImg[2].style.display = "inline";
-        allImg[2].src = "check";
-        allSpan[2].style.display = "none";
-        allImg2[2].style.display = "none";
-    } else {
-        allImg[2].style.display = "none";
-        allImg2[2].style.display = "inline";
-        allImg2[2].src = "times";
-        allSpan[2].style.display = "inline";
-    } 
-})
-
-// Validation création du Mdp
-
-let valeurInp;
-
-//les symboles soit tous ce qui n'est pas lettres ou chiffres
-const specialCar = /[^a-zA-Z0-9]/;
-// toutes les lettres
-const alphabet = /[a-zA-z]/i;
-// les chiffres
-const chiffres = /[0-9]/;
-
-// On crée un objet
-// pour voir si 
-// dans notre input il y a au moins 1 symbole 1e lettre et 1 chiffre
-
+        inpFirstname.addEventListener('input', (e) => {
+            console.log(e)
+            if(e.target.value.length >= 3){
+                console.log(e.target.value)
+                allImg[0].style.display = "inline";
+                allImg[0].src = "check";
+                allSpan[0].style.display = "none";
+                allImg2[0].style.display = "none";
+            }
+            else{
+                allImg[0].style.display = "none";
+                allImg2[0].style.display = "inline";
+                allImg2[0].src = "times";
+                allSpan[0].style.display = "inline";
+            }
+        })
+        inpLastname.addEventListener('input', (e) => {
+            if(e.target.value.length >= 3){
+                allImg[1].style.display = "inline";
+                allImg[1].src = "check";
+                allSpan[1].style.display = "none";
+                allImg2[1].style.display = "none";
+            }
+            else{
+                allImg[1].style.display = "none";
+                allImg2[1].style.display = "inline";
+                allImg2[1].src = "times";
+                allSpan[1].style.display = "inline";
+            }
+        })
+        inpMail.addEventListener('input', (e) => {
+            const regexEmail = /\S+@\S+\.\S+/;
+            if(e.target.value.search(regexEmail) === 0){
+                allImg[2].style.display = "inline";
+                allImg[2].src = "check";
+                allSpan[2].style.display = "none";
+                allImg2[2].style.display = "none";
+            } else {
+                allImg[2].style.display = "none";
+                allImg2[2].style.display = "inline";
+                allImg2[2].src = "times";
+                allSpan[2].style.display = "inline";
+            } 
+        })
+        // Validation création du Mdp
+        let valeurInp;
+        //les symboles soit tous ce qui n'est pas lettres ou chiffres
+        const specialCar = /[^a-zA-Z0-9]/;
+        // toutes les lettres
+        const alphabet = /[a-zA-z]/i;
+        // les chiffres
+        const chiffres = /[0-9]/;
+        // On créer un objet
+        // pour voir si 
+        // dans notre input il y a au moins 1 symbole 1e lettre et 1 chiffre
         let objValidation = {
             symbole : 0,
             lettre : 0,
             chiffre : 0
         }
+        inpMdp.addEventListener('input', (e) => {
+            valeurInp = e.target.value;
+                    if(inpConfirme.value.length === 0){
+                    //allSpan[4].style.display = "none";
+                    allImg2[4].style.display = "inline";
+                    allImg2[4].src = "times";
+                    allImg[4].style.display = "none";
+                }
+                else if(inpConfirme.value === valeurInp){
+                    allImg[4].style.display = "inline";
+                    allImg[4].src = "check";
+                    allImg2[4].style.display = "none";
+                } else {
+                    allImg2[4].style.display = "inline";
+                    allImg2[4].src = "times";
+                    allImg[4].style.display = "none";
+                }
+            if(valeurInp.search(specialCar) !== -1){
+                objValidation.symbole = 1;
+            }
+            if(valeurInp.search(alphabet) !== -1){
+                objValidation.lettre = 1;
+            }
+            if(valeurInp.search(chiffres) !== -1){
+                objValidation.chiffre = 1;
+            }
+            // gestion delete dans l'input 
+            if(e.inputType == 'deleteContentBackward'){ // ICI BUG SUR OPERATEUR !!!!! with "=" fail to compile 
+                if(valeurInp.search(specialCar) === -1){
+                    objValidation.symbole = 0;
+                }
+                if(valeurInp.search(alphabet) === -1){
+                    objValidation.lettre = 0;
+                }
+                if(valeurInp.search(chiffres) === -1){
+                    objValidation.chiffre = 0;
+                }
+            } 
+                // avec un for in on itere sur un objet
+                // pour tester chaque propriétés de l'objet pour la validation
+                let testAll = 0;
+                for(const property in objValidation){
+                    if(objValidation[property] > 0){
+                        testAll++;
+                    }
+                }
+                // Si il n'y a pas assez d'input  
+                if(testAll < 3){
+                    allSpan[3].style.display = "inline";
+                    allImg[3].style.display = "none";
+                    allImg2[3].style.display = "inline";
+                    allImg2[3].src = "times";
+                } else {
+                    allSpan[3].style.display = "inline";
+                    allImg[3].src = "check";
+                    allImg[3].style.display = "inline";
+                    allImg2[3].style.display = "none";
+                }
+                // valider la force du mdp
+                // valeur la plus basse
+                if(valeurInp.length <= 6 && valeurInp.length > 0){
+                    allLigne[0].style.display = 'block';
+                    allLigne[1].style.display = 'none';
+                    allLigne[2].style.display = 'none';
+                }
+                // force moyenne
+                else if (valeurInp.length > 6 && valeurInp.length <= 9) {
+                    allLigne[0].style.display = 'block';
+                    allLigne[1].style.display = 'block';
+                    allLigne[2].style.display = 'none';
+                }
+                //mdp fort
+                else if (valeurInp.length > 9) {
+                    allLigne[0].style.display = 'block';
+                    allLigne[1].style.display = 'block';
+                    allLigne[2].style.display = 'block';
+                }
+                // si 0 input 
+                else if (valeurInp.length === 0) {
+                    allLigne[0].style.display = 'none';
+                    allLigne[1].style.display = 'none';
+                    allLigne[2].style.display = 'none';
+                }    
+        })
+        // check confirmation
+        // On compare la valeur de l'input a celle de l'input  valeurInp
+        // Si la length de la target value = 0  retour error ;
+        // Si la target value =  strictement celle de valeurInp  retour check;
+        // Sinon retour error ; 
+        inpConfirme.addEventListener('input', (e) => {
+            if(e.target.value.length === 0){
+                //allSpan[4].style.display = "none";
+                allImg2[4].style.display = "inline";
+                allImg2[4].src = "times";
+                allImg[4].style.display = "none";
 
-inpMdp.addEventListener('input', (e) => {
-    valeurInp = e.target.value;
-            if(inpConfirme.value.length === 0){
-            //allSpan[4].style.display = "none";
-            allImg2[4].style.display = "inline";
-            allImg2[4].src = "times";
-            allImg[4].style.display = "none";
-
-        }
-        else if(inpConfirme.value === valeurInp){
-            allImg[4].style.display = "inline";
-            allImg[4].src = "check";
-            allImg2[4].style.display = "none";
-        } else {
-            allImg2[4].style.display = "inline";
-            allImg2[4].src = "times";
-            allImg[4].style.display = "none";
-        }
-    if(valeurInp.search(specialCar) !== -1){
-        objValidation.symbole = 1;
-    }
-    if(valeurInp.search(alphabet) !== -1){
-        objValidation.lettre = 1;
-    }
-    if(valeurInp.search(chiffres) !== -1){
-        objValidation.chiffre = 1;
-    }
-    // gestion delete dans l'input 
-    if(e.inputType == 'deleteContentBackward'){ // ICI BUG SUR OPERATEUR !!!!! with "=" fail to compile 
-        if(valeurInp.search(specialCar) === -1){
-            objValidation.symbole = 0;
-        }
-        if(valeurInp.search(alphabet) === -1){
-            objValidation.lettre = 0;
-        }
-        if(valeurInp.search(chiffres) === -1){
-            objValidation.chiffre = 0;
-        }
-    } 
-    // avec un for in on itere sur un objet
-    // pour tester chaque propriétés de l'objet pour la validation
-    let testAll = 0;
-    for(const property in objValidation){
-        if(objValidation[property] > 0){
-            testAll++;
-        }
-    }
-    // Si il n'y a pas assez d'input  
-    if(testAll < 3){
-        allSpan[3].style.display = "inline";
-        allImg[3].style.display = "none";
-        allImg2[3].style.display = "inline";
-        allImg2[3].src = "times";
-    } else {
-        allSpan[3].style.display = "inline";
-        allImg[3].src = "check";
-        allImg[3].style.display = "inline";
-        allImg2[3].style.display = "none";
-    }
-        // valider la force du mdp
-        // valeur la plus basse
-        if(valeurInp.length <= 6 && valeurInp.length > 0){
-            allLigne[0].style.display = 'block';
-            allLigne[1].style.display = 'none';
-            allLigne[2].style.display = 'none';
-        }
-        // force moyenne
-        else if (valeurInp.length > 6 && valeurInp.length <= 9) {
-            allLigne[0].style.display = 'block';
-            allLigne[1].style.display = 'block';
-            allLigne[2].style.display = 'none';
-        }
-        //mdp fort
-        else if (valeurInp.length > 9) {
-            allLigne[0].style.display = 'block';
-            allLigne[1].style.display = 'block';
-            allLigne[2].style.display = 'block';
-        }
-        // si 0 input 
-        else if (valeurInp.length === 0) {
-            allLigne[0].style.display = 'none';
-            allLigne[1].style.display = 'none';
-            allLigne[2].style.display = 'none';
-        }
-
-    
-})
-// check confirmation
-// On compare la valeur de l'input a celle de l'input  valeurInp
-// Si la length de la target value = 0  retour error ;
-// Si la target value =  strictement celle de valeurInp  retour check;
-// Sinon retour error ; 
-
-    inpConfirme.addEventListener('input', (e) => {
-        if(e.target.value.length === 0){
-            //allSpan[4].style.display = "none";
-            allImg2[4].style.display = "inline";
-            allImg2[4].src = "times";
-            allImg[4].style.display = "none";
-
-        }
-        else if(e.target.value === valeurInp){
-            allImg[4].style.display = "inline";
-            allImg[4].src = "check";
-            allImg2[4].style.display = "none";
-        } else {
-            allImg2[4].style.display = "inline";
-            allImg2[4].src = "times";
-            allImg[4].style.display = "none";
-        }
-    })
-    
+            }
+            else if(e.target.value === valeurInp){
+                allImg[4].style.display = "inline";
+                allImg[4].src = "check";
+                allImg2[4].style.display = "none";
+            } else {
+                allImg2[4].style.display = "inline";
+                allImg2[4].src = "times";
+                allImg[4].style.display = "none";
+            }
+        })    
     },
     methods: {
         sendForm() {
             console.log("ok");
-                if (!this.inputFirstName || !this.inputLastName || !this.inputEmail || !this.inputPassword || this.inputPassword !== this.inputConfirmPassword) {
-                
-                return this.invalid = true;
-                
+                if (!this.inputFirstName || !this.inputLastName || !this.inputEmail || !this.inputPassword || this.inputPassword !== this.inputConfirmPassword) {                
+                return this.invalid = true;                
             }
-            console.log("ok2");
             const nameRegex = /(.*[a-z]){3,30}/;
             const mailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
             const pwdRegex  = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[,.@!])[A-Za-z\d,.@!]{8,}$/;
             
             if (nameRegex.test(this.inputFirstName) && nameRegex.test(this.inputLastName) && mailRegex.test(this.inputEmail) && pwdRegex.test(this.inputPassword)) {
-                console.log("ok3");
                 const data= { 
                     "firstname": this.inputFirstName, 
                     "lastname": this.inputLastName, 
@@ -409,8 +383,7 @@ inpMdp.addEventListener('input', (e) => {
                 console.log('erreur')
                 this.invalid = true;
             }
-        }
-    
+        }    
     }
 }   
 </script>

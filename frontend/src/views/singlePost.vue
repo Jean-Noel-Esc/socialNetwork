@@ -3,39 +3,29 @@
 <navBar/>
     <div class="album py-5 bg-light h-100">
         <div class="container">
-            <!-- <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">  -->
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img class="card-img-top" v-bind:src="article.picture"/>
-                        <div class="card-body" alt="Max-height 100%">
-                            
-                            <p class="card-text">{{article.text}}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <!-- <button type="button" class="btn btn-sm btn-outline-secondary">View</button> -->
-                                    <button type="button" class="btn btn-sm btn-outline-secondary" 
-                                    data-bs-toggle="modal" data-bs-target="#modalUpdatePost" v-if="author==true">Edit</button>
-                                    <!-- ICI GESTION DE LA MODIFICATION D'UN POST PAR SON AUTEUR-->
-                                </div>
-                                <small class="text-muted">Auteur:{{ auteur.firstname}} {{ auteur.lastname}}  </small>
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img class="card-img-top" v-bind:src="article.picture"/>
+                    <div class="card-body" alt="Max-height 100%">        
+                        <p class="card-text">{{article.text}}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary" 
+                                data-bs-toggle="modal" data-bs-target="#modalUpdatePost" v-if="author==true">
+                                Edit
+                                </button>
+                                <!-- ICI GESTION DE LA MODIFICATION D'UN POST PAR SON AUTEUR-->
                             </div>
+                            <small class="text-muted">Auteur:{{ auteur.firstname}} {{ auteur.lastname}}</small>
                         </div>
                     </div>
-                    <!-- <form @submit="sendForm()">
-                        <label for="inputComment">Taper votre comment</label>
-                            <textarea v-on:keydown="invalid = false" v-model="inputText" class="form-control" id="inputText" rows="3">
-                            </textarea>
-                        <span class= "message-alerte"></span>                        
-                    </form> -->
-                    <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#modalComment"><font-awesome-icon icon = "pen"/></button>
-                    <!-- <button type="button" class="btn btn-sm btn-outline-secondary">ADD COMMENT</button> -->
-                    <div v-for="comment in commentairesValides" :key="comment.id">{{comment.text}}
-                        <div>{{comment.firstname}} {{comment.lastname}}</div><hr/>
-                    </div>
-                    
                 </div>
-
-                <!-- MODALE POUR AJOUT DE COMMENTAIRE -->
+                <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#modalComment"><font-awesome-icon icon = "pen"/></button>
+                <div v-for="comment in commentairesValides" :key="comment.id">{{comment.text}}
+                    <div>{{comment.firstname}} {{comment.lastname}}</div><hr/>
+                </div>        
+            </div>
+            <!-- MODALE POUR AJOUT DE COMMENTAIRE -->
                 <div class="modal fade" id="modalComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -55,13 +45,11 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                                 <button id="editUser" @click="sendForm()" type="button" class="btn btn-success"><font-awesome-icon icon="edit"/></button>
                             </div>
                         </div>
                     </div>
                 </div>
-            <!-- </div>  -->
             <!-- MODALE POUR MODIFICATION D'UN ARTICLE/POST PAR SON AUTEUR -->
                 <div class="modal fade" id="modalUpdatePost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -94,14 +82,9 @@
                                 <span class= "message-alerte"></span>                        
                                 </form> 
                             </div>
-                            <!-- <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button id="editUser" @click="sendForm()" type="button" class="btn btn-success"><font-awesome-icon icon="edit"/></button>
-                            </div> -->
                         </div>
                     </div>
                 </div>
-            <!-- </div>  -->
         </div>
     </div> 
 </div>
@@ -136,12 +119,10 @@ export default {
                 if (res) {
                     const rep = res.data;
                     this.users = rep;
-                    console.log(rep);
                 }
             })
             .catch((error) =>{
                 console.log(error);
-                console.log ("c'est err 404");
             })
         axios.get("http://localhost:3000/api/post/"+this.$route.params.id,  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
         .then((res) => {
@@ -159,13 +140,11 @@ export default {
                     this.inputTitle = this.article.title;
                     this.inputPicture = this.article.picture;
                     for ( let i=0 ; i<this.commentaires.length; i++ ){
-                        //on parcour tt les commentaires
+                        //on parcour ts les commentaires
                         if (this.commentaires[i].status == 1){
-
                             this.commentairesValides.push(this.commentaires[i])
-                            
                             for (let k =0; k<this.users.length ; k++){
-                             // on recup tt les user
+                             // on recup ts les users
                             if (this.users[k].id == this.commentairesValides[this.j].UserId){
                                     this.commentairesValides[this.j].firstname = this.users[k].firstname;
                                     this.commentairesValides[this.j].lastname = this.users[k].lastname;
@@ -173,22 +152,19 @@ export default {
                             }
                             this.j+=1;
                         }
-                    console.log(this.commentairesValides);
                     }  
-                    console.log(rep);
                 }
             })
         .catch((error) =>{
             console.log(error);
             console.log ("c'est err 404");
         })
-
     },
     methods:{
         sendForm () {
             console.log(this.inputText);
             if ( !this.inputText ) {
-                    return this.invalid = true;
+                return this.invalid = true;
             }
             else{
                 axios.post("http://localhost:3000/api/comment/",  
@@ -224,16 +200,15 @@ export default {
             let file = input.files;
             let formData = new FormData();
             // ici on gère la condition d'un update de l'inputImage
-            // SI l'user update l'img alors on utilise .append sur le formData POUR
-            // attacher le file a l'index O
-            // Sinon on update le text et le title avec les valeur de l'input de la MODALE
-            // qu'ils aient été modifié ou non 
+            // Si l'user update l'img alors on utilise .append sur le formData pour:
+            // attacher le file à l'index O
+            // Sinon on update le text et le title avec les valeurs de l'input de la modale
+            // qu'ils aient été modifiés ou non. 
             if (file[0]) {
                 formData.append('image', file[0]);
                 formData.append('text', this.inputText);  
                 formData.append('title', this.inputTitle);
-                console.log(file[0]);
-                
+                // console.log(file[0]);                
                 axios.put('http://localhost:3000/api/post/'+ this.article.id , formData, {
                 headers: {
                 'Authorization': 'Bearer ' + sessionStorage.getItem("token"),
@@ -248,7 +223,6 @@ export default {
             .catch((error)=>{
                     alert(error.status)
                     console.log("erreur du put file")});
-
             } else {
             axios.put('http://localhost:3000/api/post/'+ this.article.id , {text: this.inputText, title: this.inputTitle}, {
                 headers: {
@@ -264,10 +238,7 @@ export default {
             .catch((error)=>{
                     alert(error.status)
                     console.log("erreur update")});
-
             }
-
-
         }
     }
 }
@@ -280,5 +251,4 @@ hr {
     border: 0;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
-
 </style>

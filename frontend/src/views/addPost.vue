@@ -5,14 +5,14 @@
         <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-light rounded">
             <h1 class="text-center font-weight-bold" style="font-size:4vw;" >VOTRE ARTICLE</h1>
             <form @submit="sendForm()">
-                <!--EN COURS DE DEV gestion category -->
-                <!-- <div class="form-group"> -->
-                    <!-- <label for="inputCategory">Categorie</label>
-                    <select v-on:keydown="invalid = false" v-model="inputCategory" type="text" class="form-control" id="inputCategory"  placeholder="Ajoutez du texte">
-                    <option v-for="categorie in categories" v-bind:value="categorie.id" :key="categorie.name">{{categorie.name}}</option>
-                    </select>
-                    <span class= "message-alerte"></span> -->
-                <!-- </div>                 -->
+                    <!--EN COURS DE DEV gestion category -->
+                    <!-- <div class="form-group"> -->
+                        <!-- <label for="inputCategory">Categorie</label>
+                        <select v-on:keydown="invalid = false" v-model="inputCategory" type="text" class="form-control" id="inputCategory"  placeholder="Ajoutez du texte">
+                        <option v-for="categorie in categories" v-bind:value="categorie.id" :key="categorie.name">{{categorie.name}}</option>
+                        </select>
+                        <span class= "message-alerte"></span> -->
+                    <!-- </div> -->
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Ajoutez une photo pour illustrer votre article</label>
                     <input @change="handleImage()" class="form-control" type="file" accept="image/png, image/jpeg" id="inputImage">                    
@@ -37,10 +37,6 @@
 </template>
 
 <style>
-/* button {
-    margin-top: 20px;
-} */
-
 label{
     margin: 5px 23px;
     font-size: 20px;
@@ -49,15 +45,12 @@ label{
     position: left;
     text-align: left;
 }
-
 textarea{
     margin-bottom: 20px;
 }
-
 </style>
 
 <script>
-
 import axios from "axios";
 import router from "../router";
 import navBar from "../components/Nav.vue";
@@ -82,6 +75,7 @@ export default {
     },
     mounted ()
     {
+        // select category du post a publier en cours de dev 
         // axios.get("http://localhost:3000/api/category/")
         // .then((res) => {
         //         if (res) {
@@ -136,17 +130,12 @@ export default {
             });
             },
         sendForm() {
-            console.log("ok");
-                if ( !this.inputTitle || !this.inputText) {
-                    console.log('err')
+            if ( !this.inputTitle || !this.inputText) {
                 return this.invalid = true;
-
-            
-            }else {
+            } else {
                 console.log('erreur')
                 this.invalid = true;
             }
-            console.log('bien')
             let input = document.getElementById("inputImage");
             let userId = sessionStorage.getItem("userId");
             let file = input.files;
@@ -156,27 +145,22 @@ export default {
             formData.append('text', this.inputText);
             //formData.append('categoryId', this.inputCategory); // ce sera un this.inputCategorie
             formData.append('userId', userId);
-            console.log(formData);
-                axios.post('http://localhost:3000/api/post/create', formData, {
+            axios.post('http://localhost:3000/api/post/create', formData, {
                 headers: {
                 'Authorization': 'Bearer ' + sessionStorage.getItem("token"),
                 'Content-Type': 'application/json',
                 }
             })
-                .then((res) => {
-                    console.log(res);
-                    alert('Votre article est en attente de modération');
-                    //redirection page principale
-                    router.push({ path : '/main'});
-                })
-                .catch((error)=>{
-                    alert(error.status)
-                    console.log("on est dans cette erreur")});
+            .then((res) => {
+                console.log(res); // SI DELETE error res is defined but never used ????????????? 
+                alert('Votre article est en attente de modération');
+                //redirection page principale
+                router.push({ path : '/main'});
+            })
+            .catch((error)=>{
+                alert(error.status)
+            });
         }
-    
     }
-
-
-
 }
 </script>

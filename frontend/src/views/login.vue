@@ -1,26 +1,23 @@
 <template>
 <div>
-    <!-- <img src = "../assets/groupomania/icon-above-font.svg" style="width: 50%; height: 200px;" alt="globe"/> -->
     <main class="form-signin text-center">
-        <!-- <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-light rounded">  -->
-            <img src = "../assets/groupomania/icon-above-font.svg" style="width: 50%; height: 200px;" alt="globe"/>
-            <h1>LOGIN</h1>
-            <form @submit.prevent="submitForm()">
-                <div class="form-floating">
-                    <input v-on:keydown="invalid = false" v-model="inputEmail" type="email" class="form-control" id="floatingInput" aria-describedby="emailHelp" placeholder="votre email">
-                    <label for="floatingInput">Email:</label>               
-                </div>
-                <div class="form-floating mb-3">
-                    <input v-on:keydown="invalid = false" v-model="inputPassword" type="password" class="form-control" id="inputPassword" aria-describedby="passwordHelp" placeholder="mot de passe">
-                    <label for="floatingPassword">Password:</label>                
-                </div>
+        <img src = "../assets/groupomania/icon-above-font.svg" style="width: 50%; height: 200px;" alt="globe"/>
+        <h1>LOGIN</h1>
+        <form @submit.prevent="submitForm()">
+            <div class="form-floating">
+                <input v-on:keydown="invalid = false" v-model="inputEmail" type="email" class="form-control" id="floatingInput" aria-describedby="emailHelp" placeholder="votre email">
+                <label for="floatingInput">Email:</label>               
+            </div>
+            <div class="form-floating mb-3">
+                <input v-on:keydown="invalid = false" v-model="inputPassword" type="password" class="form-control" id="inputPassword" aria-describedby="passwordHelp" placeholder="mot de passe">
+                <label for="floatingPassword">Password:</label>                
+            </div>
                 <button class="w-100 btn btn-lg btn-primary" type="submit">CONNEXION</button> 
                 <button class="w-100 btn btn-lg btn-success" type="link" @click="$router.push({ path : 'signup'})">INSCRIPTION</button> 
-            </form>
-            <div>
-                <p class="text-danger">{{error}}</p>
-            </div>
-        <!-- </section>    -->
+        </form>
+        <div>
+            <p class="text-danger">{{error}}</p>
+        </div>
     </main>
 </div>
 </template>
@@ -30,7 +27,6 @@
 html,body {
     height: 100%;
 }
-
 main {    
     align-items: center;
     padding-top: 40px;
@@ -53,31 +49,22 @@ h1 {
     padding: 15px;
     margin: auto;
 }
-
 .form-signin .checkbox {
     font-weight: 400;
 }
-/* .form-floating mb3 {
-    margin-bottom: 0px;
-} */
-
-
 .form-signin .form-floating:focus-within {
     z-index: 2;
 }   
-
 .form-signin input[type="email"] {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 } 
-
 .form-signin input[type="password"] {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
-
 button {
     margin-bottom: 20px;
 }
@@ -116,7 +103,6 @@ export default {
                 window.alert('Connexion réussie');
                 router.push({ path : 'main'});
             })
-
             .catch(() => {
                 this.invalid = true;
                 this.error= 'Utilisateur en attente de modération ou inexistant!';

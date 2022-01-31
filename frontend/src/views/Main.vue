@@ -1,7 +1,6 @@
 <template>
 <div>
 <navBar/>
-
 <main>
     <section class="py-5 text-center container">
         <div id="publish" class="row py-lg-5 mx-0">
@@ -23,7 +22,6 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-outline-secondary" @click=displayPost(post.id)>View</button>
-                                    <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
                                 </div>
                             </div>
                         </div>
@@ -32,8 +30,7 @@
             </div>
         </div>
     </div>
-</main>
-    
+</main>    
 <footer class="text-muted py-5">
     <div class="container">
         <p class="mb-1"> &copy; Groupomania 2022</p>
@@ -50,10 +47,6 @@
         -moz-user-select: none;
         user-select: none;
     }
-    /* img{
-        height: inherit;
-        width: 30%;
-    } */
     #publish{
         padding-top: 0px!important;
         padding-bottom: 0px!important;
@@ -83,16 +76,11 @@ export default {
     mounted () {
         axios.get("http://localhost:3000/api/post/",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
         .then((res) => {
-                if (res) {
-                    const rep = res.data;
-                    this.posts = rep;
-                    console.log(rep);
-                }
-                //else {
-                    //si les post sont absent c'est que le token est invalide
-                    // redirection vers login si token invalide 
-        //         }
-        //     })
+            if (res) {
+                const rep = res.data;
+                this.posts = rep;
+                console.log(rep);
+            }
         })
         .catch((error) =>{
             console.log(error);

@@ -8,144 +8,139 @@
             </div>
         </div>
     </header>
-
     <div class="container-fluid">
-    <!-- <div class="row"> -->
         <main class="col-md-auto ms-sm-auto col-lg-12 px-md-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Dashboard</h1>
-        </div>
-
-    <!--Gestion des catégories EN COURS DE DEV-->
-    <!--<h2>Gestion des catégories</h2>
-        <div class="table-responsive">
-            <table class="table table-striped table-sm">
-                <thead>
-                    <tr>
-                    <th scope="col">#id</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Vue</th>
-                    </tr>
-                </thead>
-                <tbody  v-for="category in categories" :key="category.id">
-                    <tr>
-                        <td>{{category.id}}</td>
-                        <td>{{category.name}}</td>
-                        <td>
-                        <button type="button" class="btn btn-danger m-3" data-bs-toggle="modal" data-bs-target="#modalcategory" v-bind:data-bs-user-id="category.id"  v-bind:data-bs-category-name="category.name"><font-awesome-icon icon = "trash"/></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div> -->
-    <!--------------------------------->
-    <!--Boutton pour la création d'une nouvelle catégorie-->
-    <!-- <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#modalCategory" v-bind:data-bs-category-id="category.id"  v-bind:data-bs-category-name="category.name"><font-awesome-icon icon = "eye"/></button> --> 
-    <!----------------------------------------------------->
-
-
-    <!--display des users à modérer-->
-        <section>
-        <h2>Modération des nouveaux utilisateurs</h2>
-        <div class="table-responsive" id="utilisateurs">
-            <table class="table table-striped table-sm">
-                <thead>
-                    <tr>
-                    <th scope="col">#id</th>
-                    <th scope="col">Prénom</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Voir</th>
-                    </tr>
-                </thead>
-                <tbody  v-for="user in users" :key="user.id">
-                    <tr>
-                        <td>{{user.id}}</td>
-                        <td>{{user.firstname}}</td>
-                        <td>{{user.lastname}}</td>
-                        <td>{{user.email}}</td>
-                        <td>
-                        <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#modalUser" v-bind:data-bs-user-id="user.id"  v-bind:data-bs-user-fisrtname="user.firstname" v-bind:data-bs-user-lastname="user.lastname"><font-awesome-icon icon = "eye"/></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        </section>
-    <!--------------------------------->
-    <!-- Modale pour moderation des nouveaux utilisateurs -->
-        <div class="modal fade" id="modalUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Cet utilisateur est en attente de validation</p>
-                    </div>
-                    <div class="modal-user-body">
-                        <p>les infos de l'utilisateur</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button id="editUser" type="button" class="btn btn-success"><font-awesome-icon icon="edit"/></button>
-                        <button id="trashUser" type="button" class="btn btn-danger"><font-awesome-icon icon="trash"/></button>
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Dashboard</h1>
+            </div>
+                <!--Gestion des catégories EN COURS DE DEV-->
+                <!--<h2>Gestion des catégories</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm">
+                            <thead>
+                                <tr>
+                                <th scope="col">#id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Vue</th>
+                                </tr>
+                            </thead>
+                            <tbody  v-for="category in categories" :key="category.id">
+                                <tr>
+                                    <td>{{category.id}}</td>
+                                    <td>{{category.name}}</td>
+                                    <td>
+                                    <button type="button" class="btn btn-danger m-3" data-bs-toggle="modal" data-bs-target="#modalcategory" v-bind:data-bs-user-id="category.id"  v-bind:data-bs-category-name="category.name"><font-awesome-icon icon = "trash"/></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div> -->
+                <!--------------------------------->
+                <!--Boutton pour la création d'une nouvelle catégorie-->
+                <!-- <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#modalCategory" v-bind:data-bs-category-id="category.id"  v-bind:data-bs-category-name="category.name"><font-awesome-icon icon = "eye"/></button> --> 
+                <!----------------------------------------------------->    
+            <!--LISTE DES USERS EN ATTENTE DE MODERATION-->
+            <section>
+                <h2>Modération des nouveaux utilisateurs</h2>
+                <div class="table-responsive" id="utilisateurs">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                            <th scope="col">#id</th>
+                            <th scope="col">Prénom</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Voir</th>
+                            </tr>
+                        </thead>
+                        <tbody  v-for="user in users" :key="user.id">
+                            <tr>
+                                <td>{{user.id}}</td>
+                                <td>{{user.firstname}}</td>
+                                <td>{{user.lastname}}</td>
+                                <td>{{user.email}}</td>
+                                <td>
+                                <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#modalUser" v-bind:data-bs-user-id="user.id"  v-bind:data-bs-user-fisrtname="user.firstname" v-bind:data-bs-user-lastname="user.lastname"><font-awesome-icon icon = "eye"/></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <!--------------------------------->
+            <!-- MODALE pour moderation des nouveaux utilisateurs -->
+            <div class="modal fade" id="modalUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Cet utilisateur est en attente de validation</p>
+                        </div>
+                        <div class="modal-user-body">
+                            <p>les infos de l'utilisateur</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button id="editUser" type="button" class="btn btn-success"><font-awesome-icon icon="edit"/></button>
+                            <button id="trashUser" type="button" class="btn btn-danger"><font-awesome-icon icon="trash"/></button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    <!-- liste des articles à moderer -->
-    <section>
-        <h2>Articles en attente de publication</h2>
-        <div class="table-responsive" id="articles">
-            <table class="table table-striped table-sm">
-                <thead>
-                    <tr>
-                    <th scope="col">#id</th>
-                    <!-- <th scope="col">Category</th> -->
-                    <th scope="col">Auteur</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Header</th>
-                    <th scope="col">Voir</th>
-                    </tr>
-                </thead>
-                <tbody  v-for="post in posts" :key="post.id">
-                    <tr>
-                        <td>{{post.id}}</td>
-                        <!-- <td>{{post.CategoryId}}</td> -->
-                        <td>{{post.User.firstname}} {{post.User.lastname}}</td>
-                        <td>{{post.createdAt}}</td>
-                        <td>text</td>
-                        <td>
-                        <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#exampleModalLong" v-bind:data-bs-id="post.id"  v-bind:data-bs-title="post.text"><font-awesome-icon icon = "eye"/></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-        <!-- Modale pour modération des articles/posts -->
-        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                    </div>
-                    <div class="modal-body">
-                        <p>Ceci est un article </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button id="edit" type="button" class="btn btn-success"><font-awesome-icon icon="edit"/></button>
-                        <button id="trash" type="button" class="btn btn-danger"><font-awesome-icon icon="trash"/></button>
+            <!-- LISTE DES ARTICLES/POST EN ATTENTE DE MODERATION -->
+            <section>
+                <h2>Articles en attente de publication</h2>
+                <div class="table-responsive" id="articles">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                            <th scope="col">#id</th>
+                            <!-- <th scope="col">Category</th> -->
+                            <th scope="col">Auteur</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Header</th>
+                            <th scope="col">Voir</th>
+                            </tr>
+                        </thead>
+                        <tbody  v-for="post in posts" :key="post.id">
+                            <tr>
+                                <td>{{post.id}}</td>
+                                <!-- <td>{{post.CategoryId}}</td> -->
+                                <td>{{post.User.firstname}} {{post.User.lastname}}</td>
+                                <td>{{post.createdAt}}</td>
+                                <td>text</td>
+                                <td>
+                                <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#exampleModalLong" v-bind:data-bs-id="post.id"  v-bind:data-bs-title="post.text"><font-awesome-icon icon = "eye"/></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <!-- MODALE pour modération des articles/posts -->
+            <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>Ceci est un article </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button id="edit" type="button" class="btn btn-success"><font-awesome-icon icon="edit"/></button>
+                            <button id="trash" type="button" class="btn btn-danger"><font-awesome-icon icon="trash"/></button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--display liste des commentaires-->
+        <!--LISTE DES COMMENTAIRES EN ATTENTE DE MODERATION-->
         <section>
         <h2>Commentaires en attente de publication</h2>
         <div class="table-responsive" id="commentaires">

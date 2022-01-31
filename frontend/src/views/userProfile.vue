@@ -1,41 +1,36 @@
 <template>
     <div>
-
-        <navBar></navBar>
-
+    <navBar></navBar>
         <main class="container-fluid">
-            <!-- <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-light rounded"> -->
-                <div class="album py-5 bg-light">
-                    <div class="container-fluid">
-                        <!-- <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"> -->
-                            <h2>Votre profil utilisateur</h2>
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Firstname</th>
-                                            <th scope="col">Lastname</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Delete</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>{{user.firstname}}</td>
-                                            <td>{{user.lastname}}</td>
-                                            <td>{{user.email}}</td>
-                                            <td>
-                                                <button type="button" class="btn btn-danger m-3" data-bs-toggle="modal" data-bs-target="#modalUser" v-bind:data-bs-user-id="user.id"  v-bind:data-bs-user-fisrtname="user.firstname" v-bind:data-bs-user-lastname="user.lastname"><font-awesome-icon icon = "trash"/></button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <!-- </div> -->
+            <div class="album py-5 bg-light">
+                <div class="container-fluid">
+                    <h2>Votre profil utilisateur</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Firstname</th>
+                                    <th scope="col">Lastname</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{user.firstname}}</td>
+                                    <td>{{user.lastname}}</td>
+                                    <td>{{user.email}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger m-3" data-bs-toggle="modal" data-bs-target="#modalUser" v-bind:data-bs-user-id="user.id"  v-bind:data-bs-user-fisrtname="user.firstname" v-bind:data-bs-user-lastname="user.lastname"><font-awesome-icon icon = "trash"/></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            <!-- </section>   -->
+            </div>
         </main>
+        <!-- Modale pour le delete profil d'user -->
         <div class="modal fade" id="modalUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -55,12 +50,10 @@
                 </div>
             </div>
         </div>
-    </div>
-    
+    </div>    
 </template>
 
 <style>
-
 
 </style>
 
@@ -104,7 +97,6 @@ export default {
             .catch((error) =>{
                 console.log(error);
             })
-
         }
     }
 }
