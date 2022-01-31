@@ -13,6 +13,5 @@ Comment.associate = function(models){
 		foreignkey:{allowNull: false}
 	});
 };
-
 return Comment;
 }
