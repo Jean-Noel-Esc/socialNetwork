@@ -14,7 +14,7 @@ exports.createComment = (req, res, next) => {
       const newComment = models.Comment.create({
         text: req.body.text,
         status:0,
-        UserId: req.body.userId, // modif pour correspondre a l'id de l'user connecte donc a extraire du token
+        UserId: req.body.userId, // modif pour correspondre a l'id de l'user connecté donc à extraire du token.
         PostId: req.body.postId
       })
       .then(newComment => {
@@ -100,44 +100,8 @@ exports.moderateComment = (req, res, next) => {
 
 
 
-/*
-exports.modifyComment = (req, res, next) => {
-  const commentObject = req.file ?
-
-    Comment.updateOne({ _id: req.params.id }, { ...commentObject, _id: req.params.id })
-    .then(() => res.status(200).json({ message: 'Comment modifié !'}))
-    .catch(error => res.status(400).json({ error })); 
-};
-*/
 
 
 
 
 
-/*
-exports.deleteComment = (req, res, next) => {
-  Comment.findOne({ _id: req.params.id })
-    .then(comment => {
-        Comment.destroy({ _id: req.params.id })
-          .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
-          .catch(error => res.status(400).json({ error }));
-      });
-    };
-*/
-
-
-/*
-exports.getAllComments = (req, res, next) => {
-  Comment.findAll().then(
-    (comments) => {
-      res.status(200).json(comments);
-    }
-  ).catch(
-    (error) => {
-      res.status(400).json({
-        error: error
-      });
-    }
-  );
-};
-*/

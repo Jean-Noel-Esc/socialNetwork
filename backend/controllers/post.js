@@ -8,10 +8,9 @@ exports.createPost = (req, res, next) => {
     title: req.body.title,
     text: req.body.text,
     picture:`${req.protocol}://${req.get('host')}/images/`+req.file.filename,
-    UserId: req.body.userId, // modif pour correspondre a l'id de l'user connecte donc a extraire du token
-    //CategoryId: req.body.categoryId,
+    UserId: req.body.userId, // modif pour correspondre à l'id de l'user connecté donc à extraire du token.
+    //CategoryId: req.body.categoryId,  (en cours de dev)
     status:0
-
   })
   .then(newPost => {
     console.log(newPost);
@@ -39,42 +38,37 @@ exports.getOnePost = (req, res, next) => {
 };
 
 exports.updatePost = (req, res, next) => {
-  console.log(req.body.text);
-    models.Post.findOne({ where : {id: req.params.id} })
-    .then(post => {
-      if (req.file.filename) {
-
-        models.Post.update({text: req.body.text , title: req.body.title, picture:`${req.protocol}://${req.get('host')}/images/`+req.file.filename, status: 0},{ where : {id: req.params.id} })
-        .then(() => res.status(200).json({ message: 'Ce post a été modifié !'}))
-        .catch(error => res.status(400).json({ error }));
-      }
-    else {
-          models.Post.update({text: req.body.text , title: req.body.title, status: 0},{ where : {id: req.params.id} })
-          .then(() => res.status(200).json({ message: 'Ce post a été modifié !'}))
-          .catch(error => res.status(400).json({ error }));
-        }
-    })
-    .catch(error => res.status(500).json({ error }));
-
+  models.Post.findOne({ where : {id: req.params.id} })
+  .then(post => {
+    if (req.file.filename) {
+      models.Post.update({text: req.body.text , title: req.body.title, picture:`${req.protocol}://${req.get('host')}/images/`+req.file.filename, status: 0},{ where : {id: req.params.id} })
+      .then(() => res.status(200).json({ message: 'Ce post a été modifié !'}))
+      .catch(error => res.status(400).json({ error }));
+    } else {
+      models.Post.update({text: req.body.text , title: req.body.title, status: 0},{ where : {id: req.params.id} })
+      .then(() => res.status(200).json({ message: 'Ce post a été modifié !'}))
+      .catch(error => res.status(400).json({ error }));
+    }
+  })
+  .catch(error => res.status(500).json({ error }));
 };
 
 exports.destroyPost = (req, res, next) => {
   models.Post.findOne({ where : {id: req.params.id} })
-    .then(post => {
+  .then(post => {
         models.Post.destroy({ where : {id: req.params.id} })
           .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
           .catch(error => res.status(400).json({ error }));
-    })
-    .catch(error => res.status(500).json({ error }));
+  })
+  .catch(error => res.status(500).json({ error }));
 };
 
 exports.getAllPosts = (req, res, next) => {
-
-  models.Post.findAll({ where : {status: 1}, include : models.User, order:[["updatedAt", "DESC"]] } )
+  models.Post.findAll({ where : {status: 1}, include : models.User, order:[["updatedAt", "DESC"]] })
   .then((posts) => {  
       res.status(200).json(posts);
-    }
-  ).catch(
+    })
+  .catch(
     (error) => {
       res.status(400).json({
         error: error

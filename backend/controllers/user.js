@@ -1,6 +1,6 @@
-const bcrypt = require('bcrypt');                                           // Importation du package de chiffrement bcrypt
-const jwt = require('jsonwebtoken');                                        // Importation du package jsonwebtoken
-const models = require('../models');                                     // Importation modèle User
+const bcrypt = require('bcrypt');                               // Importation du package de chiffrement bcrypt
+const jwt = require('jsonwebtoken');                            // Importation du package jsonwebtoken
+const models = require('../models');                            // Importation modèle User
 const fs = require('fs');   
 
 
@@ -9,7 +9,7 @@ const fs = require('fs');
 
 exports.signup = (req, res, next) => {
   console.log("debut fct");
-  bcrypt.hash(req.body.password, 10)                                        // On appelle la fonction de hachage, on créer un nouvel utilisateur, on le sauvegarde dans la BDD
+  bcrypt.hash(req.body.password, 10)      // On appelle la fonction de hachage, on créer un nouvel utilisateur, on le sauvegarde dans la BDD
   .then(hash => {
     console.log(hash);
     console.log(req.body);
@@ -30,17 +30,13 @@ exports.signup = (req, res, next) => {
           { expiresIn: '24h' }
         )
       });
-
     })
     .catch(_error => console.log("Bonjour"));
   })
   .catch(error => res.status(500).json({ error }));
 };
 
-
-
 // Connexion // Login
-
 exports.login = (req, res, _next) => {
   const { Op } = require("sequelize");
   models.User.findOne({ where: {email:req.body.email, role: {[Op.or]: [1,2]}} }) 
@@ -69,13 +65,9 @@ exports.login = (req, res, _next) => {
     .catch(error => res.status(501).json({ error }));
 };
 
-
-
-
-
-// Recupere tous les users
-//on importe le modèle
-//var models = require('./Model');
+// Récupération all users
+// on importe le modèle
+// var models = require('./Model');
 // verifier si l'utilisateur a le role admin voir condition role admin
 
 exports.findAll = (req, res) => {
@@ -137,12 +129,12 @@ exports.deleteUser = (req, res, next) => {
 // verif avec un find one si l'user existe
 exports.update = (req, res) => {
   let newpass = req.body.newpassword;
-  bcrypt.hash(newpass, 10)                                        // On appelle la fonction de hachage, on créer un nouvel utilisateur, on le sauvegarde dans la BDD
+  bcrypt.hash(newpass, 10)                   // On appelle la fonction de hachage, on créer un nouvel utilisateur, on le sauvegarde dans la BDD
   .then(hash => {
     console.log(hash);
     const updatePassword = models.User.update({
       password: hash
-    }, {where :{id:req.body.userid}}) //utiliser le token envoyé par le front a la place du req body user id
+    }, {where :{id:req.body.userid}})        // utiliser le token envoyé par le front a la place du req body user id
     .then(newPass => {
       console.log(newPass);
       res.status(201).json({ confirmation:'password modifié'});
@@ -152,22 +144,6 @@ exports.update = (req, res) => {
   .catch(error => res.status(500).json({ error }));   
 };
 
-// Modifier une photo
-
-
-//avant de delete verifier par un find one si l'utilisateur existe 
-//
-// Supprimer un user par son id
-// exports.delete = (req, res) => {
-//   const id = req.body.userid;
-  
-//   models.User.destroy({
-//       where: { id: id }
-//   }).then(() => {
-//     res.status(201).json({ confirmation:'compte supprimé'});
-//   })
-//   .catch(error =>res.status(500).json({ error }));
-// };  
 
 
 
