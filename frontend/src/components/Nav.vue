@@ -85,11 +85,6 @@ export default {
 </template>
 
 <style>
-/* a:hover {
-    color:#666;
-    text-decoration: underline;
-} */
-
 img {
         height: inherit;
         width: 30%;
@@ -99,7 +94,6 @@ a:hover img {
     border-radius: 0.25rem;
     
 }
-
 </style>
 
 
