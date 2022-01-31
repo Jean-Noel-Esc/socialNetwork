@@ -140,74 +140,61 @@
                     </div>
                 </div>
             </div>
-        <!--LISTE DES COMMENTAIRES EN ATTENTE DE MODERATION-->
-        <section>
-        <h2>Commentaires en attente de publication</h2>
-        <div class="table-responsive" id="commentaires">
-            <table class="table table-striped table-sm">
-            <thead>
-                <tr>
-                <th scope="col">#id</th>
-                <!-- <th scope="col">Category</th> -->
-                <th scope="col">Auteur</th>
-                <th scope="col">Header</th>
-                <th scope="col">Header</th>
-                <th scope="col">Voir</th>
-                </tr>
-            </thead>
-            <tbody v-for="comment in comments" :key="comment.id">
-                <tr>
-                <td>{{comment.id}}</td>
-                <!-- <td>{{comment.CategoryId}}</td> -->
-                <td>{{comment.text}}</td>
-                <td>{{comment.createdAt}}</td>
-                <td>text</td>
-                <td>
-                <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#modalComment" v-bind:data-bs-comment-id="comment.id"  v-bind:data-bs-comment-title="comment.text"><font-awesome-icon icon = "eye"/></button>
-                </td>
-                </tr>
-            </tbody>
-            </table>
-        </div>
-        </section>
-        <!-- Modale pour commentaire -->        
-        <div class="modal fade" id="modalComment" tabindex="-1" role="dialog" aria-labelledby="modalCommentTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalCommentTitle">Modal comment title</h5>
-                    </div>
-                    <div class="modal-body">
-                        <p>Ceci est un commentaire</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button id="editComment" type="button" class="btn btn-success"><font-awesome-icon icon="edit"/></button>
-                        <button id="trashComment" type="button" class="btn btn-danger"><font-awesome-icon icon="trash"/></button>
+            <!--LISTE DES COMMENTAIRES EN ATTENTE DE MODERATION-->
+            <section>
+                <h2>Commentaires en attente de publication</h2>
+                <div class="table-responsive" id="commentaires">
+                    <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>
+                        <th scope="col">#id</th>
+                        <!-- <th scope="col">Category</th> -->
+                        <th scope="col">Auteur</th>
+                        <th scope="col">Header</th>
+                        <th scope="col">Header</th>
+                        <th scope="col">Voir</th>
+                        </tr>
+                    </thead>
+                    <tbody v-for="comment in comments" :key="comment.id">
+                        <tr>
+                        <td>{{comment.id}}</td>
+                        <!-- <td>{{comment.CategoryId}}</td> -->
+                        <td>{{comment.text}}</td>
+                        <td>{{comment.createdAt}}</td>
+                        <td>text</td>
+                        <td>
+                        <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#modalComment" v-bind:data-bs-comment-id="comment.id"  v-bind:data-bs-comment-title="comment.text"><font-awesome-icon icon = "eye"/></button>
+                        </td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+            </section>
+            <!-- MODALE pour commentaire -->        
+            <div class="modal fade" id="modalComment" tabindex="-1" role="dialog" aria-labelledby="modalCommentTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalCommentTitle">Modal comment title</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>Ceci est un commentaire</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button id="editComment" type="button" class="btn btn-success"><font-awesome-icon icon="edit"/></button>
+                            <button id="trashComment" type="button" class="btn btn-danger"><font-awesome-icon icon="trash"/></button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
         </main>
-    <!--</div>-->
     </div>
 </body>
 </template>
 
 <style>
-    /* .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-    }
-    @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-        }
-    } */
+
 </style>
 
 
@@ -233,33 +220,30 @@ export default {
         if (sessionStorage.getItem("role")!= 2 ){
             router.push({ path : 'main'});
         }
-        // Requetes listes categories / utilisateurs / articles / commentaires.
-        // Requetes category en cours de dev
-        // axios.get("http://localhost:3000/api/category/",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
-        // .then((res) => {
-        //         if (res) {
-        //             const rep = res.data;
-        //             this.categories = rep;
-        //             console.log(rep);
-        //             console.log("Mais ou sont les categories");
-        //         }
-        // })
-        // .catch((error) =>{
-        //     console.log(error);
-        //     console.log ("c'est err 404");
-        // })       
-
+        // REQUETES LISTES  / utilisateurs / articles / commentaires.
+            // Requetes category en cours de dev
+            // axios.get("http://localhost:3000/api/category/",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
+            // .then((res) => {
+            //         if (res) {
+            //             const rep = res.data;
+            //             this.categories = rep;
+            //             console.log(rep);
+            //             console.log("Mais ou sont les categories");
+            //         }
+            // })
+            // .catch((error) =>{
+            //     console.log(error);
+            //     console.log ("c'est err 404");
+            // })       
         axios.get("http://localhost:3000/api/auth/findalluserstomoderate",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
         .then((res) => {
                 if (res) {
                     const rep = res.data;
                     this.users = rep;
-                    console.log(rep);
                 }
         })
         .catch((error) =>{
             console.log(error);
-            console.log ("c'est err 404");
         })
         axios.get("http://localhost:3000/api/post/admin",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
         .then((res) => {
@@ -271,21 +255,18 @@ export default {
         })
         .catch((error) =>{
             console.log(error);
-            console.log ("c'est err 404");
         })
         axios.get("http://localhost:3000/api/comment/admin",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
         .then((res) => {
-                if (res) {
-                    const rep = res.data;
-                    this.comments = rep;
-                    console.log(rep);
-                }
+            if (res) {
+                const rep = res.data;
+                this.comments = rep;
+            }
         })
         .catch((error) =>{
             console.log(error);
-            console.log ("c'est err 404");
         })
-        // Gestion des modales pour la modération des utilisateurs / articles / commentaires
+        // GESTION DES MODALES POUR MODERATION des utilisateurs / articles / commentaires
         // Modale Post
         var exampleModal = document.getElementById('exampleModalLong')
             exampleModal.addEventListener('show.bs.modal', function (event) {
@@ -299,33 +280,31 @@ export default {
                 console.log(this.postIdToModerate);
                     document.getElementById("edit").addEventListener("click", function (){
                         axios.put("http://localhost:3000/api/post/admin/"+id, {userId : sessionStorage.getItem("userId")},  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
-                            .then((res) => {
-                                if (res) {
+                        .then((res) => {
+                            if (res) {
                                 console.log(res);
                                 window.location.reload();
-                                }
-                            })
-                            .catch((error) =>{
+                            }
+                        })
+                        .catch((error) =>{
                                 console.log(error);
-                                console.log ("c'est err 404");
-                            }) ;
+                        }) ;
                     })
                     document.getElementById("trash").addEventListener("click", function (){
                         axios.delete("http://localhost:3000/api/post/"+id, { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
                         .then((res) => {
-                                if (res) {
-                                    console.log(res);
-                                    window.location.reload();
-                                }
+                            if (res) {
+                                console.log(res);
+                                window.location.reload();
+                            }
                         })
                         .catch((error) =>{
                             console.log(error);
                             console.log ("c'est err 404");
                         })  
                     })
-        
         })
-        // Modale commentaire
+        // Modale commentaires
         var modalComment = document.getElementById('modalComment')
             modalComment.addEventListener('show.bs.modal', function (event) {
                 var button = event.relatedTarget;
@@ -362,26 +341,20 @@ export default {
                             console.log ("c'est err 404");
                         })  
                     })
-        })
+            })
         // Modale utilisateurs
         var modalUser = document.getElementById('modalUser')
             modalUser.addEventListener('show.bs.modal', function (event) {
                 var button = event.relatedTarget;
                 var title = button.getAttribute('data-bs-user-title');
                 var modalTitle = modalUser.querySelector('.modal-title');
-                modalTitle.textContent = title;
-
-                
+                modalTitle.textContent = title;               
                 var id = button.getAttribute('data-bs-user-id');
-                console.log(id);
-
-
                 var modalUserContent = modalUser.querySelector('.modal-user-body');
                 var firstname = button.getAttribute('data-bs-user-fisrtname');
                 var lastname = button.getAttribute('data-bs-user-lastname')
                 //var email = button.getAttribute()
                 modalUserContent.textContent = firstname + " " + lastname;
-                console.log(firstname);
                 
                 this.userIdToModerate = id;
                 console.log(this.userIdToModerate);
