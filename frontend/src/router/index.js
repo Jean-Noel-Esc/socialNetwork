@@ -1,6 +1,4 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-//import Home from '../views/Home.vue'
-
 
 const routes = [
   {
@@ -39,21 +37,11 @@ const routes = [
     name: "UserProfile",
     component: () => import("../views/UserProfile"),
   },
-  
-
 ]
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
-  // scrollBehavior(to, from, savedPosition) {
-  //   if (to.hash) {
-  //     position.selector = to.hash
-  //     return {
-  //       el: to.hash,
-  //     }
-  //   }
-  // },
 })
 
 export default router
