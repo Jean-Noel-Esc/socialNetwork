@@ -24,6 +24,7 @@ exports.signup = (req, res, next) => {
       console.log(newUser);
       res.status(201).json({
         userId: newUser.id,
+        role: 0,
         token: jwt.sign(
           { userId: newUser.id },
           'RANDOM_TOKEN_SECRET',

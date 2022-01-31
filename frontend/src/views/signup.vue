@@ -142,7 +142,7 @@ button{
     font-size: 20px;
     cursor: pointer;
 }
-button:hover {
+button:hover , button:focus {
     background: rgb(252,181,49);
 }
 button:active {
@@ -367,12 +367,14 @@ export default {
                 };
                 axios.post('http://localhost:3000/api/auth/signup', data)
                 .then((res) => {
-                    sessionStorage.setItem("token",   res.data.token)
-                    sessionStorage.setItem("userId",  res.data.userId)
+                    // sessionStorage.setItem("token",   res.data.token)
+                    // sessionStorage.setItem("userId",  res.data.userId)
+                    // sessionStorage.setItem("role",    res.data.role)
                         console.log(res);
                         alert('inscription réussie');
                         //redirection main page
-                        router.push({ path : 'main'});
+                        router.push({ path : '/'});
+                        
                 })
                 .catch((error)=>{
                     alert(error.status)

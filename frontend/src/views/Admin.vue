@@ -1,13 +1,15 @@
 <template>
+<div>
+<navBar/>
 <body>
-    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <!-- <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
         <img src = "../assets/groupomania/icon-left-font-monochrome-white.svg" alt="globe"/>
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
             <button class="btn btn-primary my-2" @Click="$router.push({path:'/main'})">Page principale</button>
             </div>
         </div>
-    </header>
+    </header> -->
     <div class="container-fluid">
         <main class="col-md-auto ms-sm-auto col-lg-12 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -43,7 +45,7 @@
             <section>
                 <h2>Modération des nouveaux utilisateurs</h2>
                 <div class="table-responsive" id="utilisateurs">
-                    <table class="table table-striped table-sm">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                             <th scope="col">#id</th>
@@ -60,7 +62,7 @@
                                 <td>{{user.lastname}}</td>
                                 <td>{{user.email}}</td>
                                 <td>
-                                <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#modalUser" v-bind:data-bs-user-id="user.id"  v-bind:data-bs-user-fisrtname="user.firstname" v-bind:data-bs-user-lastname="user.lastname"><font-awesome-icon icon = "eye"/></button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUser" v-bind:data-bs-user-id="user.id"  v-bind:data-bs-user-fisrtname="user.firstname" v-bind:data-bs-user-lastname="user.lastname" title="voir"><font-awesome-icon icon="eye" alt="icon"/></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -96,7 +98,7 @@
             <section>
                 <h2>Articles en attente de publication</h2>
                 <div class="table-responsive" id="articles">
-                    <table class="table table-striped table-sm">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                             <th scope="col">#id</th>
@@ -115,7 +117,7 @@
                                 <td>{{post.createdAt}}</td>
                                 <td>text</td>
                                 <td>
-                                <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#exampleModalLong" v-bind:data-bs-id="post.id"  v-bind:data-bs-title="post.text"><font-awesome-icon icon = "eye"/></button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalLong" v-bind:data-bs-id="post.id"  v-bind:data-bs-title="post.text" title="voir"><font-awesome-icon icon = "eye"/></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -144,26 +146,26 @@
             <section>
                 <h2>Commentaires en attente de publication</h2>
                 <div class="table-responsive" id="commentaires">
-                    <table class="table table-striped table-sm">
+                    <table class="table table-bordered">
                     <thead>
                         <tr>
                         <th scope="col">#id</th>
                         <!-- <th scope="col">Category</th> -->
-                        <th scope="col">Auteur</th>
-                        <th scope="col">Header</th>
-                        <th scope="col">Header</th>
+                        <th scope="col">Id-Auteur</th>
+                        <th scope="col">Date</th>
                         <th scope="col">Voir</th>
                         </tr>
                     </thead>
                     <tbody v-for="comment in comments" :key="comment.id">
                         <tr>
                         <td>{{comment.id}}</td>
+                        <td>{{comment.UserId}}</td>
                         <!-- <td>{{comment.CategoryId}}</td> -->
-                        <td>{{comment.text}}</td>
+                        <!-- <td>{{comment.text}}</td>
+                        <td>{{comment.text}}</td> -->
                         <td>{{comment.createdAt}}</td>
-                        <td>text</td>
                         <td>
-                        <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#modalComment" v-bind:data-bs-comment-id="comment.id"  v-bind:data-bs-comment-title="comment.text"><font-awesome-icon icon = "eye"/></button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalComment" v-bind:data-bs-comment-id="comment.id"  v-bind:data-bs-comment-title="comment.text" title="voir"><font-awesome-icon icon = "eye"/></button>
                         </td>
                         </tr>
                     </tbody>
@@ -191,10 +193,22 @@
         </main>
     </div>
 </body>
+</div>
 </template>
 
 <style>
-
+/* table {
+    background-color: ghostwhite;
+}
+th {
+    background-color: ghostwhite !important;
+}
+td {
+    background-color: ghostwhite !important;
+}
+table, .tr {
+    background-color: ghostwhite !important;
+} */
 </style>
 
 
@@ -202,9 +216,11 @@
 <script>
 import router from "../router";
 import axios from "axios";
+import navBar from "../components/Nav.vue";
 
 export default {
     name: "Admin",
+    components: {navBar},
     data() {
         return {
             //categories:[],
@@ -261,13 +277,14 @@ export default {
             if (res) {
                 const rep = res.data;
                 this.comments = rep;
+                console.log(rep);
             }
         })
         .catch((error) =>{
             console.log(error);
         })
         // GESTION DES MODALES POUR MODERATION des utilisateurs / articles / commentaires
-        // Modale Post
+        // MODALE POST
         var exampleModal = document.getElementById('exampleModalLong')
             exampleModal.addEventListener('show.bs.modal', function (event) {
                 var button = event.relatedTarget;
@@ -304,7 +321,7 @@ export default {
                         })  
                     })
         })
-        // Modale commentaires
+        // MODALE COMMENTAIRES
         var modalComment = document.getElementById('modalComment')
             modalComment.addEventListener('show.bs.modal', function (event) {
                 var button = event.relatedTarget;
@@ -342,7 +359,7 @@ export default {
                         })  
                     })
             })
-        // Modale utilisateurs
+        // MODALE UTILISATEUR
         var modalUser = document.getElementById('modalUser')
             modalUser.addEventListener('show.bs.modal', function (event) {
                 var button = event.relatedTarget;

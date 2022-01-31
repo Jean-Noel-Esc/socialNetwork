@@ -1,7 +1,12 @@
 <template>
 <div>
 <navBar/>
-<main>
+<main v-if="role == 0"> 
+    <div>
+        <p>Votre profil est en attente de validation</p>
+    </div> 
+</main>
+<main v-else>
     <section class="py-5 text-center container">
         <div id="publish" class="row py-lg-5 mx-0">
             <div class="col-lg-6 col-md-8 mx-auto">
@@ -71,9 +76,15 @@ export default {
     data() {
         return {
             posts:[],
+            role:0
         }
     },
     mounted () {
+        //window.location.reload();
+        if(sessionStorage.getItem("role") == 1 || sessionStorage.getItem("role") == 2 ){
+            this.role = 1;
+        }
+        
         axios.get("http://localhost:3000/api/post/",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
         .then((res) => {
             if (res) {

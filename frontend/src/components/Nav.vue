@@ -40,7 +40,7 @@ export default {
     <div class="collapse bg-dark" id="navbarHeader">
         <div class="container">
             <div class="row">
-                <div class="col-sm-8 col-md-7 py-4">
+                <!-- <div class="col-sm-8 col-md-7 py-4">
                     <h4 class="text-white">A propos</h4>
                     <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
                 </div>
@@ -51,20 +51,20 @@ export default {
                         <li><a href="#" class="text-white">Like on Facebook</a></li>
                         <li><a href="#" class="text-white">Email </a></li>
                     </ul>
-                </div>
+                </div> -->
                 <!-- <connexion deconnexion user> -->
-                <div class="col-sm-8 col-md-7 py-4" v-if="userConnected">
+                <div class="col py-4" v-if="userConnected">
                     <button type="button" class="btn text-white btn-warning" @Click="disconnectUser()">Déconnexion</button>
                 </div>
-                <div class="col-sm-8 col-md-7 py-4" v-else>
+                <div class="col py-4" v-else>
                         <button type="button" class="btn text-white btn-primary" @Click="connectUser()">Connexion</button>
                 </div>
                 <!-- <acces profil user> -->
-                <div class="col-sm-8 col-md-7 py-4">
+                <div class="col py-4">
                     <button type="button" class="btn text-white btn-secondary" @Click="$router.push({path:'/userprofile'})">Mon profil</button>
                 </div>
                 <!-- <acces admin if user role set on 2> -->
-                <div class="col-sm-8 col-md-7 py-4" v-show="userAdmin">
+                <div class="col py-4" v-show="userAdmin">
                     <button type="button" class="btn text-white btn-secondary"  @Click="$router.push({path:'/admin'})">ADMIN</button>
                 </div>
             </div>
@@ -72,10 +72,10 @@ export default {
     </div>
     <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center"  @Click="$router.push({path:'/main'})">
-            <img src = "../assets/groupomania/icon-left-font-monochrome-white.svg" alt="globe"/>
+        <a id="logo" tabindex=0 class="navbar-brand d-flex align-items-center"  @Click="$router.push({path:'/main'})">
+            <img src = "../assets/groupomania/icon-left-font-monochrome-white.svg" id="logo" alt="globe" tabindex=0/>
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler my-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         </div>
@@ -85,15 +85,15 @@ export default {
 </template>
 
 <style>
-img {
+#logo {
         height: inherit;
         width: 30%;
 }
-a:hover img {
+a:hover #logo, a:focus #logo {
     background-color: #0d6efd;
     border-radius: 0.25rem;
-    
 }
+
 </style>
 
 

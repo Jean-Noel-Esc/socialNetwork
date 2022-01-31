@@ -5,12 +5,12 @@
         <h1>LOGIN</h1>
         <form @submit.prevent="submitForm()">
             <div class="form-floating">
-                <input v-on:keydown="invalid = false" v-model="inputEmail" type="email" class="form-control" id="floatingInput" aria-describedby="emailHelp" placeholder="votre email">
+                <input v-on:keydown="invalid = false" v-model="inputEmail" type="email" class="form-control" id="floatingInput" aria-describedby="emailHelp" placeholder="votre email" alt="email">
                 <label for="floatingInput">Email:</label>               
             </div>
             <div class="form-floating mb-3">
-                <input v-on:keydown="invalid = false" v-model="inputPassword" type="password" class="form-control" id="inputPassword" aria-describedby="passwordHelp" placeholder="mot de passe">
-                <label for="floatingPassword">Password:</label>                
+                <input v-on:keydown="invalid = false" v-model="inputPassword" type="password" class="form-control" id="inputPassword" aria-label="password" aria-describedby="passwordHelp" placeholder="password" alt="password">
+                <label for="floatingPassword" name="password">Password:</label>                
             </div>
                 <button class="w-100 btn btn-lg btn-primary" type="submit">CONNEXION</button> 
                 <button class="w-100 btn btn-lg btn-success" type="link" @click="$router.push({ path : 'signup'})">INSCRIPTION</button> 
@@ -39,7 +39,7 @@ img{
     
 }
 h1 {
-    color:red;
+    color: black;
     font-size: 15px;
     font-weight: bold;
 }
@@ -106,7 +106,7 @@ export default {
             .catch(() => {
                 this.invalid = true;
                 this.error= 'Utilisateur en attente de modération ou inexistant!';
-                
+                router.push({ path : 'main'});
             })         
         }
     } 
