@@ -23,6 +23,7 @@
                     <div class="card shadow-sm">
                         <img class="card-img-top" v-bind:src="post.picture"/>
                         <div class="card-body">
+                            <p class="card-text">{{post.title}}</p>
                             <p class="card-text">{{post.text}}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">

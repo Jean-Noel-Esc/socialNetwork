@@ -6,17 +6,20 @@
             <div class="col">
                 <div class="card shadow-sm">
                     <img class="card-img-top" v-bind:src="article.picture"/>
-                    <div class="card-body" alt="Max-height 100%">        
+                    <div class="card-body" alt="Max-height 100%">
+                        <p class="card-text">{{article.title}}</p>        
                         <p class="card-text">{{article.text}}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
+                                <!-- Ce bouton n'apparait sur la vue d'un article que si l'utilisateur en est l'auteur
+                                et lui permet d'accéder au formulaire de modification de son article-->
                                 <button type="button" class="btn btn-sm btn-outline-secondary" 
                                 data-bs-toggle="modal" data-bs-target="#modalUpdatePost" v-if="author==true">
                                 Edit
                                 </button>
-                                <!-- ICI GESTION DE LA MODIFICATION D'UN POST PAR SON AUTEUR-->
+                                
                             </div>
-                            <small class="text-muted">Auteur:{{ auteur.firstname}} {{ auteur.lastname}}</small>
+                            <small class="text-muted">Auteur: {{auteur.firstname}} {{auteur.lastname}}</small>
                         </div>
                     </div>
                 </div>
@@ -38,7 +41,7 @@
                             <div class="modal-body">
                                 <form>
                                 <label for="inputComment">Entrez votre texte:</label>
-                                    <textarea v-on:keydown="invalid = false" v-model="inputText" class="form-control" id="inputText" rows="3">
+                                    <textarea v-on:keydown="invalid = false" v-model="inputTexte" class="form-control" id="inputTexte" rows="3">
                                     </textarea>
                                 <span class= "message-alerte"></span>                        
                                 </form> 
@@ -63,7 +66,7 @@
                             <div class="modal-body">
                                 <form>
                                     <div class="mb-3">
-                                        <label for="formFile" class="form-label">Modifiez une photo pour illustrer votre article</label>
+                                        <label for="formFile" class="form-label">Modifiez la photo de votre article</label>
                                         <input class="form-control" type="file" accept="image/png, image/jpeg" id="inputImage">                    
                                         <div id="previewSettings"></div>
                                     </div>
@@ -106,6 +109,7 @@ export default {
             auteur:[],
             author: false,
             inputText:"",
+            inputTexte:"",
             inputTitle:"",
             inputPicture:"",
             invalid: false,
@@ -161,22 +165,23 @@ export default {
         })
     },
     methods:{
+        //formulaire pour ajout de comentaires
         sendForm () {
-            console.log(this.inputText);
-            if ( !this.inputText ) {
+            console.log(this.inputTexte);
+            if ( !this.inputTexte ) {
                 return this.invalid = true;
             }
             else{
                 axios.post("http://localhost:3000/api/comment/",  
                     {
-                        text: this.inputText,
+                        text: this.inputTexte,
                         userId: sessionStorage.getItem("userId"),
                         postId: this.$route.params.id
                     },
                         { headers: {'Authorization': 'Bearer ' + sessionStorage.getItem("token")}}
                 )
                 .then(function () {
-                        window.alert('Comment send');
+                        window.alert('Votre commentaire est en attente de publication');
                         window.location.reload;
                 })
                 .catch((error) => {
@@ -188,11 +193,8 @@ export default {
         updateForm() {
             console.log("ok");
             if (!this.inputTitle || !this.inputText) {
-                    console.log('err')
+                console.log('err')
                 return this.invalid = true;            
-            }else {
-                console.log('erreur')
-                this.invalid = true;
             }
             console.log(this.inputTitle);
             console.log(this.inputText);
@@ -224,7 +226,7 @@ export default {
                     alert(error.status)
                     console.log("erreur du put file")});
             } else {
-            axios.put('http://localhost:3000/api/post/'+ this.article.id , {text: this.inputText, title: this.inputTitle}, {
+            axios.put('http://localhost:3000/api/post/'+ this.article.id, {text: this.inputText, title: this.inputTitle}, {
                 headers: {
                 'Authorization': 'Bearer ' + sessionStorage.getItem("token"),
                 'Content-Type': 'application/json',

@@ -40,14 +40,22 @@ exports.getOnePost = (req, res, next) => {
 exports.updatePost = (req, res, next) => {
   models.Post.findOne({ where : {id: req.params.id} })
   .then(post => {
-    if (req.file.filename) {
-      models.Post.update({text: req.body.text , title: req.body.title, picture:`${req.protocol}://${req.get('host')}/images/`+req.file.filename, status: 0},{ where : {id: req.params.id} })
-      .then(() => res.status(200).json({ message: 'Ce post a été modifié !'}))
-      .catch(error => res.status(400).json({ error }));
-    } else {
+    console.log(post);
+    console.log(req.body);
+   
+    if (!req.file) {
+      console.log("ok&.1");
       models.Post.update({text: req.body.text , title: req.body.title, status: 0},{ where : {id: req.params.id} })
       .then(() => res.status(200).json({ message: 'Ce post a été modifié !'}))
       .catch(error => res.status(400).json({ error }));
+
+
+    } else {
+      console.log("ok1");
+      models.Post.update({text: req.body.text , title: req.body.title, picture:`${req.protocol}://${req.get('host')}/images/`+req.file.filename, status: 0},{ where : {id: req.params.id} })
+      .then(() => res.status(200).json({ message: 'Ce post a été modifié !'}))
+      .catch(error => res.status(400).json({ error }));
+
     }
   })
   .catch(error => res.status(500).json({ error }));

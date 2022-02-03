@@ -105,7 +105,7 @@
                             <!-- <th scope="col">Category</th> -->
                             <th scope="col">Auteur</th>
                             <th scope="col">Date</th>
-                            <th scope="col">Header</th>
+                            <!-- <th scope="col">Header</th> -->
                             <th scope="col">Voir</th>
                             </tr>
                         </thead>
@@ -115,9 +115,9 @@
                                 <!-- <td>{{post.CategoryId}}</td> -->
                                 <td>{{post.User.firstname}} {{post.User.lastname}}</td>
                                 <td>{{post.createdAt}}</td>
-                                <td>text</td>
+                                <!-- <td>text</td> -->
                                 <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalLong" v-bind:data-bs-id="post.id"  v-bind:data-bs-title="post.text" title="voir"><font-awesome-icon icon = "eye"/></button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalLong" v-bind:data-bs-id="post.id"  v-bind:data-bs-title="post.title" v-bind:data-bs-text="post.text" v-bind:data-bs-image="post.picture" title="voir"><font-awesome-icon icon = "eye"/></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -129,10 +129,12 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                            <p>Cet article est en attente de modération.</p>
                         </div>
                         <div class="modal-body">
-                            <p>Ceci est un article </p>
+                            <img class="modal-image img-fluid"/>
+                            <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                            <p class="modal-text"></p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -288,9 +290,15 @@ export default {
         var exampleModal = document.getElementById('exampleModalLong')
             exampleModal.addEventListener('show.bs.modal', function (event) {
                 var button = event.relatedTarget;
+                var image = button.getAttribute('data-bs-image');
                 var title = button.getAttribute('data-bs-title');
+                var texte = button.getAttribute('data-bs-text');
+                var modalImage = exampleModal.querySelector('.modal-image');
+                modalImage.src = image;
                 var modalTitle = exampleModal.querySelector('.modal-title');
                 modalTitle.textContent = title;
+                var modalText = exampleModal.querySelector('.modal-text');
+                modalText.textContent = texte;
                 var id = button.getAttribute('data-bs-id');
                 console.log(id);
                 this.postIdToModerate = id;
