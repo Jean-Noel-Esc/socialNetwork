@@ -160,8 +160,7 @@ export default {
                 //redirection page principale
                 router.push({ path : '/main'});
             })
-            .catch((error)=>{
-                alert(error.status);
+            .catch(()=>{
                 alert("Tous les champs du formulaire sont obligatoire pour la publication de votre article");
             });
         }

@@ -101,7 +101,8 @@ export default {
                 sessionStorage.setItem("userId",  res.data.userId)
                 sessionStorage.setItem("role",    res.data.role)
                 window.alert('Connexion réussie');
-                router.push({ path : 'main'});
+                // router.push({ path : 'main'});
+                window.location.href("http://localhost:8080/#/main");
             })
             .catch(() => {
                 this.invalid = true;
