@@ -14,20 +14,20 @@
                         <span class= "message-alerte"></span> -->
                     <!-- </div> -->
                 <div class="mb-3">
-                    <label for="formFile" class="form-label">Ajoutez une photo pour illustrer votre article</label>
+                    <label for="formFile" class="form-label">Ajoutez une photo pour illustrer votre article*</label>
                     <input @change="handleImage()" class="form-control" type="file" accept="image/png, image/jpeg" id="inputImage">                    
                     <div id="previewSettings"></div>
                 </div>
                 <div class="form-group">
-                    <label for="inputTiltle">Titre de votre article</label>
+                    <label for="inputTiltle">Titre de votre article*</label>
                     <input v-on:keydown="invalid = false" v-model="inputTitle" type="text" class="form-control" id="inputTitle"  placeholder="Ajoutez un titre">
                     <span class= "message-alerte"></span>
                 </div>          
                 <div class="form-group">
-                    <label for="inputEmail">Texte</label>
+                    <label for="inputEmail">Texte*</label>
                     <textarea v-on:keydown="invalid = false" v-model="inputText" class="form-control" id="inputText" rows="3">
                     </textarea>
-                    <span class= "message-alerte"></span>
+                    <span class= "message-alerte">*Tous les champs du formulaire sont obligatoire</span>
                 </div>
                 <button class="w-100 btn btn-lg btn-primary" type="submit" @click.prevent="sendForm()">PUBLICATION</button> 
             </form>
@@ -47,6 +47,9 @@ label{
 }
 textarea{
     margin-bottom: 20px;
+}
+.message-alerte{
+    font-size: 12px;
 }
 </style>
 
@@ -158,7 +161,8 @@ export default {
                 router.push({ path : '/main'});
             })
             .catch((error)=>{
-                alert(error.status)
+                alert(error.status);
+                alert("Tous les champs du formulaire sont obligatoire pour la publication de votre article");
             });
         }
     }
