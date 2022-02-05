@@ -2,17 +2,17 @@
     <div>
     <navBar></navBar>
         <main class="container-fluid">
-            <div class="album py-5 bg-light">
-                <div class="container-fluid">
+            <div class="album py-5 bg-white">
+                <div class="container-fluid bg-white">
                     <h2>Votre profil utilisateur</h2>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">Firstname</th>
-                                    <th scope="col">Lastname</th>
+                                    <th scope="col">Prénom</th>
+                                    <th scope="col">Nom</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Delete</th>
+                                    <th scope="col">Effacer</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,7 +41,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Etes vous sur de vouloir suppr votre compte </p>
+                        <p>Etes vous sur de vouloir supprimer votre compte?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -84,7 +84,6 @@ export default {
             })
             .catch((error) =>{
                 console.log(error);
-                console.log ("c'est err 404");
             })
     },
     methods:{

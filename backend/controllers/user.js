@@ -66,11 +66,6 @@ exports.login = (req, res, _next) => {
     .catch(error => res.status(501).json({ error }));
 };
 
-// Récupération all users
-// on importe le modèle
-// var models = require('./Model');
-// verifier si l'utilisateur a le role admin voir condition role admin
-
 exports.findAll = (req, res) => {
   console.log("je suis le findAll users");
   models.User.findAll().then(users => {

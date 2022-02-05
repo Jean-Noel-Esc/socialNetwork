@@ -9,8 +9,6 @@ module.exports = (sequelize, DataTypes) => {const Post = sequelize.define('Post'
 });
     Post.associate = function(models){
         models.Post.belongsTo(models.User,{foreignKey:{allowNull: false}});
-        //models.Post.belongsTo(models.Category,{foreignKey:{allowNull: false}});   en cours de dev
-        //models.Post.hasMany(models.Like);                                         implementation :likes counter could be interesting
         models.Post.hasMany(models.Comment);
     };
     return Post;

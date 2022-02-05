@@ -2,45 +2,11 @@
 <div>
 <navBar/>
 <body>
-    <!-- <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <img src = "../assets/groupomania/icon-left-font-monochrome-white.svg" alt="globe"/>
-        <div class="navbar-nav">
-            <div class="nav-item text-nowrap">
-            <button class="btn btn-primary my-2" @Click="$router.push({path:'/main'})">Page principale</button>
-            </div>
-        </div>
-    </header> -->
     <div class="container-fluid">
-        <main class="col-md-auto ms-sm-auto col-lg-12 px-md-4">
+        <main class="col-md-auto ms-sm-auto col-lg-12 px-md-4 bg-white">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Dashboard</h1>
             </div>
-                <!--Gestion des catégories EN COURS DE DEV-->
-                <!--<h2>Gestion des catégories</h2>
-                    <div class="table-responsive">
-                        <table class="table table-striped table-sm">
-                            <thead>
-                                <tr>
-                                <th scope="col">#id</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Vue</th>
-                                </tr>
-                            </thead>
-                            <tbody  v-for="category in categories" :key="category.id">
-                                <tr>
-                                    <td>{{category.id}}</td>
-                                    <td>{{category.name}}</td>
-                                    <td>
-                                    <button type="button" class="btn btn-danger m-3" data-bs-toggle="modal" data-bs-target="#modalcategory" v-bind:data-bs-user-id="category.id"  v-bind:data-bs-category-name="category.name"><font-awesome-icon icon = "trash"/></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div> -->
-                <!--------------------------------->
-                <!--Boutton pour la création d'une nouvelle catégorie-->
-                <!-- <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#modalCategory" v-bind:data-bs-category-id="category.id"  v-bind:data-bs-category-name="category.name"><font-awesome-icon icon = "eye"/></button> --> 
-                <!----------------------------------------------------->    
             <!--LISTE DES USERS EN ATTENTE DE MODERATION-->
             <section>
                 <h2>Modération des nouveaux utilisateurs</h2>
@@ -152,7 +118,6 @@
                     <thead>
                         <tr>
                         <th scope="col">#id</th>
-                        <!-- <th scope="col">Category</th> -->
                         <th scope="col">Id-Auteur</th>
                         <th scope="col">Date</th>
                         <th scope="col">Voir</th>
@@ -162,9 +127,6 @@
                         <tr>
                         <td>{{comment.id}}</td>
                         <td>{{comment.UserId}}</td>
-                        <!-- <td>{{comment.CategoryId}}</td> -->
-                        <!-- <td>{{comment.text}}</td>
-                        <td>{{comment.text}}</td> -->
                         <td>{{comment.createdAt}}</td>
                         <td>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalComment" v-bind:data-bs-comment-id="comment.id"  v-bind:data-bs-comment-title="comment.text" title="voir"><font-awesome-icon icon = "eye"/></button>
@@ -179,10 +141,10 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="modalCommentTitle">Modal comment title</h5>
+                            <p>Ce commentaire est en attente de modération:</p>
                         </div>
                         <div class="modal-body">
-                            <p>Ceci est un commentaire</p>
+                            <h5 class="modal-title" id="modalCommentTitle"></h5>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -199,18 +161,10 @@
 </template>
 
 <style>
-/* table {
-    background-color: ghostwhite;
+table {
+    background-color: white;
 }
-th {
-    background-color: ghostwhite !important;
-}
-td {
-    background-color: ghostwhite !important;
-}
-table, .tr {
-    background-color: ghostwhite !important;
-} */
+
 </style>
 
 
@@ -237,22 +191,7 @@ export default {
     mounted () {
         if (sessionStorage.getItem("role")!= 2 ){
             router.push({ path : 'main'});
-        }
-        // REQUETES LISTES  / utilisateurs / articles / commentaires.
-            // Requetes category en cours de dev
-            // axios.get("http://localhost:3000/api/category/",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
-            // .then((res) => {
-            //         if (res) {
-            //             const rep = res.data;
-            //             this.categories = rep;
-            //             console.log(rep);
-            //             console.log("Mais ou sont les categories");
-            //         }
-            // })
-            // .catch((error) =>{
-            //     console.log(error);
-            //     console.log ("c'est err 404");
-            // })       
+        }   
         axios.get("http://localhost:3000/api/auth/findalluserstomoderate",  { headers: {"Authorization": "Bearer " + sessionStorage.getItem("token")} })
         .then((res) => {
                 if (res) {

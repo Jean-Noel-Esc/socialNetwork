@@ -1,8 +1,8 @@
 <template>
     <main class="container-fluid">
-        <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-light rounded">
+        <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-white rounded">
             <form @submit.prevent="sendForm()">
-                <font-awesome-icon class="icone-groupomania" icon="globe" size="3x"/>
+                <img class="img-fluid" src="../assets/groupomania/icon-left-font-monochrome-black.svg" id="logo" alt="globe" tabindex=0/>
                 <h1 class="text-center font-weight-bold" style="font-size:4vw;" >INSCRIPTION</h1>
                 <div class="form-groupe">
                     <label for="inputFirstName">Prénom:</label>
@@ -68,12 +68,10 @@ label{
 } 
 input {
     display: block;
-    /* margin: 10px 20px 20px 20px;  */
     outline: 0;
     background: rgb(226,226,226);
     width: 400px;
     border: 0;
-    /* padding: 10px 12px;  */
     border-radius: 3px;
     font-size: 22px;
     border: 1px solid rgba(0,0,0,0.3);
@@ -157,8 +155,6 @@ import axios from "axios";
 export default {
     name: "signup",
     data() {
-        // mes data sont des var dans la page qui matchent avec la partie template cad le champ v model des input
-        // c'est v model qui fait matcher les input de la var .
         return {
             inputFirstName: "",
             inputLastName: "",
@@ -267,7 +263,7 @@ export default {
                 objValidation.chiffre = 1;
             }
             // gestion delete dans l'input 
-            if(e.inputType == 'deleteContentBackward'){ // ICI BUG SUR OPERATEUR !!!!! with "=" fail to compile 
+            if(e.inputType == 'deleteContentBackward'){ 
                 if(valeurInp.search(specialCar) === -1){
                     objValidation.symbole = 0;
                 }
@@ -367,14 +363,10 @@ export default {
                 };
                 axios.post('http://localhost:3000/api/auth/signup', data)
                 .then((res) => {
-                    // sessionStorage.setItem("token",   res.data.token)
-                    // sessionStorage.setItem("userId",  res.data.userId)
-                    // sessionStorage.setItem("role",    res.data.role)
                         console.log(res);
                         alert('inscription réussie');
                         //redirection main page
-                        router.push({ path : '/'});
-                        
+                        router.push({ path : '/'});                       
                 })
                 .catch((error)=>{
                     alert(error.status)

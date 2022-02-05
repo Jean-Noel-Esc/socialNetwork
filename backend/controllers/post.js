@@ -1,15 +1,12 @@
 const models = require('../models');  
 
 exports.createPost = (req, res, next) => {
-  console.log(req.body);
-  console.log(req.file);
-  console.log(req.file.filename);
   const newPost = models.Post.create({
     title: req.body.title,
     text: req.body.text,
     picture:`${req.protocol}://${req.get('host')}/images/`+req.file.filename,
     UserId: req.body.userId, // modif pour correspondre à l'id de l'user connecté donc à extraire du token.
-    //CategoryId: req.body.categoryId,  (en cours de dev)
+
     status:0
   })
   .then(newPost => {
@@ -42,7 +39,6 @@ exports.updatePost = (req, res, next) => {
   .then(post => {
     console.log(post);
     console.log(req.body);
-   
     if (!req.file) {
       console.log("ok&.1");
       models.Post.update({text: req.body.text , title: req.body.title, status: 0},{ where : {id: req.params.id} })

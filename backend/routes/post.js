@@ -14,5 +14,4 @@ router.put('/:id',auth, multer, postCtrl.updatePost);
 router.delete('/:id',auth, postCtrl.destroyPost);
 router.put('/admin/:id',auth, postCtrl.moderatePost); //route pour valider la moderation d'un post 
 
-//router.post ('/:id/like',auth, postCtrl.likePost); en cours de dev 
 module.exports = router;

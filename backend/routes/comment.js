@@ -3,7 +3,6 @@ const router = express.Router();
 const commentCtrl = require('../controllers/comment');
 const auth = require('../middleware/auth');
 
-//const multer = require('../middleware/multer-config');
 console.log("router comment ok");
 
 router.get('/admin', auth, commentCtrl.getAllCommentsToModerate); // Recup ts les comments en attente de modération 

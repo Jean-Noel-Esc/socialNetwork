@@ -13,13 +13,13 @@
                             <div class="btn-group">
                                 <!-- Ce bouton n'apparait sur la vue d'un article que si l'utilisateur en est l'auteur
                                 et lui permet d'accéder au formulaire de modification de son article-->
-                                <button type="button" class="btn btn-sm btn-outline-secondary" 
+                                <button type="button" class="btn btn-sm btn-secondary" 
                                 data-bs-toggle="modal" data-bs-target="#modalUpdatePost" v-if="author==true">
                                 Edit
                                 </button>
                                 
                             </div>
-                            <small class="text-muted">Auteur: {{auteur.firstname}} {{auteur.lastname}}</small>
+                            <small>Auteur: {{auteur.firstname}} {{auteur.lastname}}</small>
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Ajouter un commentaire</h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle">Pour ajouter un commentaire</h5>
                                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
