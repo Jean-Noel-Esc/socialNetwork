@@ -1,7 +1,7 @@
 # socialNetwork
  
 ## Pour commencer
-download ou cloner le projet
+Download ou cloner le projet.
 
 ### Pré-requis
 Il est nécessaire que certaines technologies soient installées sur votre machine si vous souhaitez lancer ce projet.
@@ -37,12 +37,12 @@ DB_HOST="L'ADRESSE DE VOTRE BDD"
 ## Précisions
 
 Les identifiants :
-Pour accéder au site avec un compte admin utilisez ces identifiants:
-(Vous avez accès au dashboard admin depuis lequel vous pouvez modérer toutes publications avant qu’elles ne paraissent ainsi que les nouveaux utilisateurs)
-mail : admin@gmail.com
-mdp : superadmin1234.
+Pour accéder au site avec un compte admin utilisez ces identifiants: <br>
+(Vous avez accès au dashboard admin depuis lequel vous pouvez modérer toutes publications avant qu’elles ne paraissent ainsi que les nouveaux utilisateurs)<br>
+mail : admin@gmail.com <br>
+mdp : superadmin1234. <br>
 
 Pour accéder au site en tant qu'utilisateur 
-(Pouvant consulter, publier, commenter, modifier ses publications et effacer son profil):
-mail : vbuisson@gmail.com
+(Pouvant consulter, publier, commenter, modifier ses publications et effacer son profil):<br>
+mail : vbuisson@gmail.com<br>
 mdp : victor1234.
