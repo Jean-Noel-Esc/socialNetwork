@@ -19,12 +19,12 @@ Ensuite :
 
 - Créez une base de données MySQL .
 - Importez le dump sql “db_groupamania_dump.sql” à la racine du dossier back end 
--Creer un fichier .env comprenant 4 variables,
-(en remplaçant les valeurs par vos informations): 
-DB_NAME="LE NOM DE VOTRE BDD"
-DB_USER="VOTRE NOM D' UTILISATEUR MY SQL" 
-DB_PASSWORD=" VOTRE MOT DE PASSE UTILISATEUR MYSQL" 
-DB_HOST="L'ADRESSE DE VOTRE BDD"
+-Creer un fichier .env comprenant 4 variables,<br>
+(en remplaçant les valeurs par vos informations):<br> 
+DB_NAME="LE NOM DE VOTRE BDD"<br>
+DB_USER="VOTRE NOM D' UTILISATEUR MY SQL"<br>
+DB_PASSWORD=" VOTRE MOT DE PASSE UTILISATEUR MYSQL"<br> 
+DB_HOST="L'ADRESSE DE VOTRE BDD"<br>
 
 
 ## Démarrage
