@@ -50,6 +50,7 @@ mdp : victor1234.
 ## Charte graphique screenshots
 ![chartegraphique2](https://user-images.githubusercontent.com/60701865/152785487-c60ede61-3b9d-4ac6-8633-a6d9c2b0469f.png)
 ![chartegraphique5](https://user-images.githubusercontent.com/60701865/152785585-03797d2e-a083-4022-a14d-22d8992ec7ed.png)
-
-
+![chartegraphique6](https://user-images.githubusercontent.com/60701865/152785661-c8a87f9b-4263-4e91-aa9e-b77ffaac356a.png)
+![chartegraphique7](https://user-images.githubusercontent.com/60701865/152785686-5bd714cb-4d7f-4c5d-97b5-6b7393d802c8.png)
+![chartegraphique8](https://user-images.githubusercontent.com/60701865/152785720-b914d790-c21a-49fa-8534-37e866b8473f.png)
 
