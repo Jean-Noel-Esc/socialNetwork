@@ -49,6 +49,7 @@ mdp : victor1234.
 
 ## Charte graphique screenshots
 ![chartegraphique2](https://user-images.githubusercontent.com/60701865/152785487-c60ede61-3b9d-4ac6-8633-a6d9c2b0469f.png)
+![chartegraphique5](https://user-images.githubusercontent.com/60701865/152785585-03797d2e-a083-4022-a14d-22d8992ec7ed.png)
 
 
 
