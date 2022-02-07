@@ -57,6 +57,11 @@
         padding-top: 0px!important;
         padding-bottom: 0px!important;
     }
+    .btn-primary{
+        background-color: rgb(26, 26, 124);
+        color:white;
+        font-weight: bold;
+    }
     @media (min-width: 768px) {
         .bd-placeholder-img-lg {
         font-size: 3.5rem;

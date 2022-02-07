@@ -163,6 +163,15 @@
 <style>
 table {
     background-color: white;
+    
+}
+.btn-primary{
+        background-color: rgb(26, 26, 124);
+        color:white;
+}
+.btn-danger{
+    color:white;
+    background-color: #ff6c6c;
 }
 
 </style>

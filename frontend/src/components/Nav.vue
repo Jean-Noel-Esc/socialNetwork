@@ -37,7 +37,7 @@ export default {
 
 <template>
 <header>
-    <div class="collapse bg-dark" id="navbarHeader">
+    <div class="collapse bg-grey" id="navbarHeader">
         <div class="container">
             <div class="row">
                 <!-- <connexion deconnexion user> -->
@@ -49,11 +49,11 @@ export default {
                 </div>
                 <!-- <acces profil user> -->
                 <div class="col py-4">
-                    <button type="button" class="btn text-white btn-secondary" @Click="$router.push({path:'/userprofile'})">Mon profil</button>
+                    <button type="button" class="btn text-white btn-primary" @Click="$router.push({path:'/userprofile'})">Mon profil</button>
                 </div>
                 <!-- <acces admin if user role set on 2> -->
                 <div class="col py-4" v-show="userAdmin">
-                    <button type="button" class="btn text-white btn-secondary"  @Click="$router.push({path:'/admin'})">ADMIN</button>
+                    <button type="button" class="btn text-white btn-primary"  @Click="$router.push({path:'/admin'})">ADMIN</button>
                 </div>
             </div>
         </div>
@@ -78,8 +78,21 @@ export default {
         width: 60%;
 }
 a:hover #logo, a:focus #logo {
-    background-color: #0d6efd;
+    background-color:  rgb(26, 26, 124);
     border-radius: 0.25rem;
+}
+.btn-primary{
+        background-color: rgb(26, 26, 124);
+        color:white;
+}
+.btn-warning{
+    color:white;
+    background-color: #ff6c6c;
+    font-weight: bold;
+
+}
+.bg-grey{
+    background-color: rgba(141, 141, 141, 0.664) !important;
 }
 </style>
 

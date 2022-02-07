@@ -66,7 +66,11 @@ h1 {
     border-top-right-radius: 0;
 }
 button {
-    margin-bottom: 20px;
+    margin-bottom: 20px;    
+}
+.btn-primary{
+        background-color: rgb(26, 26, 124);
+        color:white;
 }
 
 </style>

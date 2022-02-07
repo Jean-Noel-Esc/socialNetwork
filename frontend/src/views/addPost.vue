@@ -1,8 +1,8 @@
 <template>
 <div>
 <navBar/>
-    <main class="container-fluid">
-        <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-light rounded">
+    <main class="container-fluid bg-white">
+        <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-white rounded">
             <h1 class="text-center font-weight-bold" style="font-size:4vw;" >VOTRE ARTICLE</h1>
             <form @submit="sendForm()">
                 <div class="mb-3">
@@ -42,6 +42,9 @@ textarea{
 }
 .message-alerte{
     font-size: 12px;
+}
+.bg-white{
+    background-color: white;
 }
 </style>
 

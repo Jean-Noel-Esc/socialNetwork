@@ -3,7 +3,7 @@
         <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-white rounded">
             <form @submit.prevent="sendForm()">
                 <img class="img-fluid" src="../assets/groupomania/icon-left-font-monochrome-black.svg" id="logo" alt="globe" tabindex=0/>
-                <h1 class="text-center font-weight-bold" style="font-size:4vw;" >INSCRIPTION</h1>
+                <h1 class="text-center font-weight-bold" style="font-size:7vw;" >INSCRIPTION</h1>
                 <div class="form-groupe">
                     <label for="inputFirstName">Prénom:</label>
                     <input v-on:keydown="invalid = false" v-model="inputFirstName" type="text" class="form-control" id="inputFirstName" placeholder="Entrez votre prénom">
@@ -57,6 +57,8 @@
 } 
 h1{
     margin-top: 5px;
+    color: rgb(26, 26, 124);
+    font-weight: 900;
 }
 label{
     margin: 5px 23px;
@@ -129,15 +131,17 @@ input {
     top: 10px;
 }
 button{
+    color: white;
     display: block;
     margin: 30px auto;
     outline: 0;
-    background: rgb(250,165,9);
+    background: #ff6c6c;
     width: 90%;
     border: 0;
     padding: 15px;
     border-radius: 3px;
     font-size: 20px;
+    font-weight: bold;
     cursor: pointer;
 }
 button:hover , button:focus {

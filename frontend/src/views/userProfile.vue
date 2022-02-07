@@ -54,6 +54,10 @@
 </template>
 
 <style>
+.btn-danger{
+    color:white;
+    background-color: #ff6c6c;
+}
 
 </style>
 
