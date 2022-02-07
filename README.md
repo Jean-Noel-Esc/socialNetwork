@@ -46,3 +46,9 @@ Pour accéder au site en tant qu'utilisateur
 (Pouvant consulter, publier, commenter, modifier ses publications et effacer son profil):<br>
 mail : vbuisson@gmail.com<br>
 mdp : victor1234.
+
+## Charte graphique screenshots
+![chartegraphique2](https://user-images.githubusercontent.com/60701865/152785487-c60ede61-3b9d-4ac6-8633-a6d9c2b0469f.png)
+
+
+
